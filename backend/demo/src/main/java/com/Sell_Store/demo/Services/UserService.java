@@ -1,0 +1,36 @@
+package com.Sell_Store.demo.Services;
+
+import com.Sell_Store.demo.Entity.UserDetail;
+import com.Sell_Store.demo.Repository.UserDetailRepository;
+
+import org.apache.catalina.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+@Transactional(rollbackFor = Exception.class)
+public class UserService {
+    @Autowired
+    private UserDetailRepository tvRepository;
+    public List<UserDetail> getAllThanhVien(){
+        return tvRepository.findAll();
+    }
+    public UserDetail getUserDetailById(String matv){
+        Optional<UserDetail> op = tvRepository.findById(matv);
+        if( op.isEmpty()){
+            return null;
+        }
+        return op.get();
+    }
+    public UserDetail save(UserDetail userDetail){
+        return tvRepository.save(userDetail);
+    }
+    public void xoa (String id){
+        tvRepository.deleteById(id);
+    }
+
+}
