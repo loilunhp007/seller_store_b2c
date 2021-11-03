@@ -1,6 +1,5 @@
 export class Category {
-    cateid: number
+    cateID: number
     tenloai:String
     trangthai:number
-    
 }

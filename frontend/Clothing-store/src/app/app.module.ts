@@ -7,7 +7,17 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SliderComponent } from './components/slider/slider.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { HomeComponent } from './components/home/home.component';
-import { HttpClientModule,HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { ProductComponent } from './components/product/product.component';
+import { SearchComponent } from './components/search/search.component';
+import { ContactsComponent } from './components/contacts/contacts.component';
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+import { UserprofileComponent } from './components/userprofile/userprofile.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { CartComponent } from './components/cart/cart.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +25,23 @@ import { HttpClientModule,HttpClient } from '@angular/common/http';
     MenuComponent,
     FooterComponent,
     SliderComponent,
-    HomeComponent
+    HomeComponent,
+    ProductComponent,
+    SearchComponent,
+    ContactsComponent,
+    PagenotfoundComponent,
+    UserprofileComponent,
+    LoginComponent,
+    RegisterComponent,
+    CartComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
+    
 
   ],
   providers: [],
