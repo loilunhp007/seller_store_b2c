@@ -14,7 +14,7 @@ import javax.persistence.*;
 @Table(name = "account")
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long uid;
     @Column(name = "email",columnDefinition = "nvarchar(20)",length = 100,nullable = false)
     private String email;
