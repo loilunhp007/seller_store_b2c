@@ -1,11 +1,11 @@
 import { Category } from "./category"
 
 export class Product {
-    productid:string
+    productID:string
     name:string
     cate:Category
     productName:String
-    images:String
+    images={}
     info:String
     likes:number
     views:number
