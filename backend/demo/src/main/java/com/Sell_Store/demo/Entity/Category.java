@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 public class Category {
     @Id
     @Column(name="cateID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int cateID;
     private String tenloai;
     private int trangthai;

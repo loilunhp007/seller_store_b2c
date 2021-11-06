@@ -37,5 +37,7 @@ public class ProductService {
     }   public List<Product> getProductByLikeTensp(String tensp){
         return productRepository.findByProductNameContains(tensp);
     }
-
+    public List<Product> getAllInventoriesByProductID(){
+        return productRepository.getAllInventoriesByProductID();
+    }
 }

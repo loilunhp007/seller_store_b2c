@@ -23,7 +23,7 @@ public class Transport {
     private int tid;
     @Column(name = "name",columnDefinition = 
     "nvarchar(50)",length = 50,nullable = false)
-    private String tname;
+    private String name;
     @Column(name = "fee",columnDefinition = "double",nullable = false)
     private Double fee;
 
