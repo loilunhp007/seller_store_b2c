@@ -12,8 +12,5 @@ import org.springframework.stereotype.Repository;
 public interface ProductRepository extends JpaRepository<Product,String> {
     public List<Product> findByState(int trangthai);
     public List<Product> findByProductNameContains(String tensp);
-
-    @Query(value = "SELECT * From Inventory inven INNER join Product p on inven.pid=p.pid where 1",nativeQuery=true)
-    public List<Product> getAllInventoriesByProductID();
     
 }   

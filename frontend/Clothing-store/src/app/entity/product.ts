@@ -1,4 +1,5 @@
 import { Category } from "./category"
+import { Inventory } from "./inventory"
 
 export class Product {
     productID:string
@@ -10,4 +11,5 @@ export class Product {
     likes:number
     views:number
     state:number
+    inventory:Inventory
 }
