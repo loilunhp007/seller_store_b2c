@@ -35,7 +35,7 @@ public class Inventory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "p_id",referencedColumnName = "pid")
     private Product product;
     @Column(name = "quantity",columnDefinition = "int")
