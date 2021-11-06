@@ -114,5 +114,9 @@ public class ProductController {
         this.productService.deteleProductByID(masp);
         return ResponseEntity.status(HttpStatus.OK).body("detele sucess");
     }
-    
+    @GetMapping("/get/all")
+    public ResponseEntity<List<Product>> getAllInventoriesByProductID(){
+        List<Product> list= productService.getAllInventoriesByProductID();
+        return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
 }

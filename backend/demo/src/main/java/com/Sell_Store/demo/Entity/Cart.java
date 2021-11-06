@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "cart",schema="seller_store")
 public class Cart {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id;
     @ManyToOne
     @JoinColumn(name = "productID",referencedColumnName = "pid")

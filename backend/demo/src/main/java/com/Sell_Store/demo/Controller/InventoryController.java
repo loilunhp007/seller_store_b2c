@@ -39,4 +39,5 @@ public class InventoryController {
         Inventory inventory2 = inventoryService.addProductToInventory(inventory);
         return ResponseEntity.status(HttpStatus.OK).body(inventory2);
     }
+   
 }
