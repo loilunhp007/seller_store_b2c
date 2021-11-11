@@ -27,7 +27,7 @@ export class MenuComponent implements OnInit {
     },(error)=>{
       console.log(error)
     });
-    
+
   }
   getCart(){
     this.cartService.getCartItems(1+'').subscribe(Response=>{
