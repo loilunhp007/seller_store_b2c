@@ -11,14 +11,14 @@
             <input type="email" ngModel name="email" id="email" required minlegth = "6" #email="ngModel"
             class="form-control" placeholder="example@gmail.com" aria-describedby="emailHId">
             <small id="emailHId" *ngIf="!email?.valid && (email?.dirty||email?.touched)"
-            class="text-muted">Help text</small>
+            class="text-muted">Email is invalid or empty</small>
           </div>
           <div class="form-group">
             <label for="">Password</label>
             <input type="password" ngModel name="password" id="password" #password="ngModel" required minlegth = "6"
             class="form-control" placeholder="*********" aria-describedby="passwordHId">
             <small  *ngIf="!password?.valid && (password?.dirty||password?.touched)" id="passwordHId"
-            class="text-muted">Help text</small>
+            class="text-muted">Password is invalid or empty</small>
           </div>
         </div>
         <div class="card-footer text-muted">
