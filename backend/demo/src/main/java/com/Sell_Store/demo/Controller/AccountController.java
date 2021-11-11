@@ -5,6 +5,7 @@ import java.util.List;
 import com.Sell_Store.demo.Entity.Account;
 import com.Sell_Store.demo.Services.AccountService;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -72,6 +73,8 @@ public class AccountController {
     @PostMapping("/login")
     public ResponseEntity<Account> loginUser(@RequestBody Account account) throws Exception{
         Account existAccount = null ;
+        System.out.println(account);
+        System.out.println("nek");
         if (account.getEmail() != null && account.getPassword() != null){
              existAccount = accountService.findAccountByEmailAndMatkhau(account.getEmail(),account.getPassword());
             if(existAccount == null){
@@ -81,6 +84,7 @@ public class AccountController {
         }
             return ResponseEntity.status(HttpStatus.OK).body(existAccount);
     }
+    
     @GetMapping("/getMax")
     public ResponseEntity<Long> getMaxUser(){
         long count = accountService.count();

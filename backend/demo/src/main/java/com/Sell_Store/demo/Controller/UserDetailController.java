@@ -24,7 +24,9 @@ public class UserDetailController {
     }
     @PostMapping({"/add"})
     public ResponseEntity<UserDetail> addThanhVien(@RequestBody UserDetail userDetail){
-        try {   String matv = userDetail.getUid();
+        try { 
+            String matv = userDetail.getUid();
+            System.out.println(userDetail); 
               UserDetail existUser = tvService.getUserDetailById(matv);
               UserDetail _userDetail = null;
               if(existUser == null){

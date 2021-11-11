@@ -1,0 +1,17 @@
+.loginForm {
+  padding: 30px 80px 80px 80px;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  border-radius: 10%;
+}
+.card-header{
+  font-size: 45px;
+  text-align: center;
+  padding-bottom: 15px;
+}
+.card-body{
+  font-size: 15px;
+}
