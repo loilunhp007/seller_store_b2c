@@ -57,6 +57,7 @@ public class CartController {
         JSONObject json = new JSONObject();
         json.put("string",qt+"update succes");
         return ResponseEntity.status(HttpStatus.OK).body(json.toString());
+
     }
     @PutMapping("/put/minus/{pid}/{uid}")
     public ResponseEntity<String> minusCart(@PathVariable(name = "pid")String pid,@PathVariable(name = "uid")String uid){

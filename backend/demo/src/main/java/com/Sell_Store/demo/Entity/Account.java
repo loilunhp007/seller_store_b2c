@@ -29,4 +29,10 @@ public class Account {
         this.email=email;
         this.password=password;
     }
+    public String getEmail() {
+        return this.email;
+    }
+    public String getPassword() {
+        return this.password;
+    }
 }
