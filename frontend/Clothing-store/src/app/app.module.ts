@@ -16,7 +16,6 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { CartComponent } from './components/cart/cart.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { FormsModule } from '@angular/forms';
 import { CartComponent } from './components/cart/cart.component';
@@ -28,7 +27,6 @@ import { CartComponent } from './components/cart/cart.component';
     FooterComponent,
     SliderComponent,
     HomeComponent,
-<<<<<<< HEAD
     ProductComponent,
     SearchComponent,
     ContactsComponent,
@@ -38,10 +36,8 @@ import { CartComponent } from './components/cart/cart.component';
     RegisterComponent,
     CartComponent,
     ProductDetailComponent,
-=======
     LoginComponent,
     CartComponent
->>>>>>> 7b10ce19210ba68362d676f0bc36a364be39416e
   ],
   imports: [
     BrowserModule,
