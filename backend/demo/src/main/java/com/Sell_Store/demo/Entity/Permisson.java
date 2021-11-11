@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Table(name = "permisson",schema="seller_store")
 public class Permisson {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "roleID")
     private long roleID;
     @Column(name = "name",columnDefinition = "nvarchar(20)",length = 50,nullable = false)

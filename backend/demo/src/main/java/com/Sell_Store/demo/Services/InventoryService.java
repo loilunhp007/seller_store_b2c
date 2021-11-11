@@ -31,4 +31,5 @@ public class InventoryService {
     public void deteleProductByID(int id){
         inventoryRepository.deleteById(id);
     }
+   
 }

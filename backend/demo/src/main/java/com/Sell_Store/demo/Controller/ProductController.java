@@ -114,5 +114,4 @@ public class ProductController {
         this.productService.deteleProductByID(masp);
         return ResponseEntity.status(HttpStatus.OK).body("detele sucess");
     }
-    
 }

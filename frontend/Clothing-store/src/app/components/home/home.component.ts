@@ -8,8 +8,9 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  product:Array<Product>
-
+  text:string
+  products:Array<Product>
+  hotproducts:Array<Product> = [];
   constructor(private productService:ProductService) { }
 
   ngOnInit(): void {
@@ -17,7 +18,17 @@ export class HomeComponent implements OnInit {
   }
   getProduct(){
     this.productService.getProducts().subscribe(Response =>{
-        this.product = Response;
+        this.products = Response;
+        this.fetchDiscountProduct();
+        console.log(this.products);
     })
+  }
+  fetchDiscountProduct(){
+    this.products.forEach( (e)=>{
+      if(e.inventory.percent_discount >= 10){
+        this.hotproducts.push(e);
+        this.text= ((100-e.inventory.percent_discount)/100* e.inventory.price)+"";
+      }
+    });
   }
 }
