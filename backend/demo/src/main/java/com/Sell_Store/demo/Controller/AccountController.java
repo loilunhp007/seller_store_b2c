@@ -79,6 +79,7 @@ public class AccountController {
              existAccount = accountService.findAccountByEmailAndMatkhau(account.getEmail(),account.getPassword());
             if(existAccount == null){
                  String message = "Username"+account.getEmail()+"not exist";   
+                 System.out.println(message);
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(existAccount);
             }
         }
