@@ -18,6 +18,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,15 +35,14 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     LoginComponent,
     RegisterComponent,
     CartComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    CommonModule
-
-
+    CommonModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
