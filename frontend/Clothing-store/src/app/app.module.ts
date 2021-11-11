@@ -16,8 +16,9 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { CartComponent } from './components/cart/cart.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { FormsModule } from '@angular/forms';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -34,15 +35,16 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     LoginComponent,
     RegisterComponent,
     CartComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    LoginComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    CommonModule
-    
-
+    CommonModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
