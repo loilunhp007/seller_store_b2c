@@ -14,10 +14,10 @@ import { SearchComponent } from './components/search/search.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent} from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
@@ -37,7 +37,7 @@ import { CartComponent } from './components/cart/cart.component';
     CartComponent,
     ProductDetailComponent,
     LoginComponent,
-    CartComponent
+    CartComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +45,7 @@ import { CartComponent } from './components/cart/cart.component';
     HttpClientModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

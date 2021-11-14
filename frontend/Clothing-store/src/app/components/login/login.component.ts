@@ -1,8 +1,15 @@
 import { AppModule } from './../../app.module';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, Directive, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, NgForm, NG_VALIDATORS, ValidationErrors, Validator, ValidatorFn, Validators } from '@angular/forms';
 import { Account } from 'src/app/entity/account';
 import { LoginService } from 'src/app/services/login.service';
+
+// export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
+//   return (control: AbstractControl): ValidationErrors | null => {
+//     const forbidden = nameRe.test(control.value);
+//     return forbidden ? {forbiddenName: {value: control.value}} : null;
+//   };
+// }
 
 @Component({
   selector: 'app-login',
@@ -13,7 +20,8 @@ export class LoginComponent implements OnInit {
   @ViewChild('loginForm')
   loginForm!: NgForm;
   account: Account;
-  constructor(private loginService:LoginService) { }
+  form: FormGroup;
+  constructor(private loginService:LoginService, private fb: FormBuilder ) { }
 
   ngOnInit() {
   }
