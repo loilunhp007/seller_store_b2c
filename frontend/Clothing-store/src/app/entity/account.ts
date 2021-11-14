@@ -4,6 +4,7 @@ export class Account {
   email: string;
   password: string;
   state: number;
+  userDetail:Userdetail
   constructor(email: string, password: string){
     this.email = email;
     this.password = password;
