@@ -21,4 +21,17 @@ export class ProductService {
   deleteProduct(id:String){
     return this.httpClient.delete<Product>("http://localhost:8090/products/delete/"+id);
   }
+  getProductByTrangthai(trangthai:number){
+    return this.httpClient.get<Product>("http://localhost:8090/products/get");
+  }  
+  getProductByLikeTensp(tensp:String){
+    return this.httpClient.get<Product>("http://localhost:8090/products/get/us/"+tensp);
+  }
+  getAllProducts(){
+  return this.httpClient.get<Product[]>("http://localhost:8090/products/get");
+  }
+  
+  getProductByID(id:String){
+    return this.httpClient.get<Product>("http://localhost:8090/products/get/"+id);
+  }
 }
