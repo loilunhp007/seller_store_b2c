@@ -29,10 +29,10 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm.value);
       this.loginService.login(new Account(this.loginForm.value.email, this.loginForm.value.password))
       .subscribe(Response =>{
-        if(sessionStorage.getItem("uid")==null)
-        sessionStorage.setItem("uid",JSON.stringify(Response.userDetail.uid))
-        this.router.navigate(["/index"])
+        sessionStorage.setItem("uid",JSON.stringify(Response.userDetail.id))
+        this.router.navigate(["/"])
         console.log(Response);
+        
       },(error) => {
         console.log("Đăng nhập không thành công");
       });

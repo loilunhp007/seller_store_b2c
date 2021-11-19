@@ -12,12 +12,17 @@ export class SearchComponent implements OnInit {
   s:String;
   products: Array<Product>;
   constructor(
-    private actroute: ActivatedRoute,
+    private actRoute: ActivatedRoute,
     private productService: ProductService,
   ) { }
 
   ngOnInit(): void {
-      this.getProductByLikeTensp(this.s);
+    this.actRoute.queryParams.subscribe(
+      data=>{
+        const key = data.keyword;
+        this.getProductByLikeTensp(key);
+      })
+      
   }
   getProductByLikeTensp(tensp:String){
     this.productService.getProductByLikeTensp(tensp).subscribe(
