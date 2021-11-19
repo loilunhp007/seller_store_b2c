@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
     console.log(pid)
     if(this.uid!=null){
       console.log(this.uid)
-      this.cartService.addToCart(this.uid,pid,product.inventory[0].options.id).subscribe(Response=>{
+      this.cartService.addToCart(this.uid,pid).subscribe(Response=>{
         console.log(Response);
     },)
     }
