@@ -56,11 +56,13 @@
                               </form>
                            </li>
                            <li class="option-cart">
-                              <a href="#" class="cart-icon">cart <span class="cart_no">02</span></a>
+                              <a [routerLink]="['/cart']"class="cart-icon">cart <span class="cart_no">{{cartLength}}</span></a>
                               <ul class="option-cart-item">
-                                 <li>
-                                    <div class="cart-item">
-                                       <div class="image"><img src="assets/images/products/thum/products-01.png" alt=""></div>
+                                 <li *ngFor="let cart of carts">
+                                    <div class="cart-item" >
+                                    <div *ngFor="let img of cart.product.images.slice(0,1)  | keyvalue;" class="image">
+                                          <img src="assets/images/products/thum/{{img.value.data}}" alt="">
+                                    </div>
                                        <div class="item-description">
                                           <p class="name">Lincoln chair</p>
                                           <p>Size: <span class="light-red">One size</span><br>Quantity: <span class="light-red">01</span></p>
