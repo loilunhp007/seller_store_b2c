@@ -81,9 +81,9 @@
                     </td>
                     <td>
                     <div class="cart_quantity_button">
-                        <a class="cart_quantity_down" (click)="minusCart(cart.product.productID,'1')">-</a>
+                        <a class="cart_quantity_down" (click)="minusCart(cart.product.productID)">-</a>
                         <input  type="number"value="{{cart.soluong}}"  name="quantity" autocomplete="on" size="2" class="cart_quantity_input" (change)="onChange($event,cart)" >
-                        <a class="cart_quantity_up" (click)="plusCart(cart.product.productID,'1')">+</a>
+                        <a class="cart_quantity_up" (click)="plusCart(cart.product.productID)">+</a>
                       </div>
                     </td>
                     <td>

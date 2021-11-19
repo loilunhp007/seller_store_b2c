@@ -41,8 +41,8 @@ public class OrderController {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(orders);
     }
     @GetMapping("/get/state/{state}")
-    public ResponseEntity<List<Order>> getAllOrderByState(@PathVariable(name = "trangthai")int trangthai,@PathVariable(name = "matvban" )String matvban){
-        List<Order> orders = orderService.getAllOrderByStateAndUserDetail(trangthai,matvban);
+    public ResponseEntity<List<Order>> getAllOrderByState(@PathVariable(name = "trangthai")int trangthai,@PathVariable(name = "matvban" )String uid){
+        List<Order> orders = orderService.getAllOrderByStateAndUserDetail(trangthai,uid);
         if(orders!=null){
             return ResponseEntity.status(HttpStatus.OK).body(orders);
         }
