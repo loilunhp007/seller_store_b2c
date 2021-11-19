@@ -31,14 +31,14 @@ export class CartComponent implements OnInit {
       console.log(error);
     })
   }
-  plusCart(pid:string,quantity:number){
-    this.cartService.plusCart(this.uid,pid,quantity).subscribe(Response=>{
+  plusCart(pid:string){
+    this.cartService.plusCart(this.uid,pid).subscribe(Response=>{
       console.log(Response);
       this.reloadCurrentRoute();
     })
   }
-  minusCart(pid:string,quantity:number){
-    this.cartService.minusCart(this.uid,pid,quantity).subscribe(Response=>{
+  minusCart(pid:string){
+    this.cartService.minusCart(this.uid,pid).subscribe(Response=>{
       console.log(Response);
       this.reloadCurrentRoute();
     })
@@ -56,10 +56,10 @@ export class CartComponent implements OnInit {
     console.log(input.value);
     console.log(cart);
     if(cart.soluong>this.input){
-        this.minusCart(cart.product.productID,this.input);
+        this.minusCart(cart.product.productID);
     }else{
       if(cart.soluong<this.input){
-        this.plusCart(cart.product.productID,this.input);
+        this.plusCart(cart.product.productID);
       }
     }
     }
