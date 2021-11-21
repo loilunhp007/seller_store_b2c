@@ -1,0 +1,93 @@
+<p>ql-sanpham works!</p>
+<div class="breadcrumb">
+    <span><a href="../index.html">Home</a></span><span> / </span><span>Manager</span><span> / </span><span>Quản lý sản phẩm</span>
+</div>
+<div class="section">
+    <div class="them-sp"><button onclick="popup_themsp()">Thêm Sản Phẩm</button></div>
+    <table id="table-sp">
+        <thead>
+            <tr>
+                <th>Mã SP</th>
+                <th>Hình</th>
+                <th>Tên</th>
+                <th>Giá</th>
+                <th>Loại</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <div class="text-center">
+                    <nav aria-label="Page navigation example">
+                      <ul class="pagination justify-content-center">
+                    </ul>
+                </nav>
+            </div>
+    </div>
+    </div>
+    </div>
+<!-- popup thêm sp -->
+<form method="POST" enctype="multipart/form-data">
+    <div class="popup-themsp">
+        <div class="popup-themsp__content">
+            <div class="popup-themsp__title">Thêm Sản Phẩm</div>
+            <div class="popup-themsp-left">
+                <div class="popup-themsp-left__label">Nhập Têns</div>
+                <div class="popup-themsp-left__label">Nhập Giá</div>
+                <div class="popup-themsp-left__label">Chọn Hình</div>
+                <div class="popup-themsp-left__label">Chọn Loại</div>
+                <div class="popup-themsp-left__label">Mã Loại</div>
+                <div class="popup-themsp-left__label">Mô tả</div>
+                
+            </div>
+            <div class="popup-themsp-right">
+                <div class="popup-themsp-left__input" ><input type="text" placeholder="Tên sản phẩm" name ="ten"></div>
+                <div class="popup-themsp-left__input"><input type="text" placeholder="Giá sản phẩm" name = "gia"></div>
+                <div class="popup-themsp-left__input" ><input type="file" name="hinhanh" id="file" onchange="return fileValidationt()"></div>
+                <div class="popup-themsp-left__input" ><select name="dropdown" onchange="chon(this)">
+                </select>
+            </div>
+            <div class="popup-themsp-left__input" id="loai" ></div>
+            <div class="popup-themsp-left__input"><textarea name="mota" rows="5" cols="20" placeholder="Mô tả tại đây..."></textarea></div>
+        </div>
+
+        <button type ="submit" class="popup-themsp__btn" name ="clickthem">Thêm</button>
+        <div id = "imagePreviewt"><img src="image/img-01.png" class="sua-hinh" width="110" /></div>
+        <span class="back" onclick="close_popup_themsp()">&times;</span>
+    </div>
+    </div>
+    </form>
+    <!-- popup sửa sp -->
+<form method="POST" id="form_sua" enctype="multipart/form-data">
+    <div class="popup-suasp" id = "dodulieu">
+        <div class="popup-suasp__content">
+            <div class="popup-themsp__title">Sửa Sản Phẩm</div>
+            <div class="popup-themsp-left">
+                <div class="popup-themsp-left__label">Mã SP</div>
+                <div class="popup-themsp-left__label">Nhập Tên</div>
+                <div class="popup-themsp-left__label">Nhập Giá</div>
+                <div class="popup-themsp-left__label">Chọn Hình</div>
+                <div class="popup-themsp-left__label">Chọn Loại</div>
+                <div class="popup-themsp-left__label">Mã Loại</div>
+                <div class="popup-themsp-left__label">Mô tả</div>
+                
+            </div>
+            <div class="popup-themsp-right">
+                <div class="popup-themsp-left__input" ><input type="text" placeholder="Mã loại" name ="idsps" id="idsp" readonly></div>
+                <div class="popup-themsp-left__input" ><input type="text" placeholder="Tên sản phẩm" name ="tens" id="tensp"></div>
+                <div class="popup-themsp-left__input"><input type="text" placeholder="Giá sản phẩm" name = "gias" id="giasp"></div>
+                <div class="popup-themsp-left__input" id = "hinhanhs"><input type="file" name="hinhanhs" id="files" onchange="return fileValidations()"></div>
+                <div class="popup-themsp-left__input" >
+                    <select name="dropdowns" onchange="chons(this)" id="loaisp">
+                    </select>
+                </div>
+                <div class="popup-themsp-left__input" id="loais" ></div>
+                <div class="popup-themsp-left__input"><textarea name="motas" rows="5" cols="20" placeholder="Mô tả tại đây..." id="mota"></textarea></div>
+            </div>
+            <button type ="submit" class="popup-suasp__btn" name = "clicksua">Sửa</button>
+            <span class="back" onclick="close_popup_suasp()">&times;</span>
+            <div id = "imagePreviews"></div>
+        </div>
+    </div>
+</form>
