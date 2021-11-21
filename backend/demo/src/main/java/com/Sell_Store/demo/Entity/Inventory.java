@@ -40,14 +40,4 @@ public class Inventory {
     private Product product;
     @Column(name = "quantity",columnDefinition = "int")
     private int quantity;
-    @Column(name = "price",columnDefinition = "double")
-    private double price;
-    @Column(name = "percent_discount",columnDefinition = "int")
-    private int percent_discount;
-    @Column(name = "special_from_time")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date special_from_time;
-    @Column(name = "special_to_time")
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date special_to_time;
 }

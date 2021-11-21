@@ -2,7 +2,9 @@ package com.Sell_Store.demo.Entity;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,10 +15,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import com.Sell_Store.demo.Utils.StringPrefixedSequenceIdGenerator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 @Entity
 @Data
@@ -25,8 +32,22 @@ import org.hibernate.annotations.CreationTimestamp;
 @Table(name = "userdetail",schema="seller_store")
 public class UserDetail {
     @Id
-    @Column(name = "uid", columnDefinition = "nvarchar(20)",length=20)
-    private String uid;
+    @GenericGenerator(
+        name = "uid_seq", 
+        strategy = "com.Sell_Store.demo.Utils.StringPrefixedSequenceIdGenerator",
+        parameters = {
+            @org.hibernate.annotations.Parameter(
+                name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "1"),
+            @org.hibernate.annotations.Parameter(
+                name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "U_"),
+                @org.hibernate.annotations.Parameter(
+                name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
+           
+            
+    @GeneratedValue(generator = "uid_seq",
+        strategy = GenerationType.SEQUENCE)  
+    @Column(name="uid",updatable = false,nullable = false) 
+    private String id;
     @Column(name = "phone",columnDefinition = 
     "nvarchar(20)",length = 12)
     private String phone;
@@ -45,9 +66,10 @@ public class UserDetail {
     @Column(name = "gmail",columnDefinition = 
     "nvarchar(20)",length = 20)
     private String gmail;
+    @Column(name="timestamp", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP",nullable = false, updatable = false,insertable = false)
     @CreationTimestamp
-    @Column(name="timestamp", nullable = false, updatable = false, insertable = false)
-    private Timestamp timestamp;
+    private Timestamp timestamp; 
+
     @Column(name = "state",columnDefinition = 
     "int")
     private int state;

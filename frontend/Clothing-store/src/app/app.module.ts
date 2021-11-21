@@ -17,8 +17,9 @@ import { UserprofileComponent } from './components/userprofile/userprofile.compo
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartComponent } from './components/cart/cart.component';
+import { OrderComponent } from './components/order/order.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { CartComponent } from './components/cart/cart.component';
     CartComponent,
     ProductDetailComponent,
     LoginComponent,
-    CartComponent
+    CartComponent,
+    OrderComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,7 @@ import { CartComponent } from './components/cart/cart.component';
     HttpClientModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
