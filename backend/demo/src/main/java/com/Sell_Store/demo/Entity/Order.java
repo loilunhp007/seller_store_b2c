@@ -54,8 +54,8 @@ public class Order {
     @Column(name = "total",columnDefinition = "double",nullable = false)
     private Double total;
     @Column(name = "state",columnDefinition = "int",nullable = false)
-    @ManyToOne
+    private int state;
+    @OneToOne
     @JoinColumn(name = "payment_id", referencedColumnName = "payment_id")
     private PaymentMethod paymentMethod;
-    private int state;
 }

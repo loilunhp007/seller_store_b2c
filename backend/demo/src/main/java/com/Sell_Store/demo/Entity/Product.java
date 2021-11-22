@@ -64,8 +64,6 @@ public class Product{
     private double price;
     @Column(name = "percent_discount",columnDefinition = "int")
     private int percent_discount;
-    @Column(name = "discount_price",columnDefinition = "double")
-    private double discount_price;
     @Column(name = "special_from_time")
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date special_from_time;
@@ -78,8 +76,8 @@ public class Product{
     private int views;
     @Column(name = "state",columnDefinition = "int")
     private int state;
-    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "product",fetch = FetchType.LAZY)
     @JsonIgnoreProperties("product")
-    private  List<Inventory> inventory;
+    private  Inventory inventory;
   
 }
