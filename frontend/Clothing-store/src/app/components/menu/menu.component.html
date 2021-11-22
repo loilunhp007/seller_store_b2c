@@ -39,9 +39,13 @@
                               </ul>
                            </div>
                            <div class="col-md-3">
-                              <ul class="usermenu">
-                                 <li><a href="checkout.html" class="log">Login</a></li>
-                                 <li><a href="checkout2.html" class="reg">Register</a></li>
+                              <ul class="usermenu" *ngIf="!isLoggedIn()">
+                                 <li><a [routerLink]="['/login']" class="log">Login</a></li>
+                                 <li><a href="" class="reg">Register</a></li>
+                              </ul>
+                                <ul class="usermenu" *ngIf="isLoggedIn()">
+                                 <li><a  class="log">Hello </a></li>
+                                 <li><a href="" class="reg">Doi mat khau</a></li>
                               </ul>
                            </div>
                         </div>
