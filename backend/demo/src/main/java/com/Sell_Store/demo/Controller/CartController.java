@@ -50,6 +50,15 @@ public class CartController {
         json.put("string", qt+"add success");
         return ResponseEntity.status(HttpStatus.OK).body(json.toString());
     }
+    @PutMapping("/put/{pid}/{uid}/{soluong}")
+    public ResponseEntity<String> updateQuantityCart(@PathVariable(name = "pid")String pid,@PathVariable(name = "uid")String uid,@PathVariable(name = "soluong") int soluong){
+        UserDetail userDetail = userService.getUserDetailById(uid);
+        int qt = cartService.updateQuanCart(userDetail, pid,soluong);
+        JSONObject json = new JSONObject();
+        json.put("string",qt+"update succes");
+        return ResponseEntity.status(HttpStatus.OK).body(json.toString());
+
+    }
     @PutMapping("/put/plus/{pid}/{uid}")
     public ResponseEntity<String> plusCart(@PathVariable(name = "pid")String pid,@PathVariable(name = "uid")String uid){
         UserDetail userDetail = userService.getUserDetailById(uid);

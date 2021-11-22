@@ -21,6 +21,7 @@ export class MenuComponent implements OnInit {
     searchText;
   categories:Array<Category>
   carts:Array<Cart>
+  cartTotal=0;
   cartLength:number
   uid:string
   img:string
@@ -35,7 +36,9 @@ export class MenuComponent implements OnInit {
     if(sessionStorage.getItem("uid")!=null){
       this.uid=JSON.parse(sessionStorage.getItem("uid"));
       this.getCart();
+     
     }
+    
     this.getCategories();
   }
   getCategories(){
@@ -51,6 +54,7 @@ export class MenuComponent implements OnInit {
     this.cartService.getCartItems(this.uid).subscribe(Response=>{
       this.carts=Response;
       this.cartLength = this.carts.length;
+      this.getCartTotal(this.carts);
       console.log(this.carts);
       console.log(Response);
     },(error)=>{
@@ -63,5 +67,10 @@ export class MenuComponent implements OnInit {
   }
   getFormcontrols(){
     return this.formSearch.controls;
+  }
+  getCartTotal(carts:Array<Cart>){
+    carts.forEach(element => {
+      this.cartTotal+=(element.product.price*(100-element.product.percent_discount)/100)*element.soluong
+    });
   }
 }

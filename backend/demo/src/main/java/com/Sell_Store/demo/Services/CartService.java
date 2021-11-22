@@ -72,6 +72,12 @@ public class CartService {
         cartRepository.save(cart);
         return soluong;
     }
-
+    public int updateQuanCart(UserDetail userDetail,String masp,int soluong){
+        Product product = productRepository.findById(masp).get();
+        Cart cart = cartRepository.findByProductAndUserDetail(product, userDetail);
+        cart.setSoluong(soluong);
+        cartRepository.save(cart);
+        return soluong;
+    }
     
 }

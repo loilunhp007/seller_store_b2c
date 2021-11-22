@@ -11,16 +11,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Table(name="payment_method")
-@Entity
 public class PaymentMethod {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "payment_id")
-    private long id;
+    private long payment_id;
     @Column(name = "payment_name")
     private String payment_name;
     private int state; 

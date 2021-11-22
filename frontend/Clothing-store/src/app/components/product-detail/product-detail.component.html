@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-9">
-          <div class="products-details">
+          <div class="products-details" >
             <div class="preview_image">
               <div class="preview-small">
                 <img id="zoom_03" src="images/products/medium/products-01.jpg" data-zoom-image="images/products/Large/products-01.jpg" alt="">
@@ -69,13 +69,13 @@
               <div class="price">
                 Price : 
                 <span class="new_price">
-                  {{product.inventory.price}}
+                  {{product.price*(100-product.percent_discount)/100}}
                   <sup>
                     $
                   </sup>
                 </span>
                 <span class="old_price">
-                  {{product.inventory.price}}
+                  {{product.price}}
                   <sup>
                     $
                   </sup>
@@ -308,7 +308,7 @@
                         {{product.productName}}
                       </div>
                       <h4 class="price">
-                        {{product.inventory.price}}
+                        {{product.price}}
                       </h4>
                       <div class="button_group">
                         <button class="button add-cart" type="button">

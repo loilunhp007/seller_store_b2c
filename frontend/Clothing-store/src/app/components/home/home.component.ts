@@ -36,12 +36,9 @@ export class HomeComponent implements OnInit {
   }
   fetchDiscountProduct(){
     if(this.products!=null){
-      let i=1
       this.products.forEach( (e)=>{
-        if(e.inventory[0].percent_discount >= 20){
+        if(e.percent_discount >= 20){
           this.hotproducts.push(e); 
-          this.percent_discounts.push(e.inventory[0].percent_discount);
-          i++;
         }
       });
     }
