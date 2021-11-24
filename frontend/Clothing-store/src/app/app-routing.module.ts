@@ -1,30 +1,23 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CartComponent } from './components/cart/cart.component';
-import { HomeComponent } from './components/home/home.component';
-import { LoginComponent } from './components/login/login.component';
-import { ProductComponent } from './components/product/product.component';
-import { SearchComponent } from './components/search/search.component';
+import { AdminComponent } from './admin/admin.component';
+import { CartComponent } from './web/components/cart/cart.component';
+import { HomeComponent } from './web/components/home/home.component';
+import { LoginComponent } from './web/components/login/login.component';
+import { ProductComponent } from './web/components/product/product.component';
+import { SearchComponent } from './web/components/search/search.component';
 
 const routes: Routes = [
   
   
   {
     path: '',
-    redirectTo: '/index',
+    redirectTo: '/web/index',
     pathMatch:'full',    
   },
   {
-    path : "index",component:HomeComponent, pathMatch:'full'
-  } ,
-  {
-    path : "login", component:LoginComponent ,pathMatch:'full',
-  },
-  {
-    path:"cart",component:CartComponent
-  },
-  {path:"search",component:SearchComponent,pathMatch:'full'},
-  {path:"product",component:ProductComponent,pathMatch:'full'}
+    path:'admin',redirectTo:'/admin',pathMatch:'full'
+  }
 ];
 
 @NgModule({

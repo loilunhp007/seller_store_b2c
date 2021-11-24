@@ -1,4 +1,4 @@
-import { AppModule } from './../../app.module';
+
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Account } from 'src/app/entity/account';

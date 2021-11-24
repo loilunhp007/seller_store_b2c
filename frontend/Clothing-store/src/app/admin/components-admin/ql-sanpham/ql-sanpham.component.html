@@ -1,9 +1,10 @@
+<div class="main">
 <p>ql-sanpham works!</p>
 <div class="breadcrumb">
     <span><a href="../index.html">Home</a></span><span> / </span><span>Manager</span><span> / </span><span>Quản lý sản phẩm</span>
 </div>
 <div class="section">
-    <div class="them-sp"><button onclick="popup_themsp()">Thêm Sản Phẩm</button></div>
+    <div class="them-sp"><button (click)="popup_themsp()">Thêm Sản Phẩm</button></div>
     <table id="table-sp">
         <thead>
             <tr>
@@ -16,6 +17,17 @@
             </tr>
         </thead>
         <tbody>
+          <tr *ngFor="let product of products">
+                <td>product.productID</td>
+                <td><img src="../../../assets/image/products-01.png'" width="110px"></td>
+                <td>product.productName</td>
+                <td>product.price|currency:'VND':'symbol':'3.0'</td>
+                <td>product.category.tenloai</td>
+                <td>
+                <button >Xoá</button><br>
+                <button class="sua_sp">Sửa</button>
+                </td>
+            </tr>
         </tbody>
     </table>
     <div class="text-center">
@@ -25,15 +37,13 @@
                 </nav>
             </div>
     </div>
-    </div>
-    </div>
 <!-- popup thêm sp -->
 <form method="POST" enctype="multipart/form-data">
-    <div class="popup-themsp">
+    <div class="popup-themsp" [style.display]="isToggle?'block' : 'display: none'">
         <div class="popup-themsp__content">
             <div class="popup-themsp__title">Thêm Sản Phẩm</div>
             <div class="popup-themsp-left">
-                <div class="popup-themsp-left__label">Nhập Têns</div>
+                <div class="popup-themsp-left__label">Nhập Tên</div>
                 <div class="popup-themsp-left__label">Nhập Giá</div>
                 <div class="popup-themsp-left__label">Chọn Hình</div>
                 <div class="popup-themsp-left__label">Chọn Loại</div>
@@ -54,7 +64,7 @@
 
         <button type ="submit" class="popup-themsp__btn" name ="clickthem">Thêm</button>
         <div id = "imagePreviewt"><img src="image/img-01.png" class="sua-hinh" width="110" /></div>
-        <span class="back" onclick="close_popup_themsp()">&times;</span>
+        <span class="back" (click)="popup_themsp()">&times;</span>
     </div>
     </div>
     </form>
@@ -86,8 +96,9 @@
                 <div class="popup-themsp-left__input"><textarea name="motas" rows="5" cols="20" placeholder="Mô tả tại đây..." id="mota"></textarea></div>
             </div>
             <button type ="submit" class="popup-suasp__btn" name = "clicksua">Sửa</button>
-            <span class="back" onclick="close_popup_suasp()">&times;</span>
+            <span class="back" (click)="popup_themsp()">&times;</span>
             <div id = "imagePreviews"></div>
         </div>
     </div>
 </form>
+</div>

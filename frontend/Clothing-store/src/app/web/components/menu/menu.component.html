@@ -40,7 +40,7 @@
                            </div>
                            <div class="col-md-3">
                               <ul class="usermenu" *ngIf="!isLoggedIn()">
-                                 <li><a [routerLink]="['/login']" class="log">Login</a></li>
+                                 <li><a [routerLink]="['/web/login']" class="log">Login</a></li>
                                  <li><a href="" class="reg">Register</a></li>
                               </ul>
                                 <ul class="usermenu" *ngIf="isLoggedIn()">
@@ -60,7 +60,7 @@
                               </form>
                            </li>
                            <li class="option-cart">
-                              <a [routerLink]="['/cart']"class="cart-icon">cart <span class="cart_no">{{cartLength}}</span></a>
+                              <a [routerLink]="['/web/cart']"class="cart-icon">cart <span class="cart_no">{{cartLength}}</span></a>
                               <ul class="option-cart-item">
                                  <li *ngFor="let cart of carts">
                                     <div class="cart-item" >
