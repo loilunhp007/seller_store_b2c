@@ -7,6 +7,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Cart } from 'src/app/entity/cart';
 import { CartService } from 'src/app/services/cart.service';
+import { LoginService } from 'src/app/services/login.service';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -25,11 +26,12 @@ export class MenuComponent implements OnInit {
   cartLength:number
   uid:string
   img:string
- 
+  isLogged = false;
   constructor(private categoryService:CategoryService,
     private cartService:CartService,
     private router:Router, 
-    private formBuilder:FormBuilder,) { 
+    private formBuilder:FormBuilder,
+    private loginService:LoginService) { 
     }
 
   ngOnInit(): void {
@@ -72,5 +74,13 @@ export class MenuComponent implements OnInit {
     carts.forEach(element => {
       this.cartTotal+=(element.product.price*(100-element.product.percent_discount)/100)*element.soluong
     });
+  }
+  isLoggedIn(){
+    this.isLogged = this.loginService.isLogged();
+    return this.isLogged;
+  }
+  logout(){
+    this.isLogged = this.loginService.logOut();
+    return this.router.navigate(["/login"]);
   }
 }

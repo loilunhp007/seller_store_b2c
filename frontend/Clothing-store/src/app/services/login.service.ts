@@ -17,5 +17,16 @@ export class LoginService {
     // });
     return this.httpClient.post<Account>("http://localhost:8090/user/login", account);
   }
+  isLogged(){
+    let sesson = JSON.parse(sessionStorage.getItem("uid"));
+   if(sesson ==null || sesson===''){
+     return false;
+   }
+   else{return true}
+  }
+  logOut(){
+  sessionStorage.removeItem("user");
+  return false;
+  }
 
 }

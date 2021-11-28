@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-thongke',
   templateUrl: './thongke.component.html',
-  styleUrls: ['./thongke.component.css']
+  styleUrls: ['./../../../../assets/admin/css/styles.css']
 })
 export class ThongkeComponent implements OnInit {
 

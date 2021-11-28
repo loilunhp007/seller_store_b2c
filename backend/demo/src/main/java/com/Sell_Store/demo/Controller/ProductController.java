@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -14,6 +15,7 @@ import com.Sell_Store.demo.Entity.UserDetail;
 import com.Sell_Store.demo.Services.ProductService;
 import com.Sell_Store.demo.Services.UserService;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -92,26 +94,49 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.OK).body(_product);
 
     }
-    /*@PutMapping("/put/{masp}")
-    public ResponseEntity<Product> updateProductById(@PathVariable(name = "masp")String masp,@RequestBody Product product){
-        Product _Product = this.productService.findProductByID(masp);
+    @PutMapping("/put/{productID}")
+    public ResponseEntity<Product> updateProductById(@PathVariable(name = "productID")String productID,@RequestBody Product product){
+        Product _Product = this.productService.findProductByID(productID);
         _Product.setProductID(product.getProductID());
         _Product.setProductName(product.getProductName());
-        _Product.setThongtinproduct(product.getThongtinproduct());
+        _Product.setInfo(product.getInfo());
         _Product.setPrice(product.getPrice());
-        _Product.setSoluong(product.getSoluong());
-        _Product.setLuotxem(product.getLuotxem());
+        _Product.setViews(product.getViews());
         _Product.setImages(product.getImages());
-        _Product.setDanhgia(product.getDanhgia());
-        _Product.setTrangthai(product.getTrangthai());
-        _Product.setUserDetail(product.getUserDetail());
+        _Product.setLikes(product.getLikes());
+        _Product.setState(product.getState());
+        _Product.setInventory(product.getInventory());
         Product newProduct= this.productService.addProduct(_Product);
         return ResponseEntity.status(HttpStatus.OK).body(newProduct);
-    }*/
+    }
 
-    @DeleteMapping("/delete/{masp}")
-    public ResponseEntity<String> deteleProductById(@PathVariable(name = "masp")String masp){
-        this.productService.deteleProductByID(masp);
-        return ResponseEntity.status(HttpStatus.OK).body("detele sucess");
+    @DeleteMapping("/delete/{productID}")
+    public ResponseEntity<String> deteleProductById(@PathVariable(name = "productID")String productID){
+        this.productService.deteleProductByID(productID);
+        JSONObject obj = new JSONObject();
+        obj.put("result", "success");
+        return ResponseEntity.status(HttpStatus.OK).body(obj.toString());
+    }
+    @PostMapping("/upload")
+    public void uploadImage(@RequestParam("imageFile") MultipartFile[] file) throws IOException{
+        String folder= "./frontend/Clothing-store/src/assets/images/products/";
+        File fi = new File("");
+        System.out.println("fi:"+fi.getAbsolutePath());
+        for(int i=0;i<file.length;i++){
+            bytes = file[i].getBytes();
+            String name = file[i].getOriginalFilename();
+            
+        if (name != null && name.length() > 0) {
+            // Create the file at server
+            File serverFile = new File(folder + name);
+            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+            stream.write(bytes);
+            stream.close();                    
+        }
+        }
+       
+
+        
+      
     }
 }

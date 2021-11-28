@@ -3,6 +3,7 @@ package com.Sell_Store.demo.Services;
 import java.util.List;
 
 import com.Sell_Store.demo.Entity.Inventory;
+import com.Sell_Store.demo.Entity.Product;
 import com.Sell_Store.demo.Repository.InventoryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,13 @@ public class InventoryService {
     public Inventory addProductToInventory(Inventory inventory){
         return inventoryRepository.save(inventory);
     }
-    public void deteleProductByID(int id){
-        inventoryRepository.deleteById(id);
+    public int deteleProductByID(Product product){
+        Inventory inventory = inventoryRepository.findByProduct(product);
+        inventoryRepository.delete(inventory);
+        if(inventoryRepository.findById(inventory.getId())==null){
+            return 1;
+        }
+        else return 0;
     }
    
 }

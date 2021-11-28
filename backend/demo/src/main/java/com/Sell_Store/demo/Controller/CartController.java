@@ -43,8 +43,8 @@ public class CartController {
     @PostMapping("/add/{pid}/{uid}")
     public ResponseEntity<String> addItem(@PathVariable(name = "pid")String pid,@PathVariable(name = "uid")String uid){
         
-        UserDetail userDetail = userService.getUserDetailById(pid);
-        int qt = cartService.addItem(userDetail, uid);
+        UserDetail userDetail = userService.getUserDetailById(uid);
+        int qt = cartService.addItem(userDetail, pid);
         JSONObject json = new JSONObject();
         json.put("string", qt+"add success");
         return ResponseEntity.status(HttpStatus.OK).body(json.toString());

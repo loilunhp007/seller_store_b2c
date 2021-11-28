@@ -3,10 +3,9 @@ import { Inventory } from "./inventory"
 
 export class Product {
     productID:string
-    name:string
-    cate:Category
+    category:Category
     productName:String
-    images:Array<string>
+    images:string
     info:String
     likes:number
     views:number
@@ -16,4 +15,5 @@ export class Product {
     special_from_time:Date;
     special_to_time:Date;
     inventory:Inventory
+    imagesArray:{}
 }
