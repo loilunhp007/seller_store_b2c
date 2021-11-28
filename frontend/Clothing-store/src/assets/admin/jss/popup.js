@@ -1,6 +1,18 @@
 function popup_themsp() {
     document.getElementsByClassName('popup-themsp')[0].style.display = 'block';
 }
+function popup_form(string) {
+    document.getElementsByClassName(string)[0].style.display = 'block';
+}
+function close_popup(string) {
+    document.getElementsByClassName(string)[0].style.display = 'none';
+    try {
+        document.getElementsByClassName(string)[1].style.display = 'none';
+        console.log("ABCD");
+    } catch (e) {
+        console.log("ABCD");
+    }
+}
 function popup_themnv() {
     document.getElementsByClassName('popup-themsp')[0].style.display = 'block';
      $.ajax({
@@ -110,3 +122,4 @@ function popup_cthd (id){
 function close_popup_cthd (){
     document.getElementsByClassName('popup-cthd')[0].style.display = 'none';
 }
+

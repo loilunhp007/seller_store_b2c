@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Product } from '../entity/product';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Inventory } from '../entity/inventory';
 
 @Injectable({
   providedIn: 'root'
@@ -33,5 +34,8 @@ export class ProductService {
   
   getProductByID(id:String){
     return this.httpClient.get<Product>("http://localhost:8090/products/get/"+id);
+  }
+  deleteInventory(id:String):Observable<any>{
+    return this.httpClient.delete<Inventory>("http://localhost:8090/inventory/delete/"+id);
   }
 }

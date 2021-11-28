@@ -5,3 +5,7 @@
     min-height: 100vh;
     padding-bottom: 30px;
 }
+.popup-themsp{
+    display: block;
+}
+@import '../../../../../node_modules/@fortawesome/fontawesome-free/css/fontawesome.css';

@@ -1,52 +1,58 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AdminComponent } from './admin.component';
-
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminComponent } from './admin.component';
 import { MenuAdminComponent } from './components-admin/menu-admin/menu-admin.component';
-import { LoginAdminComponent } from './components-admin/login-admin/login-admin.component';
-import { PhanquyenComponent } from './components-admin/phanquyen/phanquyen.component';
+import { SidebarComponent } from './components-admin/sidebar/sidebar.component';
+import { AdminFooterComponent } from './components-admin/admin-footer/admin-footer.component';
+import { AdminRouting } from './admin-routing.module';
+import { QlSanphamComponent } from './components-admin/ql-sanpham/ql-sanpham.component';
 import { QlAccountComponent } from './components-admin/ql-account/ql-account.component';
 import { QlDanhmucComponent } from './components-admin/ql-danhmuc/ql-danhmuc.component';
 import { QlDonhangComponent } from './components-admin/ql-donhang/ql-donhang.component';
 import { QlKhachhangComponent } from './components-admin/ql-khachhang/ql-khachhang.component';
-import { QlSanphamComponent } from './components-admin/ql-sanpham/ql-sanpham.component';
-import { RouterModule } from '@angular/router';
-import { AdminRouting } from './admin-routing.module';
+import { LoginAdminComponent } from './components-admin/login-admin/login-admin.component';
 import { ThongkeComponent } from './components-admin/thongke/thongke.component';
-import { AdminFooterComponent } from './components-admin/admin-footer/admin-footer.component';
-import { SidebarComponent } from './components-admin/sidebar/sidebar.component';
-import { CommonModule } from '@angular/common';
+import { DpDatePickerModule } from 'ng2-date-picker';
+
 
 
 @NgModule({
   declarations: [
     AdminComponent,
+    MenuAdminComponent,
+    SidebarComponent,
     LoginAdminComponent,
-    PhanquyenComponent,
+    ThongkeComponent,
+    AdminFooterComponent,
+    QlSanphamComponent,
     QlAccountComponent,
     QlDanhmucComponent,
     QlDonhangComponent,
-    QlKhachhangComponent,
-    QlSanphamComponent,
-    ThongkeComponent,
-    AdminFooterComponent,
-    SidebarComponent
+    QlKhachhangComponent
   ],
   imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
     CommonModule,
+    AdminRouting,
+    BrowserModule,
+    FormsModule,
     ReactiveFormsModule,
-    RouterModule,
-    AdminRouting
+    DpDatePickerModule
   ],
-  providers: [],
-  bootstrap: [AdminComponent]
+  exports:[
+    AdminComponent,
+    MenuAdminComponent,
+    SidebarComponent,
+    LoginAdminComponent,
+    ThongkeComponent,
+    AdminFooterComponent,
+    QlSanphamComponent,
+    QlAccountComponent,
+    QlDanhmucComponent,
+    QlDonhangComponent,
+    QlKhachhangComponent
+  ]
 })
 export class AdminModule { }

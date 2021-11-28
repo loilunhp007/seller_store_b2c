@@ -8,7 +8,7 @@ import { SliderComponent } from './web/components/slider/slider.component';
 import { MenuComponent } from './web/components/menu/menu.component';
 import { HomeComponent } from './web/components/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { ProductComponent } from './web/components/product/product.component';
 import { SearchComponent } from './web/components/search/search.component';
 import { ContactsComponent } from './web/components/contacts/contacts.component';
@@ -28,11 +28,12 @@ import { MenuAdminComponent } from './admin/components-admin/menu-admin/menu-adm
 import { AdminFooterComponent } from './admin/components-admin/admin-footer/admin-footer.component';
 import { SidebarComponent } from './admin/components-admin/sidebar/sidebar.component';
 import { QlSanphamComponent } from './admin/components-admin/ql-sanpham/ql-sanpham.component';
+import { AdminModule } from './admin/admin.module';
+import { DpDatePickerModule } from 'ng2-date-picker';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdminComponent,
     WebComponent,
     MenuComponent,
     FooterComponent,
@@ -58,8 +59,9 @@ import { QlSanphamComponent } from './admin/components-admin/ql-sanpham/ql-sanph
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AdminRouting,
-    WebRoutingModule
+    WebRoutingModule,
+    AdminModule,
+    DpDatePickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
