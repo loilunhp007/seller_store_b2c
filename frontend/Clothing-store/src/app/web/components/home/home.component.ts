@@ -1,4 +1,5 @@
 import { Component, OnInit, SystemJsNgModuleLoaderConfig } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Cart } from 'src/app/entity/cart';
 import { Product } from 'src/app/entity/product';
 import { CartService } from 'src/app/services/cart.service';
@@ -17,13 +18,18 @@ export class HomeComponent implements OnInit {
   hotproducts:Array<Product> = [];
   uid:string
   constructor(private productService:ProductService,
-    private cartService:CartService) { }
-
+    private cartService:CartService,
+    private Actroute:ActivatedRoute,private route:Router) { }
+    flag:boolean=false;
   ngOnInit(): void {
     this.getProduct();
     if(sessionStorage.getItem("uid")!=null){
       this.uid = JSON.parse(sessionStorage.getItem("uid"))
     }
+    this.sampleMethodCall()
+   
+    
+   
   }
   getProduct(){
     this.productService.getProducts().subscribe(Response =>{
@@ -56,5 +62,15 @@ export class HomeComponent implements OnInit {
     }
 
   }
-  
+  public sampleMethodCall() {
+    
+    setInterval(function() {
+      document.getElementById("next_featured").click(); },4000); 
+    }
+    goDetail(product:Product){
+      this.Actroute.queryParams.subscribe( params  =>{
+        const id = product.productID;
+        this.route.navigate(['/web/product-detail'],{queryParams:{id}})
+      })
+    }
 }

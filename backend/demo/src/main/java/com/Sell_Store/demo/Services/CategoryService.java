@@ -22,4 +22,7 @@ public class CategoryService {
     public  Category addLoaiMay( Category loaiMay){
         return  categoryRepository.save(loaiMay);
     }
+    public Category getByID(int id) throws Exception{
+        return categoryRepository.findById(id).get();
+    }
 }

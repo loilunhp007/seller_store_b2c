@@ -65,7 +65,7 @@ export class MenuComponent implements OnInit {
   }
   goSearch(){ 
       const keyword = this.getFormcontrols().searchValue.value ;
-      this.router.navigate(['','search'],{queryParams:{keyword}})
+      this.router.navigate(['/web/search'],{queryParams:{keyword}})
   }
   getFormcontrols(){
     return this.formSearch.controls;

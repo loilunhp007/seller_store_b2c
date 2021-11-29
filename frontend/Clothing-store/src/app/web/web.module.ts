@@ -19,6 +19,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { OrderComponent } from './components/order/order.component';
 import { WebComponent } from './web.component';
 import { WebRoutingModule } from './web-routing.module';
+import { CheckoutComponent } from './components/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { WebRoutingModule } from './web-routing.module';
     LoginComponent,
     CartComponent,
     OrderComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +49,25 @@ import { WebRoutingModule } from './web-routing.module';
     FormsModule,
     ReactiveFormsModule,
     WebRoutingModule
+  ],
+  exports:[
+    MenuComponent,
+    FooterComponent,
+    SliderComponent,
+    HomeComponent,
+    ProductComponent,
+    SearchComponent,
+    ContactsComponent,
+    PagenotfoundComponent,
+    UserprofileComponent,
+    LoginComponent,
+    RegisterComponent,
+    CartComponent,
+    ProductDetailComponent,
+    LoginComponent,
+    CartComponent,
+    OrderComponent,
+    CheckoutComponent,
   ],
   providers: [],
   bootstrap: [WebComponent]
