@@ -1,3 +1,5 @@
+import { TypeMember } from "./type-member";
+
 export class Userdetail {
     id: string;
     phone:string;
@@ -7,5 +9,7 @@ export class Userdetail {
     birthday:Date;
     gmail:string
     timestamp:Date;
+    typeMember:TypeMember;
     state:number;
+
 }
