@@ -8,21 +8,32 @@
 <div class="section">
     <div class="them-sp" onclick="popup_themsp()"><button>Thêm Danh Mục</button></div>
     <table id="table-dm">
-     <thead>
-      <tr>
-       <th>STT</th>
-       <th>Tên Danh Mục</th>
-       <th>Mã Danh Mục</th>
-       <th>Thao tác</th>
-   </tr>
-</thead>
-<tbody>
-</tbody>
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên Danh Mục</th>
+                <th>Trạng Thái</th>
+                <th>Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let category of categories;let i=index">
+                <td>{{i+1}}</td>
+                <td>{{category.tenloai}}</td>
+                <td ><span *ngIf="category.trangthai=='1'">Đang hoạt động</span><span *ngIf="category.trangthai=='0'">Ẩn</span></td>
+                <td>
+                    <button type="button" class="btn btn-primary">Sửa</button>
+                    <button type="button" class="btn btn-primary">Xóa</button>
+                    <button type="button" class="btn btn-primary" *ngIf="category.trangthai=='1'">Hiện</button>
+                    <button type="button" class="btn btn-primary"*ngIf=" category.trangthai=='0'">Ẩn</button>
+                </td>
+            </tr>    
+        </tbody>
 </table>
 </div>
 
 <!-- popup thêm sp -->
-<form method="POST">
+<form *ngIf="!isToggle">
     <div class="popup-themsp">
         <div class="popup-suadm__content">
             <div class="popup-themsp__title">Thêm Danh Mục</div>
@@ -40,7 +51,7 @@
     </div>
 </form>
 <!-- popup sửa sp -->
-<form method="POST">
+<form *ngIf="!isToggle2">
     <div class="popup-suasp">
         <div class="popup-suadm__content">
             <div class="popup-themsp__title">Sửa Danh Mục</div>

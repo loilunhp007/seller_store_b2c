@@ -123,3 +123,6 @@ function close_popup_cthd (){
     document.getElementsByClassName('popup-cthd')[0].style.display = 'none';
 }
 
+function feature_click(){
+    document.getElementById("next_featured").click();
+}

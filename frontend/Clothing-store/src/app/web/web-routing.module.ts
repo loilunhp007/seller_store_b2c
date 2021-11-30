@@ -8,6 +8,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { ProductComponent } from './components/product/product.component';
 import { SearchComponent } from './components/search/search.component';
 import { WebComponent } from './web.component';
+import {CheckoutComponent} from './components/checkout/checkout.component';
 
 const routes: Routes = [
   {
@@ -31,7 +32,8 @@ const routes: Routes = [
       {path:"search",component:SearchComponent,pathMatch:'full'},
       {path:"product",component:ProductComponent,pathMatch:'full'},
       {path:"product-detail",component:ProductDetailComponent,pathMatch:'full'},
-      {path:"contact",component:ContactsComponent}
+      {path:"contact",component:ContactsComponent},
+      {path:"checkout",component:CheckoutComponent,pathMatch:'full'}
     ]
   }
   

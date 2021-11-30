@@ -27,10 +27,10 @@ export class ProductComponent implements OnInit {
         console.log(this.products);
     })
   }
-  goDetail(product:Product){
+  goDetail(product2:Product){
     this.Actroute.queryParams.subscribe( params  =>{
-      const id = product.productID;
-      this.router.navigate(['/','product-detail'],{queryParams:{id}})
+      const id = product2.productID;
+      this.router.navigate(['/web/product-detail'],{queryParams:{id}})
     })
   }
 }

@@ -16,6 +16,7 @@ import { QlKhachhangComponent } from './components-admin/ql-khachhang/ql-khachha
 import { LoginAdminComponent } from './components-admin/login-admin/login-admin.component';
 import { ThongkeComponent } from './components-admin/thongke/thongke.component';
 import { DpDatePickerModule } from 'ng2-date-picker';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -39,7 +40,8 @@ import { DpDatePickerModule } from 'ng2-date-picker';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    DpDatePickerModule
+    DpDatePickerModule,
+    NgxPaginationModule
   ],
   exports:[
     AdminComponent,

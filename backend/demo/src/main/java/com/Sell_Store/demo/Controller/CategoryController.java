@@ -11,8 +11,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @Controller
 @RestController
@@ -31,5 +36,24 @@ public class CategoryController {
         List<Category> loaimay = categoryService.getAllByName(tenloai);
         return ResponseEntity.status(HttpStatus.OK).body(loaimay);
     }
+    @PostMapping("/add")
+    public ResponseEntity<Category> addCate(@RequestBody Category category) {
+        //TODO: process POST request
+        Category category2 = categoryService.addLoaiMay(category);
+        
+        return ResponseEntity.status(HttpStatus.OK).body(category2);
+    }
+    @PutMapping("/put/{id}")
+    public ResponseEntity<Category> addCate(@PathVariable("id")int id,@RequestBody Category category) throws Exception {
+        //TODO: process POST request
+        Category category2 = categoryService.getByID(id);
+        if(category2!=null){
+            category2.setTenloai(category.getTenloai());
+            category2.setTrangthai(category2.getTrangthai());
+        }
+        Category category3 = categoryService.addLoaiMay(category2);
+        return ResponseEntity.status(HttpStatus.OK).body(category3);
+    }
+    
 
 }

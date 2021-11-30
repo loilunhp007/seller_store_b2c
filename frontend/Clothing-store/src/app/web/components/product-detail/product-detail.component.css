@@ -1,0 +1,13 @@
+#selectQuan{
+    padding: 6px;
+    border: 1px solid #e7e7e7;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+    color: #f7544a;
+    width: 60px;
+    min-width: 60px;
+}
+.qty{
+    width: 120px;
+}

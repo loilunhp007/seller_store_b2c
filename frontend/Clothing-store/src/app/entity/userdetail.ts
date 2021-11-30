@@ -1,14 +1,15 @@
 import { TypeMember } from "./type-member";
 
 export class Userdetail {
-    uid: string;
-    phone: string;
-    firstname: string;
-    lastname: string;
-    address: string;
+    id: string;
+    phone:string;
+    firstname:string;
+    lastname:string;
+    address:string;
     birthday:Date;
-    gmail: string;
-    timestamp: string;
-    state:number;
+    gmail:string
+    timestamp:Date;
     typeMember:TypeMember;
+    state:number;
+
 }

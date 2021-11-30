@@ -27,6 +27,11 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @GetMapping("/get")
+    public ResponseEntity<List<Order>> getAllOrder() throws Exception{
+        List<Order> orders = orderService.getAllOrder();
+        return ResponseEntity.status(HttpStatus.OK).body(orders);
+    }
     @GetMapping("/get/{orderID}")
     public ResponseEntity<Order> getOrderById(@PathVariable(name = "orderID")String orderID) throws Exception{
         Order order = orderService.getOrderById(orderID);

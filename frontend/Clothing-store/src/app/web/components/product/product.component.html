@@ -242,7 +242,7 @@
           </h3>
           <span class="likebutton">
             <a href="#">
-              <img src="images/fblike.png" alt="">
+              <img src="../../../../assets/images/fblike.png" alt="">
             </a>
           </span>
           <p>
@@ -285,7 +285,7 @@
           <div class="fbplug">
             <a href="#">
               <span>
-                <img src="images/fbicon.png" alt="">
+                <img src="../../../../assets/images/fbicon.png" alt="">
               </span>
               Facebook social plugin
             </a>
@@ -294,7 +294,7 @@
         <div class="clearfix">
         </div>
         <div class="leftbanner">
-          <img src="images/banner-small-01.png" alt="">
+          <img src="../../../../assets/images/banner-small-01.png" alt="">
         </div>
       </div>
       <div class="col-md-9">
@@ -303,12 +303,12 @@
             <ul class="slides">
               <li>
                 <a href="#">
-                  <img src="images/banner-01.jpg" alt=""/>
+                  <img src="../../../../assets/images/banner-01.jpg" alt=""/>
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <img src="images/banner-02.jpg" alt=""/>
+                  <img src="../../../../assets/images/banner-02.jpg" alt=""/>
                 </a>
               </li>
             </ul>
@@ -329,60 +329,20 @@
               </div>
               <div class="sort-by">
                 Sort by : 
-                <select name="" >
-                  <option value="Default" selected>
-                    Default
-                  </option>
-                  <option value="Name">
-                    Name
-                  </option>
-                  <option value="Price">
-                    Price
-                  </option>
-                </select>
+               <input type="text" id="name" width="100" placeholder="Nhập tên...">
+               <input type="number" id="price"width="50" placeholder="Nhập giá...">
               </div>
-              <div class="limiter">
-                Show : 
-                <select name="" >
-                  <option value="3" selected>
-                    3
-                  </option>
-                  <option value="6">
-                    6
-                  </option>
-                  <option value="9">
-                    9
-                  </option>
-                </select>
-              </div>
+             
             </div>
-            <div class="pager">
-              <a href="#" class="prev-page">
-                <i class="fa fa-angle-left">
-                </i>
-              </a>
-              <a href="#" class="active">
-                1
-              </a>
-              <a href="#">
-                2
-              </a>
-              <a href="#">
-                3
-              </a>
-              <a href="#" class="next-page">
-                <i class="fa fa-angle-right">
-                </i>
-              </a>
-            </div>
+            
           </div>
           <div class="clearfix">
           </div>
           <div class="row">
-            <div class="col-md-4 col-sm-6">
-              <div class="products" *ngFor='let product of products'>
-                <div class="thumbnail" (click)="goDetail(product)">
-                    <img src="images/products/small/{{product.images}}" alt="Product Name">
+            <div class="col-md-4 col-sm-6"*ngFor='let product of products'>
+              <div class="products" >
+                <div class="thumbnail" *ngFor="let img of product.images.slice(0,1)" (click)="goDetail(product)">
+                    <img src="../../../../assets/images/products/{{img}}" alt="Product Name">
                 </div>
                 <div class="productname" (click)="goDetail(product)" >
                   {{product.productName}}

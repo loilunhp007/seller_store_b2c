@@ -11,10 +11,26 @@
             <th>Địa Chỉ</th>
             <th>SĐT</th>
             <th>Email</th>
+            <th>Thời gian tạo</th>
+            <th>Trạng thái</th>
             <th>Thao tác</th>
         </tr>
     </thead>
     <tbody>
+        <tr *ngFor="let user of users;let i=index">
+            <td>{{i+1}}</td>
+            <td>{{user.firstname+user.lastname}}</td>
+            <td>{{user.address}}</td>
+            <td>{{user.phone}}</td>
+            <td>{{user.gmail}}</td>
+            <td>{{ days }} ngày trước</td>
+            <td><span *ngIf="user.state=='1'">Đang hoạt động</span><span *ngIf="user.state=='0'">Khóa</span></td>
+            
+            <td><button type ="button"class="btn primary-btn" (click)="deleteUserDetail(user)">Xóa</button>
+                <button type="button"class="btn primary-btn" *ngIf="user.state==1"(click)="blockUser(user)">Khóa</button>
+                <button type="button"class="btn primary-btn" *ngIf="user.state==0" (click)="blockUser(user)">Mở khóa</button>
+            </td>
+        </tr>    
     </tbody>
 </table>
 </div>

@@ -1,4 +1,4 @@
-<app-slider></app-slider>
+
 <div class="container_fullwidth">
     <div class="container">
       <div class="row">
@@ -6,33 +6,33 @@
           <div class="products-details" >
             <div class="preview_image">
               <div class="preview-small">
-                <img id="zoom_03" src="images/products/medium/products-01.jpg" data-zoom-image="images/products/Large/products-01.jpg" alt="">
+                <img id="zoom_03" src="../../../../assets/images/products/medium/products-01.jpg" data-zoom-image="../../../../assets/images/products/Large/products-01.jpg" alt="">
               </div>
               <div class="thum-image">
                 <ul id="gallery_01" class="prev-thum">
                   <li>
-                    <a href="#" data-image="images/products/medium/products-01.jpg" data-zoom-image="images/products/Large/products-01.jpg">
-                      <img src="images/products/thum/products-01.png" alt="">
+                    <a href="#" data-image="../../../../assets/images/products/medium/products-01.jpg" data-zoom-image="../../../../assets/images/products/Large/products-01.jpg">
+                      <img src="../../../../assets/images/products/thum/products-01.png" alt="">
                     </a>
                   </li>
                   <li>
-                    <a href="#" data-image="images/products/medium/products-02.jpg" data-zoom-image="images/products/Large/products-02.jpg">
-                      <img src="images/products/thum/products-02.png" alt="">
+                    <a href="#" data-image="../../../../assets/images/products/medium/products-02.jpg" data-zoom-image="../../../../assets/images/products/Large/products-02.jpg">
+                      <img src="../../../../assets/images/products/thum/products-02.png" alt="">
                     </a>
                   </li>
                   <li>
-                    <a href="#" data-image="images/products/medium/products-03.jpg" data-zoom-image="images/products/Large/products-03.jpg">
-                      <img src="images/products/thum/products-03.png" alt="">
+                    <a href="#" data-image="../../../../assets/images/products/medium/products-03.jpg" data-zoom-image="../../../../assets/images/products/Large/products-03.jpg">
+                      <img src="../../../../assets/images/products/thum/products-03.png" alt="">
                     </a>
                   </li>
                   <li>
-                    <a href="#" data-image="images/products/medium/products-04.jpg" data-zoom-image="images/products/Large/products-04.jpg">
-                      <img src="images/products/thum/products-04.png" alt="">
+                    <a href="#" data-image="../../../../assets/images/products/medium/products-04.jpg" data-zoom-image="../../../../assets/images/products/Large/products-04.jpg">
+                      <img src="../../../../assets/images/products/thum/products-04.png" alt="">
                     </a>
                   </li>
                   <li>
-                    <a href="#" data-image="images/products/medium/products-05.jpg" data-zoom-image="images/products/Large/products-05.jpg">
-                      <img src="images/products/thum/products-05.png" alt="">
+                    <a href="#" data-image="../../../../assets/images/products/medium/products-05.jpg" data-zoom-image="../../../../assets/images/products/Large/products-05.jpg">
+                      <img src="../../../../assets/images/products/thum/products-05.png" alt="">
                     </a>
                   </li>
                 </ul>
@@ -51,7 +51,7 @@
                 {{product.productName}}
               </h5>
               <p>
-                <img alt="" src="images/star.png">
+                <img alt="" src="../../../../assets/images/star.png">
                 <a class="review_num" href="#">
                  {{product.views}}
                 </a>
@@ -60,6 +60,9 @@
                 Availability: 
                 <span class=" light-red">
                   In Stock
+                </span>
+                <span class=" light-red" *ngIf="product.inventory.quantity==0">
+                  inavailable
                 </span>
               </p>
               <p>
@@ -85,7 +88,7 @@
               <div class="wided">
                 <div class="qty">
                   Qty &nbsp;&nbsp;: 
-                  <select>
+                  <select id="selectQuan">
                     <option>
                       1
                     </option>
@@ -112,7 +115,7 @@
               <div class="clearfix">
               </div>
               <hr class="border">
-              <img src="images/share.png" alt="" class="pull-right">
+              <img src="../../../../assets/images/share.png" alt="" class="pull-right">
             </div>
           </div>
           <div class="clearfix">
@@ -122,26 +125,24 @@
               <ul>
                 <li>
                   <a href="#Descraption">
-                    {{product.info}}
+                    DESCRIPTION
                   </a>
                 </li>
                 <li>
                   <a href="#Reviews">
-                    {{product.views}}
+                    REVIEWS
                   </a>
                 </li>
                 <li>
                   <a href="#tags">
-                    {{product.state}}
+                   TAGS
                   </a>
                 </li>
               </ul>
             </div>
             <div class="tab-content-wrap">
               <div class="tab-content" id="Descraption">
-                <p>
-                  Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae Aenean eleifend laoreet congue. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibu um ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae Aenean eleifend laoreet congue. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae Aenean eleifend laoreet congue. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae...
-                </p>
+                {{product.info}}
                 <p>
                   Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae Aenean eleifend laoreet congue. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibu um ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae Aenean eleifend laoreet congue. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc...
                 </p>
@@ -302,7 +303,7 @@
                         - %20
                       </div>
                       <div class="thumbnail">
-                        <img src="images/products/small/products-01.png" alt="Product Name">
+                        <img src="../../../../assets/images/products/small/products-01.png" alt="Product Name">
                       </div>
                       <div class="productname">
                         {{product.productName}}
@@ -331,7 +332,7 @@
                         New
                       </div>
                       <div class="thumbnail">
-                        <img src="images/products/small/products-03.png" alt="Product Name">
+                        <img src="../../../../assets/images/products/small/products-03.png" alt="Product Name">
                       </div>
                       <div class="productname">
                         Iphone 5s Gold 32 Gb 2013
@@ -363,7 +364,7 @@
                         - %20
                       </div>
                       <div class="thumbnail">
-                        <img src="images/products/small/products-01.png" alt="Product Name">
+                        <img src="../../../../assets/images/products/small/products-01.png" alt="Product Name">
                       </div>
                       <div class="productname">
                         Iphone 5s Gold 32 Gb 2013
@@ -389,7 +390,7 @@
                   <div class="col-md-4 col-sm-4">
                     <div class="products">
                       <div class="thumbnail">
-                        <img src="images/products/small/products-02.png" alt="Product Name">
+                        <img src="../../../../assets/images/products/small/products-02.png" alt="Product Name">
                       </div>
                       <div class="productname">
                         Iphone 5s Gold 32 Gb 2013
@@ -412,35 +413,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-4 col-sm-4">
-                    <div class="products">
-                      <div class="offer">
-                        New
-                      </div>
-                      <div class="thumbnail">
-                        <img src="images/products/small/products-03.png" alt="Product Name">
-                      </div>
-                      <div class="productname">
-                        Iphone 5s Gold 32 Gb 2013
-                      </div>
-                      <h4 class="price">
-                        $451.00
-                      </h4>
-                      <div class="button_group">
-                        <button class="button add-cart" type="button">
-                          Add To Cart
-                        </button>
-                        <button class="button compare" type="button">
-                          <i class="fa fa-exchange">
-                          </i>
-                        </button>
-                        <button class="button wishlist" type="button">
-                          <i class="fa fa-heart-o">
-                          </i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                 
                 </div>
               </li>
             </ul>
@@ -459,7 +432,7 @@
             <div class="special-item">
               <div class="product-image">
                 <a href="#">
-                  <img src="images/products/thum/products-01.png" alt="">
+                  <img src="../../../../assets/images/products/thum/products-01.png" alt="">
                 </a>
               </div>
               <div class="product-info">
@@ -524,23 +497,7 @@
               </li>
             </ul>
           </div>
-          <div class="clearfix">
-          </div>
-          <div class="get-newsletter leftbar">
-            <h3 class="title">
-              Get 
-              <strong>
-                newsletter
-              </strong>
-            </h3>
-            <p>
-              Casio G Shock Digital Dial Black.
-            </p>
-            <form>
-              <input class="email" type="text" name="" placeholder="Your Email...">
-              <input class="submit" type="submit" value="Submit">
-            </form>
-          </div>
+          
           <div class="clearfix">
           </div>
           <div class="fbl-box leftbar">
@@ -549,7 +506,7 @@
             </h3>
             <span class="likebutton">
               <a href="#">
-                <img src="images/fblike.png" alt="">
+                <img src="../../../../assets/images/fblike.png" alt="">
               </a>
             </span>
             <p>
@@ -592,7 +549,7 @@
             <div class="fbplug">
               <a href="#">
                 <span>
-                  <img src="images/fbicon.png" alt="">
+                  <img src="../../../../assets/images/fbicon.png" alt="">
                 </span>
                 Facebook social plugin
               </a>

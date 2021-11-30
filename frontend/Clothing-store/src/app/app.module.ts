@@ -8,7 +8,7 @@ import { SliderComponent } from './web/components/slider/slider.component';
 import { MenuComponent } from './web/components/menu/menu.component';
 import { HomeComponent } from './web/components/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { ProductComponent } from './web/components/product/product.component';
 import { SearchComponent } from './web/components/search/search.component';
 import { ContactsComponent } from './web/components/contacts/contacts.component';
@@ -30,27 +30,13 @@ import { SidebarComponent } from './admin/components-admin/sidebar/sidebar.compo
 import { QlSanphamComponent } from './admin/components-admin/ql-sanpham/ql-sanpham.component';
 import { AdminModule } from './admin/admin.module';
 import { DpDatePickerModule } from 'ng2-date-picker';
+import {moment} from 'angular-moment'
+import { NgxPaginationModule } from 'ngx-pagination';
+import { WebModule } from './web/web.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    WebComponent,
-    MenuComponent,
-    FooterComponent,
-    SliderComponent,
-    HomeComponent,
-    ProductComponent,
-    SearchComponent,
-    ContactsComponent,
-    PagenotfoundComponent,
-    UserprofileComponent,
-    LoginComponent,
-    RegisterComponent,
-    CartComponent,
-    ProductDetailComponent,
-    LoginComponent,
-    CartComponent,
-    OrderComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,10 +46,12 @@ import { DpDatePickerModule } from 'ng2-date-picker';
     FormsModule,
     ReactiveFormsModule,
     WebRoutingModule,
+    WebModule,
     AdminModule,
-    DpDatePickerModule
+    DpDatePickerModule,
+    NgxPaginationModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -44,15 +44,16 @@ public class UserDetailController {
         UserDetail thanhvien = tvService.getUserDetailById(id);
         return ResponseEntity.status(HttpStatus.OK).body(thanhvien);
     }
-    @PutMapping("/put/{matv}")
-    public ResponseEntity<UserDetail> updateThanhVienByID(@PathVariable(name = "matv")String matv, @RequestBody UserDetail userDetail ){
-        UserDetail thanhvien = tvService.getUserDetailById(matv);
+    @PutMapping("/put/{id}")
+    public ResponseEntity<UserDetail> updateThanhVienByID(@PathVariable(name = "id")String id, @RequestBody UserDetail userDetail ){
+        UserDetail thanhvien = tvService.getUserDetailById(id);
         thanhvien.setPhone(userDetail.getPhone());
         thanhvien.setFirstname(userDetail.getFirstname());
         thanhvien.setLastname(userDetail.getLastname());
         thanhvien.setAddress(userDetail.getAddress());
         thanhvien.setGmail(userDetail.getGmail());
         thanhvien.setBirthday(userDetail.getBirthday());
+        thanhvien.setState(userDetail.getState());
         UserDetail tv2 = tvService.save(thanhvien);
         return ResponseEntity.status(HttpStatus.OK).body(tv2);
     }
