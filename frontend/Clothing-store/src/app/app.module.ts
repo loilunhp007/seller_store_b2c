@@ -32,7 +32,6 @@ import { CartComponent } from './components/cart/cart.component';
     ContactsComponent,
     PagenotfoundComponent,
     UserprofileComponent,
-    LoginComponent,
     RegisterComponent,
     CartComponent,
     ProductDetailComponent,

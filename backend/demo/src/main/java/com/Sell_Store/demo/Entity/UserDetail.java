@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Data
@@ -25,6 +26,11 @@ import org.hibernate.annotations.CreationTimestamp;
 @Table(name = "userdetail",schema="seller_store")
 public class UserDetail {
     @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+        name = "UUID",
+        strategy = "org.hibernate.id.UUIDGenerator"
+    )
     @Column(name = "uid", columnDefinition = "nvarchar(20)",length=20)
     private String uid;
     @Column(name = "phone",columnDefinition = 

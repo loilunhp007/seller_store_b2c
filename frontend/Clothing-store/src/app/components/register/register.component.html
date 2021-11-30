@@ -1,1 +1,75 @@
-<p>register works!</p>
+
+  <div class="row registerForm">
+    <div class="col-6 offset-3">
+      <form id="registerForm" (ngSubmit)="onSubmit()" #registerForm="ngForm" class="form-horizontal">
+        <div class="card">
+          <div class="card-header">
+            Register
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label for="">Email</label>
+              <input type="email"  class="form-control" placeholder="example@gmail.com"
+               ngModel email name="email" id="email" #email="ngModel" aria-describedby="emailHId"
+               required >
+              <small id="emailHId" *ngIf="!email?.valid && (email?.dirty || email?.touched)"
+              class="text-muted">Vui lòng nhập đúng email</small>
+            </div>
+            <div class="form-group">
+              <label for="">Password</label>
+              <input type="" ngModel name="password" id="password" #password="ngModel"
+              required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+              class="form-control" placeholder="Gồm ít nhất 8 ký tự chứa chữ Hoa, chữ thường và số" aria-describedby="passwordHId" >
+              <small  *ngIf="!password?.valid && (password?.dirty||password?.touched)" id="passwordHId"
+              class="text-muted">Password yếu hoặc đang trống</small>
+            </div>
+            <div class="form-group row">
+              <div class="col-md-4" style="padding-left: 0px;">
+                <label for="">First name</label>
+                <input class="form-control" placeholder="Nguyễn"
+                 ngModel name="firstName" id="firstName" #firstName="ngModel" aria-describedby="nameHId"
+                 required>
+              </div>
+              <div class="col-md-8" style="padding-right: 0px;">
+                <label for="">Last name</label>
+                <input class="form-control" placeholder="Di Nguy"
+                 ngModel name="lastName" id="lastName" #lastName="ngModel" aria-describedby="nameHId"
+                 required>
+              </div>
+              <small id="nameHId" *ngIf=" (!firstName?.valid && (firstName?.dirty || firstName?.touched))
+              || (!lastName?.valid && (lastName?.dirty || lastName?.touched))"
+              class="text-muted">Vui lòng nhập đầy đủ họ tên</small>
+            </div>
+            <div class="form-group">
+              <label for="">Số điện thoại</label>
+              <input class="form-control" placeholder="0-999-999-999"
+               ngModel name="sdt" id="sdt" #sdt="ngModel" aria-describedby="sdtHId"
+               required pattern="^(09|03|07|08|05)+[0-9]{8}$">
+              <small id="sdtHId" *ngIf="!sdt?.valid && (sdt?.dirty || sdt?.touched)"
+              class="text-muted">Vui lòng nhập số điện thoại</small>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">Địa chỉ</label>
+            <input type="" ngModel name="address" id="address" #address="ngModel"
+            class="form-control" placeholder="273 An Dương Vương, Phường 3, Quận 5, Thành phố Hồ Chí Minh" aria-describedby="addressHId"
+            required minlength="30">
+            <small  *ngIf="!address?.valid && (address?.dirty||address?.touched)" id="addressHId"
+            class="text-muted">Vui lòng nhập đúng địa chỉ</small>
+          </div>
+          <div class="form-group">
+            <label for="">Ngày sinh</label>
+            <input type="date" ngModel name="birthday" id="birthday" #birthday="ngModel"
+            class="form-control" aria-describedby="birthdayHId" required>
+            <small  *ngIf="!birthday?.valid && (birthday?.dirty||birthday?.touched)" id="birthdayHId"
+            class="text-muted">Vui lòng nhập ngày sinh</small>
+          </div>
+          <div class="card-footer text-muted">
+            <button class="btn btn-primary"> Đăng ký </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+

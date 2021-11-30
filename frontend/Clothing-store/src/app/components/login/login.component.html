@@ -1,4 +1,4 @@
-<div class="haiz">
+
   <div class="row loginForm">
     <div class="col-6 offset-3">
       <form id="loginForm" (ngSubmit)="onSubmit()" #loginForm="ngForm">
@@ -17,9 +17,10 @@
             </div>
             <div class="form-group">
               <label for="">Password</label>
-              <input type="password" ngModel name="password" id="password" #password="ngModel" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
+              <input type="password" ngModel name="password" id="password" #password="ngModel"
+              required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$"
               class="form-control" placeholder="*********" aria-describedby="passwordHId" >
-              <small  *ngIf="!password?.valid && (password?.dirty||password?.touched) " id="passwordHId"
+              <small  *ngIf="!password?.valid && (password?.dirty||password?.touched)" id="passwordHId"
               class="text-muted">Password is invalid or empty</small>
             </div>
           </div>
@@ -30,5 +31,4 @@
       </form>
     </div>
   </div>
-</div>
 
