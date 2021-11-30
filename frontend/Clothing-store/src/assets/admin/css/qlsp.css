@@ -52,7 +52,7 @@
 	text-align: center;
 }
 .them-sp{
-	text-align: right;
+	float: right;
 	margin-right: 20px;
 }
 .them-sp button{
@@ -67,3 +67,24 @@
 	border: 2px solid #2F353A;
 	color: white;
 }
+#search{
+	margin-left: 30px;
+	float: left;
+}
+#search form button{
+	height: 30px;
+	border: 2px solid darkgrey;
+	background-color: white;
+	margin-left: 10px;
+    border-radius: 8px;
+}
+#search form input{
+	width: 700px;
+	height: 30px;
+}
+#search form button:hover{
+	background: #2F353A ;
+	border: 2px solid #2F353A;
+	color: white;
+}
+
