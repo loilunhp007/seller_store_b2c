@@ -18,7 +18,7 @@ export class CategoryService {
   updateCategory(category:Category){
     return this.httpClient.put<Category>("http://localhost:8090/category/put/"+category.cateID,category);
   }
-  deleteCategory(id:String){
-    return this.httpClient.delete<Category>("http://localhost:8090/categorys/delete/"+id);
+  deleteCategory(id:number):Observable<any>{
+    return this.httpClient.delete<Category>("http://localhost:8090/category/delete/"+id);
   }
 }

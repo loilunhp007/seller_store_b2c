@@ -33,10 +33,10 @@
                     </th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr *ngFor="let cart of carts">
-                    <td>
-                      <img src="../../images/products/small/products-06.png" alt="">
+                <tbody *ngIf="cartLength>0">
+                  <tr  *ngFor="let cart of carts" >
+                    <td *ngFor="let img of cart.product.images.slice(0,1)">
+                      <img src="../../../../images/products/{{img}}" alt="">
                     </td>
                     <td>
                       <div class="shop-details">
@@ -106,6 +106,7 @@
                       
                   </tr>
                 </tbody>
+                <tbody *ngIf="cartLength==0"><tr><td>Cart rỗng</td></tr></tbody>
                 <tfoot>
                   <tr>
                     <td colspan="6">
@@ -144,7 +145,7 @@
                           ${{cartTotal}}
                       </span>
                     </div>
-                    <button>
+                    <button (click)="goCheckOut()" [disabled]="cartLength<=0">
                       Process To Checkout
                     </button>
                   </div>

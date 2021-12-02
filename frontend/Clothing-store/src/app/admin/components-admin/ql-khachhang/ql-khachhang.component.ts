@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { faEdit, faLock, faTrash, faUnlock } from '@fortawesome/free-solid-svg-icons';
 import { Userdetail } from 'src/app/entity/userdetail';
 import { UserService } from 'src/app/services/user.service';
 
@@ -17,6 +18,10 @@ export class QlKhachhangComponent implements OnInit {
   users:Array<Userdetail> = [] 
   date:Date = new Date();
   days:string;
+  faTrash=faTrash;
+  faEdit = faEdit;
+  faLock = faLock;
+  faUnLock = faUnlock;
   ngOnInit(): void {
     this.getUser();
   }

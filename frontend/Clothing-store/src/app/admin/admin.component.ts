@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faCoffee, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   templateUrl: './admin.component.html',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminComponent implements OnInit {
   title = 'Clothing-store';
+  faCoffee = faCoffee;
+  faTrash=faTrash;
+  faEdit = faEdit;
   ngOnInit(){
     this.loadScript
     this.shutdownCSS();

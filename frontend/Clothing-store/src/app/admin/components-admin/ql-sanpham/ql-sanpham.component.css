@@ -8,4 +8,10 @@
 .popup-themsp{
     display: block;
 }
+ button.btn-table{
+    min-width: 40px;
+    min-height: 40px;
+    margin-right: 15px;
+}
+
 @import '../../../../../node_modules/@fortawesome/fontawesome-free/css/fontawesome.css';

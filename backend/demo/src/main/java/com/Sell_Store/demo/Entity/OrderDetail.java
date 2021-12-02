@@ -32,13 +32,13 @@ public class OrderDetail {
     private int quantity;
     @Column(name = "price",columnDefinition = "int",nullable = false)
     private String price;
-    @Column(name = "deliveryAddress",columnDefinition = "nvarchar(20)",nullable = false)
+    @Column(name = "deliveryAddress",columnDefinition = "nvarchar(50)",nullable = false)
     private String deliveryAddress;
-    @Column(name = "destination",columnDefinition = "nvarchar(20)",nullable = false)
+    @Column(name = "destination",columnDefinition = "nvarchar(50)",nullable = false)
     private String destination;
     @Column(name = "total",columnDefinition = "double",nullable = false)
     private String totalItem;
-    @Column(name = "userPay",columnDefinition = "double",nullable = false)
+    @Column(name = "userPay",columnDefinition = "double",nullable = true)
     private Double userPay;
     @ManyToOne
     @JoinColumn(name = "tid")

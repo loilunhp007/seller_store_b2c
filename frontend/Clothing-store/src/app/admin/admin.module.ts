@@ -17,6 +17,7 @@ import { LoginAdminComponent } from './components-admin/login-admin/login-admin.
 import { ThongkeComponent } from './components-admin/thongke/thongke.component';
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -41,7 +42,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     ReactiveFormsModule,
     DpDatePickerModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FontAwesomeModule
   ],
   exports:[
     AdminComponent,

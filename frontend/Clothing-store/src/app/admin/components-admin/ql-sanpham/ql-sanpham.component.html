@@ -32,10 +32,10 @@
                   </td>
                 
                <td >
-                  <button type="button"   class="btn btn-success"[product]="selectedProduct"
-                 (click)="popup_updateProduct();displayProduct(product)">Sửa</button>									
-		        <button type="button"   class="btn btn-success" [product]="selectedProduct"(click)="deleteProduct(product)">Xóa</button>
-         <button [product]="selectedProduct"
+                  <button type="button" class="btn-table" [product]="selectedProduct"
+                 (click)="popup_updateProduct();displayProduct(product)"><fa-icon [icon]="faEdit"></fa-icon></button>									
+		        <button type="button"  class="btn-table" [product]="selectedProduct"(click)="deleteProduct(product)"><fa-icon [icon]="faTrash"></fa-icon></button>
+         <button [product]="selectedProduct" class="btn-table"
          (click)="statusProduct(product)"><span *ngIf="product.state=='0'">Bật</span><span *ngIf="product.state=='1'">Tắt</span></button>
                 </td>
             </tr>

@@ -33,6 +33,7 @@ import { DpDatePickerModule } from 'ng2-date-picker';
 import {moment} from 'angular-moment'
 import { NgxPaginationModule } from 'ngx-pagination';
 import { WebModule } from './web/web.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { WebModule } from './web/web.module';
     WebModule,
     AdminModule,
     DpDatePickerModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FontAwesomeModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

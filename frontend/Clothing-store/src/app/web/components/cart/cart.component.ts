@@ -18,6 +18,7 @@ export class CartComponent implements OnInit {
   carts:Array<Cart>
   cartLength:number
   ngOnInit(): void {
+    this.cartLength=0;
     if(sessionStorage.getItem("uid")!=null){
       this.uid = JSON.parse(sessionStorage.getItem("uid"));
       this.getCart();
@@ -82,5 +83,8 @@ export class CartComponent implements OnInit {
           this.router.navigate([currentUrl]);
           console.log(currentUrl);
       });
+    }
+    goCheckOut(){
+      this.router.navigate(['/web/checkout'])
     }
 }

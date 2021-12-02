@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -57,5 +58,14 @@ public class InventoryController {
                   obj.put("result", "success");
               }
               return ResponseEntity.status(HttpStatus.OK).body(obj.toString());
+   }
+   @PutMapping("/put/{productID}/{quantity}")
+   public ResponseEntity<Inventory> updateInventory(@PathVariable(name="productID")String productID,@PathVariable(name="quantity")int quantity){
+    Product product = productService.findProductByID(productID);   
+    Inventory inventory2 = this.inventoryService.getInventoryByProduct(product);
+    
+    inventory2.setQuantity(inventory2.getQuantity()-quantity);
+    this.inventoryService.addProductToInventory(inventory2);
+    return ResponseEntity.status(HttpStatus.OK).body(inventory2);
    }
 }

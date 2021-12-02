@@ -6,10 +6,9 @@ export class Userdetail {
     firstname:string;
     lastname:string;
     address:string;
-    birthday:Date;
+    birthday:string;
     gmail:string
     timestamp:Date;
     typeMember:TypeMember;
     state:number;
-
 }

@@ -1,6 +1,8 @@
 package com.Sell_Store.demo.Services;
 
+import com.Sell_Store.demo.Entity.TypeMember;
 import com.Sell_Store.demo.Entity.UserDetail;
+import com.Sell_Store.demo.Repository.TypeMemberRepository;
 import com.Sell_Store.demo.Repository.UserDetailRepository;
 
 import org.apache.catalina.User;
@@ -16,6 +18,8 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserDetailRepository tvRepository;
+    @Autowired
+    private TypeMemberRepository typeMemberRepository;
     public List<UserDetail> getAllThanhVien(){
         return tvRepository.findAll();
     }
@@ -32,5 +36,9 @@ public class UserService {
     public void xoa (String id){
         tvRepository.deleteById(id);
     }
+    public List<TypeMember> getAllType(){
+        return typeMemberRepository.findAll();
+    }
+
 
 }
