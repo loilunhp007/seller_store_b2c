@@ -49,11 +49,12 @@ export class RegisterComponent implements OnInit {
     ) { }
     date = new Date();
   ngOnInit(): void {
-
+    this.getType();
   }
   getType(){
     this.userService.getType().subscribe(Response=>{
       this.typemembers=Response;
+      this.type = new TypeMember();
       this.type = this.typemembers.find(x=>x.typeID==2)
     })
   }
@@ -64,36 +65,51 @@ export class RegisterComponent implements OnInit {
   get f1(){ return this.registerForm.controls}
   registerNewUser(){
         //userDetail
-        this.userDetail = new UserDetail();
-        this.user = new Account();
-          this.userDetail.typeMember =this.type;
-          this.userDetail.id="U_"
-          this.userDetail.firstname = this.validate(this.f1.regisFirstName.value);
-          this.userDetail.lastname = this.validate(this.f1.regisLastName.value);
-          this.userDetail.phone = this.validate(this.f1.regisPhone.value);
-          this.userDetail.gmail = this.validate(this.f1.regisEmail.value);
-          this.userDetail.address = this.validate(this.f1.regisAddress.value);
-          let date2:string = this.datepipe.transform(this.regisBirthDay.value,"yyyy-MM-dd")
-          this.userDetail.birthday = date2;
-          this.userDetail.state= 1;
-          this.userService.addUserDetail(this.userDetail).subscribe(
-            (data)=>{
-              this.user.email=this.validate(this.f1.regisEmail.value);
-              this.user.password = this.validate(this.f1.regisPassword.value);
-              this.user.state=1;
-              this.user.userDetail= data;
-              this.userService.addUser(this.user).subscribe(
-                      (user)=>{
-                        console.log(user.matv);
-                        sessionStorage.setItem("uid",JSON.stringify(this.user.userDetail.id));
-                          this.route.navigate(['/web/index']);
-                      },
-                      (error)=>{
-                        alert("Có lỗi xảy ra vui lòng thử lại sau")
-                      }
-                    );       
-              }),
-              (error)=>{ alert("Có lỗi xảy ra vui lòng thử lại sau")}
+        let ac = new Account();
+        ac.email = this.f1.regisEmail.value;
+        ac.password = this.f1.regisPassword.value;       
+         this.userService.checkExistUser(ac).subscribe(Response=>{
+           console.log(Response.user);
+           if(Response.user=='empty'){
+            this.getType();
+            this.userDetail = new UserDetail();
+            this.user = new Account();
+              this.userDetail.typeMember =this.type;
+              this.userDetail.id="U_"
+              this.userDetail.firstname = this.validate(this.f1.regisFirstName.value);
+              this.userDetail.lastname = this.validate(this.f1.regisLastName.value);
+              this.userDetail.phone = this.validate(this.f1.regisPhone.value);
+              this.userDetail.gmail = this.validate(this.f1.regisEmail.value);
+              this.userDetail.address = this.validate(this.f1.regisAddress.value);
+              let date2:string = this.datepipe.transform(this.regisBirthDay.value,"yyyy-MM-dd")
+              this.userDetail.birthday = date2;
+              this.userDetail.state= 1;
+              console.log(this.userDetail)
+              this.userService.addUserDetail(this.userDetail).subscribe(
+                (data)=>{
+                  console.log(data);
+                  this.user.email=this.validate(this.f1.regisEmail.value);
+                  this.user.password = this.validate(this.f1.regisPassword.value);
+                  this.user.state=1;
+                  this.user.userDetail= data;
+                  console.log(this.user)
+                  this.userService.addUser(this.user).subscribe(
+                          (user)=>{          
+                            console.log(user);
+                            sessionStorage.setItem("uid",JSON.stringify(this.user.userDetail.id));
+                            alert("Dang ky thanh cong")
+                              this.route.navigate(['/web/index']);
+                          },
+                          (error)=>{
+                            alert("Có lỗi xảy ra vui lòng thử lại sau")
+                          }
+                        );       
+                  }),
+                  (error)=>{ alert("Có lỗi xảy ra vui lòng thử lại sau")}
+           }else{
+             alert("Email is exist");
+           }
+         })
              //user
         }
         get regisFirstName(){

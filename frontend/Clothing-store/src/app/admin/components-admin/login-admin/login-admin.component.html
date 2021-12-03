@@ -1,9 +1,9 @@
-<p>login-admin works!</p>
+
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
             <div class="login100-pic js-tilt" data-tilt>
-                <img src="dangnhap/images/img-01.png" alt="IMG">
+                <img src="../../../../assets/admin/image/img-01.png" alt="IMG">
             </div>
 
             <form class="login100-form validate-form" method="POST">
@@ -12,7 +12,10 @@
                 </span>
 
                 <div class="wrap-input100 validate-input">
-                    <input class="input100" type="text" name="taikhoan" placeholder="Username" data-validate = "Username is required">
+                    
+                    <input  class="input100" type="text" ngModel name="taikhoan" id="email" required minlegth = "6" #email="ngModel" placeholder="example@gmail.com"  data-validate = "Username is required" aria-describedby="emailHId">
+                    <small id="emailHId" *ngIf="!email?.valid && (email?.dirty || email?.touched)"
+                  class="text-muted">Email is invalid or empty</small>
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
                         <i class="fa fa-envelope" aria-hidden="true"></i>
@@ -20,7 +23,10 @@
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate = "Password is required">
-                    <input class="input100" type="password" name="pass" placeholder="Password">
+                    <input type="password" ngModel name="pass" id="password" #password="ngModel" required minlegth = "6"
+                    class="input100" placeholder="*********" aria-describedby="passwordHId">
+                     <small  *ngIf="!password?.valid && (password?.dirty||password?.touched) " id="passwordHId"
+                    class="text-muted">Password is invalid or empty</small>
                     <span class="focus-input100"></span>
                     <span class="symbol-input100">
                         <i class="fa fa-lock" aria-hidden="true"></i>

@@ -3,6 +3,7 @@ package com.Sell_Store.demo.Services;
 import java.util.List;
 import java.util.Optional;
 
+import com.Sell_Store.demo.Entity.Category;
 import com.Sell_Store.demo.Entity.Product;
 import com.Sell_Store.demo.Entity.UserDetail;
 import com.Sell_Store.demo.Repository.ProductRepository;
@@ -37,4 +38,7 @@ public class ProductService {
     }   public List<Product> getProductByLikeTensp(String tensp){
         return productRepository.findByProductNameContains(tensp);
     }
+   public List<Product> getProductByCategory(Category category){
+    return productRepository.findByCategory(category);
+}
 }

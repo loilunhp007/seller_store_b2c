@@ -23,6 +23,12 @@ public class UserDetailController {
         List<UserDetail> lThanhVien=  tvService.getAllThanhVien();
         return ResponseEntity.status(HttpStatus.OK).body(lThanhVien);
     }
+    @GetMapping("/get/type/{typeID}")
+    public ResponseEntity<List<UserDetail>> getAllByTypeMember(@PathVariable(name = "typeID")long id){
+        TypeMember typeMember = tvService.getTypeByID(id);
+        List<UserDetail> lThanhVien=  tvService.getAllByTypeMember(typeMember);
+        return ResponseEntity.status(HttpStatus.OK).body(lThanhVien);
+    }
     @PostMapping({"/add"})
     public ResponseEntity<UserDetail> addThanhVien(@RequestBody UserDetail userDetail){
         try { 

@@ -36,7 +36,7 @@
                 <tbody *ngIf="cartLength>0">
                   <tr  *ngFor="let cart of carts" >
                     <td *ngFor="let img of cart.product.images.slice(0,1)">
-                      <img src="../../../../images/products/{{img}}" alt="">
+                      <img src="../../../../assets/images/products/{{img}}" alt="">
                     </td>
                     <td>
                       <div class="shop-details">
@@ -44,7 +44,7 @@
                           {{cart.product.productName}}
                         </div>
                         <p>
-                          <img alt="" src="../../images/star.png">
+                          <img alt="" src="../../../../assets/images/star.png">
                           <a class="review_num" href="#">
                             02 Review(s)
                           </a>
@@ -75,8 +75,11 @@
                       </div>
                     </td>
                     <td>
-                      <h5>
-                        {{cart.product.price}}
+                      <h5 *ngIf="cart.product.percent_discount>0 && date2 >= cart.product.special_from_time && date2 <= cart.product.special_to_time">
+                        {{cart.product.price *(100-cart.product.percent_discount)/100|currency:'VND':'symbol':'3.0'}}
+                      </h5>
+                      <h5 *ngIf="(cart.product.percent_discount==0||date2 < cart.product.special_from_time || date2 > cart.product.special_to_time)">
+                        {{cart.product.price|currency:'VND':'symbol':'3.0'}}
                       </h5>
                     </td>
                     <td>
@@ -88,29 +91,26 @@
                     </td>
                     <td>
                       <h5>
-                        <strong class="red">
+                        <strong class="red" *ngIf="cart.product.percent_discount>0 && date2 >= cart.product.special_from_time && date2 <= cart.product.special_to_time">
                           {{cart.product.price*(100-cart.product.percent_discount)/100*cart.soluong}}
+                        </strong>
+                        <strong class="red" *ngIf="(cart.product.percent_discount==0||date2 < cart.product.special_from_time || date2 > cart.product.special_to_time) ">
+                          {{cart.product.price*cart.soluong}}
                         </strong>
                       </h5>
                     </td>
                     <td>
                       <a href="">
-                        <img src="../../assets/images/remove.png" alt="" (click)="deleteCartItem(cart.product)">
+                        <img src="../../../../assets/images/remove.png" alt="" (click)="deleteCartItem(cart.product)">
                       </a>
                     </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="../../images/products/small/products-02.png" alt="">
-                    </td>
-                      
                   </tr>
                 </tbody>
                 <tbody *ngIf="cartLength==0"><tr><td>Cart rỗng</td></tr></tbody>
                 <tfoot>
                   <tr>
                     <td colspan="6">
-                      <button class="pull-left">
+                      <button class="pull-left" >
                         Continue Shopping
                       </button>
                       <button class=" pull-right">
@@ -129,20 +129,12 @@
                     
                 <div class="col-md-4 col-sm-6">
                   <div class="shippingbox">
-                    <div class="subtotal">
-                      <h5>
-                        Sub Total
-                      </h5>
-                      <span>
-                        ${{cartTotal}}
-                      </span>
-                    </div>
                     <div class="grandtotal">
                       <h5>
                         GRAND TOTAL 
                       </h5>
                       <span>
-                          ${{cartTotal}}
+                          {{cartTotal|currency:'VND':'symbol':'3.0'}}
                       </span>
                     </div>
                     <button (click)="goCheckOut()" [disabled]="cartLength<=0">

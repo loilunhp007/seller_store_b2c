@@ -1,4 +1,4 @@
-import { Paymentmethod } from "./paymentMethod"
+import { PaymentMethod } from "./paymentMethod"
 import { UserDetail } from "./user-detail"
 
 export class Order {
@@ -9,5 +9,5 @@ export class Order {
     total:number
     state:number
     payment_id:number
-    paymentmethod:Paymentmethod
+    paymentMethod:PaymentMethod
 }

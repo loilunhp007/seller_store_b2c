@@ -91,6 +91,10 @@ export class MenuComponent implements OnInit {
   }
   logout(){
     this.isLogged = this.loginService.logOut();
-    return this.router.navigate(["/login"]);
+    return this.router.navigate(["/web/login"]);
+  }
+  findProductByCate(category:Category){
+    let cate:number = category.cateID;
+    this.router.navigate(['/web/product'],{queryParams:{cate}})
   }
 }

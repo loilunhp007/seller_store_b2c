@@ -16,6 +16,9 @@ constructor(private httpClient:HttpClient) { }
 getUsers():Observable<any>{
      return this.httpClient.get<Userdetail[]>("http://localhost:8090/userdetail/get");
    }
+   getUsersByType(id:number):Observable<any>{
+    return this.httpClient.get<Userdetail[]>("http://localhost:8090/userdetail/get/type/"+id);
+  }
   updateUser(userDetail: Userdetail):Observable<any> {
     return this.httpClient.put<Userdetail>('http://localhost:8090/userdetail/put/'+userDetail.id, userDetail);   
    }
@@ -32,6 +35,9 @@ getUsers():Observable<any>{
     return this.httpClient.post<Account>('http://localhost:8090/user/add', newUser);   
    }
    getType():Observable<any>{
-     return this.httpClient.get<TypeMember>("http://localhost:8090/user/gettype");
+     return this.httpClient.get<TypeMember>("http://localhost:8090/userdetail/gettype");
+   }
+   checkExistUser(account:Account):Observable<any>{
+     return this.httpClient.post<string>("http://localhost:8090/user/checkExistUser",account)
    }
 }

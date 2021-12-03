@@ -364,8 +364,11 @@
                       </div>
                     </td>
                     <td>
-                      <h5>
-                        {{cart.product.price*((100-cart.product.percent_discount)/100)|currency:'VND':'symbol':'3.0'}}
+                      <h5 *ngIf="cart.product.percent_discount>0 && date22 >= cart.product.special_from_time && date22 <= cart.product.special_to_time">
+                        {{cart.product.price *(100-cart.product.percent_discount)/100|currency:'VND':'symbol':'3.0'}}
+                      </h5>
+                      <h5 *ngIf="(cart.product.percent_discount==0||date22 < cart.product.special_from_time || date22 > cart.product.special_to_time)">
+                        {{cart.product.price|currency:'VND':'symbol':'3.0'}}
                       </h5>
                     </td>
                     <td>
@@ -375,8 +378,11 @@
                     </td>
                     <td>
                       <h5>
-                        <strong class="red">
-                          {{cart.product.price*((100-cart.product.percent_discount)/100)*cart.soluong|currency:'VND':'symbol':'3.0'}}
+                        <strong class="red" *ngIf="cart.product.percent_discount>0 && date22 >= cart.product.special_from_time && date22 <= cart.product.special_to_time">
+                          {{cart.product.price*(100-cart.product.percent_discount)/100*cart.soluong}}
+                        </strong>
+                        <strong class="red" *ngIf="(cart.product.percent_discount==0||date22 < cart.product.special_from_time || date22 > cart.product.special_to_time) ">
+                          {{cart.product.price*cart.soluong}}
                         </strong>
                       </h5>
                     </td>
@@ -394,7 +400,7 @@
                       {{previosPrice|currency:'VND':'symbol':'3.0'}}
                     </span>
                   </div>
-                  <div class="transportfee">
+                  <div class="subtotal">
                     <h5>
                       Transport
                     </h5>

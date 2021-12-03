@@ -62,7 +62,8 @@
             class="text-muted">Vui lòng nhập ngày sinh</small>
           </div>
           <div class="card-footer text-muted">
-            <button class="btn btn-primary" (click)="registerNewUser()"> Đăng ký </button>
+            <button class="btn btn-primary" (click)="registerNewUser()"  [disabled]="regisFirstName.invalid || regisLastName.invalid
+            || regisPhone.invalid || regisEmail.invalid || regisPassword.invalid||regisAddress.invalid||regisBirthDay.invalid"> Đăng ký </button>
           </div>
         </div>
       </form>

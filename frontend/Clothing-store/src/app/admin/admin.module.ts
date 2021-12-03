@@ -18,6 +18,8 @@ import { ThongkeComponent } from './components-admin/thongke/thongke.component';
 import { DpDatePickerModule } from 'ng2-date-picker';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { QlNhanvienComponent } from './components-admin/ql-nhanvien/ql-nhanvien.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 
@@ -33,7 +35,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     QlAccountComponent,
     QlDanhmucComponent,
     QlDonhangComponent,
-    QlKhachhangComponent
+    QlKhachhangComponent,
+    QlNhanvienComponent
   ],
   imports: [
     CommonModule,
@@ -43,7 +46,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ReactiveFormsModule,
     DpDatePickerModule,
     NgxPaginationModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    Ng2SearchPipeModule
   ],
   exports:[
     AdminComponent,

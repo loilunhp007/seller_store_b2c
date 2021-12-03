@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit {
   products:Array<Product>
   hotproducts:Array<Product> = [];
   uid:string
+  carts:Array<Cart>
+  cartSize:number=0
   constructor(private productService:ProductService,
     private cartService:CartService,
     private Actroute:ActivatedRoute,private route:Router) { }
@@ -25,6 +27,7 @@ export class HomeComponent implements OnInit {
     this.getProduct();
     if(sessionStorage.getItem("uid")!=null){
       this.uid = JSON.parse(sessionStorage.getItem("uid"))
+      this.getCart();
     }
     this.sampleMethodCall()
    
@@ -54,11 +57,17 @@ export class HomeComponent implements OnInit {
   addTocart(product:Product){
     let pid =product.productID
     console.log(pid)
-    if(this.uid!=null){
+    let cart = new Cart();
+    cart = this.carts.find(x=>x.product.productID==pid && x.userDetail.id == this.uid)
+    
+    if(this.uid!=null && cart==null){
       console.log(this.uid)
       this.cartService.addToCart(this.uid,pid).subscribe(Response=>{
+        alert("add to cart success")
         console.log(Response);
     },)
+    }else{
+      alert("this item already exist in your cart");
     }
 
   }
@@ -71,6 +80,16 @@ export class HomeComponent implements OnInit {
       this.Actroute.queryParams.subscribe( params  =>{
         const id = product.productID;
         this.route.navigate(['/web/product-detail'],{queryParams:{id}})
+      })
+    }
+    getCart(){
+      this.cartService.getCartItems(this.uid).subscribe(Response=>{
+        this.carts=Response;
+        this.cartSize = this.carts.length;
+        console.log(this.carts);
+        console.log(Response);
+      },(error)=>{
+        console.log(error);
       })
     }
 }

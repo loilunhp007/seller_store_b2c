@@ -49,15 +49,15 @@ public class OrderDetailController {
         return   ResponseEntity.status(HttpStatus.OK).body(orderDetail3);
 
     }
-    /*@GetMapping("/get/thongkedoanhthu/{matv}/{thang}")
-        public ResponseEntity<List<Long>> getDoanhThu(@PathVariable(name ="matv")String matv,@PathVariable(name = "thang")int thang){
-            List<Long> num = orderDetailService.getThanhtien(matv,thang);
+    @GetMapping("/get/thongkedoanhthu/{thang}")
+        public ResponseEntity<List<Long>> getDoanhThu(@PathVariable(name = "thang")int thang){
+            List<Long> num = orderDetailService.getThanhtien(thang);
             return ResponseEntity.status(HttpStatus.OK).body(num);    
         }
-        @GetMapping("/get/thongkesoluong/{matv}/{thang}")
-        public ResponseEntity<List<Long>> getSoluongBan(@PathVariable(name ="matv")String matv,@PathVariable(name = "thang")int thang){
-            List<Long> num = orderDetailService.getThongKeSoluong(matv,thang);
+        @GetMapping("/get/thongkesoluong/{thang}/{state}")
+        public ResponseEntity<List<Long>> getSoluongBan(@PathVariable(name = "thang")int thang,@PathVariable(name ="state")int state){
+            List<Long> num = orderDetailService.getThongKeSoluong(thang,state);
             return ResponseEntity.status(HttpStatus.OK).body(num);    
         }
-        */
+        
 }

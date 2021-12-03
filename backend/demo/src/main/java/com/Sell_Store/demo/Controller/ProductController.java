@@ -10,8 +10,10 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import com.Sell_Store.demo.Entity.Category;
 import com.Sell_Store.demo.Entity.Product;
 import com.Sell_Store.demo.Entity.UserDetail;
+import com.Sell_Store.demo.Services.CategoryService;
 import com.Sell_Store.demo.Services.ProductService;
 import com.Sell_Store.demo.Services.UserService;
 
@@ -42,6 +44,8 @@ public class ProductController {
     private ProductService productService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CategoryService categoryService;
 
     @GetMapping("/get")
     public List<Product> getAllProduct()  {
@@ -54,6 +58,13 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.OK).body(existproduct);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(existproduct);
+
+    }
+    @GetMapping("/get/category/{cateID}")
+    public ResponseEntity<List<Product>> getProductById(@PathVariable(name = "cateID")int id) throws Exception{
+        Category category = categoryService.getByID(id);
+        List<Product> products = productService.getProductByCategory(category);
+        return ResponseEntity.status(HttpStatus.OK).body(products);
 
     }
     @GetMapping("/get/state/{state}")

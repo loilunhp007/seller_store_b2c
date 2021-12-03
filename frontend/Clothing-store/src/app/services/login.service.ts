@@ -25,7 +25,7 @@ export class LoginService {
    else{return true}
   }
   logOut(){
-  sessionStorage.removeItem("user");
+  sessionStorage.removeItem("uid");
   return false;
   }
 

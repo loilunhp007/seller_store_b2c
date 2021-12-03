@@ -15,11 +15,20 @@ export class ProductComponent implements OnInit {
     private productService:ProductService,
     private Actroute: ActivatedRoute,
     private router:Router,
+    private actRoute:ActivatedRoute
     ) { }
 
   ngOnInit(): void {
-    this.getAllProducts();
-    this.goDetail(this.product)
+    this.actRoute.queryParams.subscribe(
+      data=>{
+        const key = data.cate;
+        if(key!=null){
+          this.getAllProductsByCate(key)
+        }else{
+          this.getAllProducts();
+        }
+        
+      })
   }
   getAllProducts(){
     this.productService.getAllProducts().subscribe(Response =>{
@@ -31,6 +40,12 @@ export class ProductComponent implements OnInit {
     this.Actroute.queryParams.subscribe( params  =>{
       const id = product2.productID;
       this.router.navigate(['/web/product-detail'],{queryParams:{id}})
+    })
+  }
+  getAllProductsByCate(cateID:number){
+    this.productService.getProductByCate(cateID).subscribe(Response=>{
+      this.products = Response;
+      console.log(Response)
     })
   }
 }

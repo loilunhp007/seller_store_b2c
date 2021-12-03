@@ -2,7 +2,7 @@
             <div class="container">
                <div class="row">
                   <div class="col-md-2 col-sm-2">
-                     <div class="logo"><a href="index.html"><img src="../assets/images/logo.png" alt="FlatShop"></a></div>
+                     <div class="logo"><a href="index.html"><img src="../../../assets/images/logo.png" alt="FlatShop"></a></div>
                   </div>
                   <div class="col-md-10 col-sm-10">
                      <div class="header_top">
@@ -38,14 +38,16 @@
                                  <li><a href="#">Support</a></li>
                               </ul>
                            </div>
-                           <div class="col-md-3">
-                              <ul class="usermenu" *ngIf="!isLoggedIn()">
+                           <div class="col-md-3"*ngIf="!isLoggedIn()">
+                              <ul class="usermenu" >
                                  <li><a [routerLink]="['/web/login']" class="log">Login</a></li>
-                                 <li><a href="" class="reg">Register</a></li>
+                                 <li><a  [routerLink]="['/web/register']" class="reg">Register</a></li>
                               </ul>
-                                <ul class="usermenu" *ngIf="isLoggedIn()">
-                                 <li><a  class="log">Hello {{userdetail.firstname+userdetail.lastname}} </a></li>
-                                 <li><a href="" class="reg">Đăng xuất</a></li>
+                           </div>
+                           <div class="col-md-3"*ngIf="isLoggedIn()">
+                                <ul class="usermenu2" >
+                                 <li><a  class="log">{{userdetail.firstname+userdetail.lastname}} </a></li>
+                                 <li><a (click)="logout()"class="reg">Đăng xuất</a></li>
                               </ul>
                            </div>
                         </div>
@@ -65,7 +67,7 @@
                                  <li *ngFor="let cart of carts">
                                     <div class="cart-item" >
                                     <div *ngFor="let img of cart.product.images.slice(0,1)  | keyvalue;" class="image">
-                                          <img src="assets/images/products/thum/{{img.value.data}}" alt="">
+                                          <img src="../../../../assets/images/products/{{img.value}}" alt="">
                                     </div>
                                        <div class="item-description">
                                           <p class="name">{{cart.product.productName}}</p>
@@ -89,28 +91,19 @@
                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home</a>
                                  <div class="dropdown-menu">
                                     <ul class="mega-menu-links">
-                                       <li><a href="index.html">home</a></li>
-                                       <li><a href="home2.html">home2</a></li>
-                                       <li><a href="home3.html">home3</a></li>
-                                       <li><a href="productlitst.html">Productlitst</a></li>
-                                       <li><a href="productgird.html">Productgird</a></li>
-                                       <li><a href="details.html">Details</a></li>
-                                       <li><a href="cart.html">Cart</a></li>
-                                       <li><a href="checkout.html">CheckOut</a></li>
-                                       <li><a href="checkout2.html">CheckOut2</a></li>
-                                       <li><a href="contact.html">contact</a></li>
+                                     <!--  <li><a href="index.html">home</a></li>-->
+                                     
                                     </ul>
                                  </div>
                               </li>
-                              <li><a href="productgird.html">men</a></li>
-                              <li><a href="productlitst.html">women</a></li>
+                              <li><a [routerLink]="['/web/product']">Product</a></li>
                               <li class="dropdown">
                                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fashion</a>
                                  <div class="dropdown-menu mega-menu">
                                     <div class="row">
                                        <div class="col-md-6 col-sm-6">
                                           <ul class="mega-menu-links" *ngFor="let category of categories">
-                                             <li><a href="productgird.html">{{category.tenloai}}</a></li>
+                                             <li><a (click)="findProductByCate(category)">{{category.tenloai}}</a></li>
                                           </ul>
                                        </div>
                                        <div class="col-md-6 col-sm-6">
@@ -126,11 +119,7 @@
                                     </div>
                                  </div>
                               </li>
-                              <li><a href="productgird.html">gift</a></li>
-                              <li><a href="productgird.html">kids</a></li>
-                              <li><a href="productgird.html">blog</a></li>
-                              <li><a href="productgird.html">jewelry</a></li>
-                              <li><a href="contact.html">contact us</a></li>
+                              <li><a [routerLink]="['/web/contact']">contact us</a></li>
                            </ul>
                         </div>
                      </div>

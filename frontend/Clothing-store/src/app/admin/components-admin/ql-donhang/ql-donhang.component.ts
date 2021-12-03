@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Order } from 'src/app/entity/order';
@@ -18,10 +19,12 @@ export class QlDonhangComponent implements OnInit {
     private route:Router,
     private actRouter:ActivatedRoute,
     private productService:ProductService,
-    private orderDetailService:OrderDetailService) { }
+    private orderDetailService:OrderDetailService,
+    public datepipe:DatePipe) { }
     orders:Array<Order>
     p:number=1
   ngOnInit(): void {
+    this.getAllOrder()
   }
   getAllOrder(){
     this.orderService.getAllOrder().subscribe(

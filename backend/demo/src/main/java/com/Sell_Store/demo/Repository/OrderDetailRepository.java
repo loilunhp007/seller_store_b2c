@@ -11,10 +11,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface OrderDetailRepository extends JpaRepository<OrderDetail,OrderDetail_ID>{
     public List<OrderDetail> findByOrderID(String orderID);
-    /*(@Query(value = "SELECT sum(ctdh.thanhtoan) from CTDatHang ctdh join DatHang dh on ctdh.madh = dh.madh where dh.matvban=?1 and Month(dh.ngaytao)=?2  group by ctdh.masp",nativeQuery = true)
-    public List<Long> findTotalItemGroupbyProductID(String matv,int thang);
-    @Query(value = "SELECT sum(ctdh.soluong) from CTDatHang ctdh join DatHang dh on ctdh.madh = dh.madh where dh.matvban=?1 and Month(dh.ngaytao)=?2  group by ctdh.masp",nativeQuery = true)
-    public List<Long> thongkesoluong(String matv,int thang);*/
+    @Query(value = "SELECT sum(detail.user_pay) from  orders ord join order_detail detail on ord.orderid = detail.order_id where Month(ord.endTime)=?1 and ord.state='4'  group by detail.product_id",nativeQuery = true)
+    public List<Long> findTotalItemGroupbyProductID(int thang);
+    @Query(value = "SELECT sum(detail.quantity) from order_detail detail join orders ord on detail.order_id = ord.orderid where Month(ord.endTime)=?1 and ord.state=?2  group by detail.product_id",nativeQuery = true)
+    public List<Long> thongkesoluong(int thang,int state);
+    @Query(value="SELECT sum(ord.orderID) from orders ord join order_detail detail on ord.orderid = detail.order_id where Date(ord.startTime)=?1 and or.state=?2  group by detail.product_id",nativeQuery = true)
+    public List<Long> thongkeNgay(String date,int state);
     public List<OrderDetail> findAllByProductID(String productID);
     
 }

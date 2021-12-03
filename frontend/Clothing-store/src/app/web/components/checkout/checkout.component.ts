@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Cart } from 'src/app/entity/cart';
 import { Order } from 'src/app/entity/order';
 import { OrderDetail } from 'src/app/entity/order-detail';
-import { Paymentmethod } from 'src/app/entity/paymentMethod';
+import { PaymentMethod } from 'src/app/entity/paymentMethod';
 import { Product } from 'src/app/entity/product';
 import { Transport } from 'src/app/entity/transport';
 import { UserDetail } from 'src/app/entity/user-detail';
@@ -49,8 +49,9 @@ export class CheckoutComponent implements OnInit {
   paymentID=1;
   shippingID=1;
   uid:string
+  payment:PaymentMethod
   carts:Array<Cart>
-  payments:Array<Paymentmethod>
+  payments:Array<PaymentMethod>
   tranports:Array<Transport>
   cartTotal=0;
   ResponseOrder:Order
@@ -58,9 +59,12 @@ export class CheckoutComponent implements OnInit {
   fee=0;
   Cartlength=0
   previosPrice=0;
+  date22:any
   ngOnInit(): void {
     this.getPaymentmethod();
     this.getTransport();
+    let date =new Date();
+     this.date22 = this.datepipe.transform(date,"yyyy-MM-dd");
     if(sessionStorage.getItem("uid")!=null){
       this.uid= JSON.parse(sessionStorage.getItem('uid'));
       console.log(this.uid)
@@ -79,11 +83,13 @@ export class CheckoutComponent implements OnInit {
   getPaymentmethod(){
     this.paymentService.getAllPaymentMethod().subscribe(Response=>{
       this.payments=Response;
+      this.payment =this.payments.find(x=>x.payment_id==this.paymentID)
     });
   }
   getTransport(){
     this.transportService.getShipping().subscribe(Response=>{
       this.tranports = Response;
+     
       
     })
   }
@@ -124,17 +130,18 @@ export class CheckoutComponent implements OnInit {
   getCartTotal(carts:Array<Cart>){
     this.fee= this.tranports.find(x=>x.tid==this.shippingID).fee;
     carts.forEach(data => {
-      let date =new Date();
-      if(data.product.percent_discount>0&& date<data.product.special_to_time&&date>data.product.special_from_time){
-        this.cartTotal+= Number(data.product.price*((100-data.product.percent_discount)/100)*data.soluong) +Number(this.fee)
+     
+      if(data.product.percent_discount>0&& this.date22<data.product.special_to_time&&this.date22>data.product.special_from_time){
+        this.cartTotal+= Number(data.product.price*((100-data.product.percent_discount)/100)*data.soluong)
         console.log(this.cartTotal)
         this.previosPrice+=Number(data.product.price*((100-data.product.percent_discount)/100)*data.soluong)
       }else{
         this.previosPrice+=  Number(data.product.price*data.soluong)
-        this.cartTotal+= Number(data.product.price*data.soluong)+Number(this.fee)
+        this.cartTotal+= Number(data.product.price*data.soluong)
         console.log(this.cartTotal)
        }
     });
+    this.cartTotal+=this.fee
   }
   //create Order
   createOrder(){
@@ -157,8 +164,10 @@ export class CheckoutComponent implements OnInit {
                order.total =Number(this.cartTotal);
                order.state= 1
                order.userDetail=this.userdetail;
-               order.paymentmethod = this.payments.find(x=>x.payment_id==this.paymentID)
+               order.paymentMethod = this.payment;
+               console.log(order)
                this.orderService.addOrder(order).subscribe(Response22=>{
+                 console.log(Response22);
                   this.ResponseOrder = Response22;
                   this.carts.forEach(data=>{
                     let orderDetail = new OrderDetail()
@@ -167,11 +176,11 @@ export class CheckoutComponent implements OnInit {
                     orderDetail.orderID= this.ResponseOrder.orderID+''                     
                     orderDetail.price = data.product.price
                     orderDetail.productID = data.product.productID
-                    let date = new Date("yyyy-mm-dd");
-                    if(data.product.percent_discount>0&& date<data.product.special_to_time&&date>data.product.special_from_time){
-                     orderDetail.totalItem= Number(data.product.price*((100-data.product.percent_discount)/100)*data.soluong)+Number(this.tranports.find(x=>x.tid==this.shippingID).fee)
+      
+                    if(data.product.percent_discount>0&& this.date22<data.product.special_to_time&&this.date22>data.product.special_from_time){
+                     orderDetail.totalItem= Number(data.product.price*((100-data.product.percent_discount)/100)*data.soluong)
                     }else{
-                      orderDetail.totalItem = Number(data.product.price*data.soluong)+Number(this.tranports.find(x=>x.tid==this.shippingID).fee)
+                      orderDetail.totalItem = Number(data.product.price*data.soluong)
                     }
                     
                    
@@ -210,12 +219,18 @@ export class CheckoutComponent implements OnInit {
     
                      
                   })
+               },(error)=>{
+                alert("đặt hàng thành công"),
+                console.log(error);
                })
                  
                    alert("đặt hàng thành công")
                  
              }else{
+               
            }      
+          },(error)=>{
+            alert("Có sự cố xảy ra vui lòng thử lại sau")
           }
           )
          
@@ -224,7 +239,7 @@ export class CheckoutComponent implements OnInit {
    }
    paymentOnchange(event){
     this.paymentID = event.target.value;
-    console.log(this.payments.find(x=>x.payment_id==this.paymentID).payment_name)
+    this.payment = this.payments.find(x=>x.payment_id==this.paymentID)
    }
    shippingOnchange(event){
     this.shippingID = event.target.value;
