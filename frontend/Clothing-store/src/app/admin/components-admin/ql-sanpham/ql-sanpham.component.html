@@ -24,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of products|filter: filter : searchText| paginate:{itemsPerPage:8,currentPage:p}">
+          <tr *ngFor="let product of products | filter : searchText| paginate:{itemsPerPage:8,currentPage:p}">
                 <td>{{product.productID}}</td>
                 <td><img src="../../../../../assets/images/banner-small-01.png" width="110px"></td>
                 <td>{{product.productName}}</td>

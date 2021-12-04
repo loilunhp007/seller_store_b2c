@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './admin.component';
+import { AdminguardGuard } from './adminguard.guard';
 import { LoginAdminComponent } from './components-admin/login-admin/login-admin.component';
 import { QlAccountComponent } from './components-admin/ql-account/ql-account.component';
 import { QlDanhmucComponent } from './components-admin/ql-danhmuc/ql-danhmuc.component';
@@ -12,7 +13,7 @@ import { ThongkeComponent } from './components-admin/thongke/thongke.component';
 
 
 const routes: Routes = [
-  {path:'admin',component:AdminComponent,
+  {path:'admin',component:AdminComponent,canActivate:[AdminguardGuard],
   children:[
     {path:'',redirectTo:'/admin/thongke',pathMatch:'full'},
     {path:'thongke',component:ThongkeComponent,pathMatch:'full'},

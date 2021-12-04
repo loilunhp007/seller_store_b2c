@@ -31,7 +31,7 @@ export class LoginAdminComponent implements OnInit {
     account.password = this.loginForm.value.password
       this.loginService.login(account)
       .subscribe(Response =>{
-        sessionStorage.setItem("id",JSON.stringify(Response.userDetail.id))
+        sessionStorage.setItem("uid",JSON.stringify(Response.userDetail.id))
         sessionStorage.setItem("type",JSON.stringify(Response.userDetail.typeMember.id))
         this.router.navigate(["/admin/thongke"])
         console.log(Response);
