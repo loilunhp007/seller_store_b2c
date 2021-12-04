@@ -14,6 +14,8 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./../../../../assets/admin/css/styles.css']
 })
 export class QlSanphamComponent implements OnInit {
+  searchText;
+  p:number=1
   selectedProduct : Product
   isToggle:boolean = true;
   isToggle2:boolean = true;

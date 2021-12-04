@@ -4,6 +4,12 @@
     <span><a href="../index.html">Home</a></span><span> / </span><span>Manager</span><span> / </span><span>Quản lý sản phẩm</span>
 </div>
 <div class="section">
+    <div id="search">
+        <form action="" method="get">
+            <input type="text" name="key" value=""[(ngModel)]="searchText" placeholder="Nhập sản phẩm cần tìm" />
+            <button type="submit" name="xem" value="search" >Tìm kiếm</button>
+        </form>
+    </div>
     <div class="them-sp"><button (click)="popup_themsp()">Thêm Sản Phẩm</button></div>
     <table id="table-sp">
         <thead>
@@ -18,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of products">
+          <tr *ngFor="let product of products|filter: filter : searchText| paginate:{itemsPerPage:8,currentPage:p}">
                 <td>{{product.productID}}</td>
                 <td><img src="../../../../../assets/images/banner-small-01.png" width="110px"></td>
                 <td>{{product.productName}}</td>

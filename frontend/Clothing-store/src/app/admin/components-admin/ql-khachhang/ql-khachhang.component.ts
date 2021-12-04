@@ -22,6 +22,8 @@ export class QlKhachhangComponent implements OnInit {
   faEdit = faEdit;
   faLock = faLock;
   faUnLock = faUnlock;
+  searchText;
+  p:number=1
   ngOnInit(): void {
     this.getUser();
   }

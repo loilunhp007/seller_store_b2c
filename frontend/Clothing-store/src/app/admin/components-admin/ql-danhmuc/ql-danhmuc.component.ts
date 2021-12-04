@@ -30,6 +30,8 @@ export class QlDanhmucComponent implements OnInit {
     cateID:['',Validators.required],
     cateName2:['',Validators.required],
   })
+  searchText;
+  p:number=1
   ngOnInit(): void {
     this.getCategories()
   }
