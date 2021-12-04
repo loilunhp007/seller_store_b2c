@@ -101,6 +101,16 @@ INSERT INTO `seller_store2`.`comment` (`orderid`, `pid`, `noidung`, `sao`) VALUE
 INSERT INTO `seller_store2`.`comment` (`orderid`, `pid`, `noidung`, `sao`) VALUES ('9', 'sp9', '\'Hàng rất tốt đúng như hình và giao cx rất nhanh nữa, mik rất ưng, đóng gói rất tỉ mỉ. Mik sẽ tiếp tụ ủng hộ shop', '5 sao');
 INSERT INTO `seller_store2`.`comment` (`orderid`, `pid`, `noidung`, `sao`) VALUES ('10', 'sp8', '\'Hàng rất tốt đúng như hình và giao cx rất nhanh nữa, mik rất ưng, đóng gói rất tỉ mỉ. Mik sẽ tiếp tụ ủng hộ shop', '4 sao');
 
+INSERT INTO `seller_store2`.`inventory` (`id`, `quantity`, `p_id`) VALUES ('1', '50', 'sp1');
+INSERT INTO `seller_store2`.`inventory` (`id`, `quantity`, `p_id`) VALUES ('2', '50', 'sp2');
+INSERT INTO `seller_store2`.`inventory` (`id`, `quantity`, `p_id`) VALUES ('3', '50', 'sp3');
+INSERT INTO `seller_store2`.`inventory` (`id`, `quantity`, `p_id`) VALUES ('4', '50', 'sp4');
+INSERT INTO `seller_store2`.`inventory` (`id`, `quantity`, `p_id`) VALUES ('5', '50', 'sp5');
+INSERT INTO `seller_store2`.`inventory` (`id`, `quantity`, `p_id`) VALUES ('6', '50', 'sp6');
+INSERT INTO `seller_store2`.`inventory` (`id`, `quantity`, `p_id`) VALUES ('7', '50', 'sp7');
+INSERT INTO `seller_store2`.`inventory` (`id`, `quantity`, `p_id`) VALUES ('8', '50', 'sp8');
+INSERT INTO `seller_store2`.`inventory` (`id`, `quantity`, `p_id`) VALUES ('9', '50', 'sp9');
+INSERT INTO `seller_store2`.`inventory` (`id`, `quantity`, `p_id`) VALUES ('10', '50', 'sp10');
 
 
 
