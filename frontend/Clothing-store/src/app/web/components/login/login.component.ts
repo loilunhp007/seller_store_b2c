@@ -27,13 +27,17 @@ export class LoginComponent implements OnInit {
       return;
     };
     console.log(this.loginForm.value);
-      this.loginService.login(new Account(this.loginForm.value.email, this.loginForm.value.password))
+    let account = new Account();
+    account.email = this.loginForm.value.email
+    account.password = this.loginForm.value.password
+      this.loginService.login(account)
       .subscribe(Response =>{
         sessionStorage.setItem("uid",JSON.stringify(Response.userDetail.id))
         this.router.navigate(["/"])
         console.log(Response);
         
       },(error) => {
+        alert("Đăng nhập không thành công")
         console.log("Đăng nhập không thành công");
       });
 

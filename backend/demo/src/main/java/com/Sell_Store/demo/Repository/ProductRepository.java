@@ -12,5 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface ProductRepository extends JpaRepository<Product,String> {
     public List<Product> findByState(int trangthai);
     public List<Product> findByProductNameContains(String tensp);
+    public List<Product> findByCategory(Category category);
     
 }   

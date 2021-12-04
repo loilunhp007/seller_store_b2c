@@ -29,6 +29,9 @@ public class InventoryService {
     public Inventory addProductToInventory(Inventory inventory){
         return inventoryRepository.save(inventory);
     }
+    public Inventory getInventoryByProduct(Product product){
+        return inventoryRepository.findByProduct(product);
+    }
     public int deteleProductByID(Product product){
         Inventory inventory = inventoryRepository.findByProduct(product);
         inventoryRepository.delete(inventory);

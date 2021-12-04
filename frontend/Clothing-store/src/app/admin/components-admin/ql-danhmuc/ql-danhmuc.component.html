@@ -8,7 +8,7 @@
 <div class="section">
     <div id="search">
         <form action="" method="get">
-            <input type="text" name="key" value="" placeholder="Nhập danh mục cần tìm" />
+            <input type="text" name="key" value=""[(ngModel)]="searchText" placeholder="Nhập danh mục cần tìm" />  
             <button type="submit" name="xem" value="search" >Tìm kiếm</button>
         </form>
     </div>
@@ -23,15 +23,15 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let category of categories;let i=index">
+            <tr *ngFor="let category of categories| filter : searchText| paginate:{itemsPerPage:8,currentPage:p};let i=index;">
                 <td>{{i+1}}</td>
                 <td>{{category.tenloai}}</td>
                 <td ><span *ngIf="category.trangthai=='1'">Đang hoạt động</span><span *ngIf="category.trangthai=='0'">Ẩn</span></td>
                 <td>
-                    <button type="button" class="btn btn-primary">Sửa</button>
-                    <button type="button" class="btn btn-primary">Xóa</button>
-                    <button type="button" class="btn btn-primary" *ngIf="category.trangthai=='1'">Hiện</button>
-                    <button type="button" class="btn btn-primary"*ngIf=" category.trangthai=='0'">Ẩn</button>
+                    <button type="button"  class="btn-table"><fa-icon [icon]="faEdit" (click)="popup_themsp2();displayCate(category)"></fa-icon></button>
+                    <button type="button"  class="btn-table"><fa-icon [icon]="faTrash"(click)="deleteCate(category)"></fa-icon></button>
+                    <button type="button"  class="btn-table" *ngIf="category.trangthai=='1'"><fa-icon [icon]="faLock" (click)="HideCategory(category)"></fa-icon></button>
+                    <button type="button"  class="btn-table"*ngIf=" category.trangthai=='0'"><fa-icon [icon]="faUnlock" (click)="HideCategory(category)"></fa-icon></button>
                 </td>
             </tr>    
         </tbody>
@@ -39,38 +39,41 @@
 </div>
 
 <!-- popup thêm sp -->
-<form *ngIf="!isToggle">
+<form *ngIf="!isToggle" [formGroup]="addCate">
     <div class="popup-themsp">
         <div class="popup-suadm__content">
             <div class="popup-themsp__title">Thêm Danh Mục</div>
             <div class="popup-themsp-left">
-                <div class="popup-themsp-left__label">Nhập Thứ tự</div>
+                <div class="popup-themsp-left__label"> Thứ tự</div>
                 <div class="popup-themsp-left__label">Nhập Tên</div>
             </div>
             <div class="popup-themsp-right">
-                <div class="popup-themsp-left__input"><input class="them-thu-tu" type="text" placeholder="Thứ tự danh mục" name = "id"></div>
-                <div class="popup-themsp-left__input"><input class="them-ten" type="text" placeholder="Tên danh mục" name = "tendm"></div>
+                <div class="popup-themsp-left__input">{{categories.length+1}}</div>
+                <div class="popup-themsp-left__input"><input class="them-ten" type="text" placeholder="Tên danh mục" name = "tendm" formControlName="cateName"></div>
             </div>
-            <button type = "submit" name = "clickthemdm" class="popup-themsp__btn" onclick="alert('Thêm thành công')">Thêm</button>
+            <button type = "submit" name = "clickthemdm" class="popup-themsp__btn" (click)="addCategory()">Thêm</button>
             <span class="back" onclick="close_popup_themsp()">&times;</span>
         </div>
     </div>
 </form>
 <!-- popup sửa sp -->
-<form *ngIf="!isToggle2">
+<form *ngIf="!isToggle2"[formGroup]="updateCate">
     <div class="popup-suasp">
         <div class="popup-suadm__content">
             <div class="popup-themsp__title">Sửa Danh Mục</div>
             <div class="popup-themsp-left">
+                <div class="popup-themsp-left__label" ></div>
                 <div class="popup-themsp-left__label" >Thứ tự</div>
                 <div class="popup-themsp-left__label" >Tên</div>
+                <div class="popup-themsp-left__label" ></div>
             </div>
             <div class="popup-themsp-right" id ="">
-                
-                <div class="popup-themsp-left__input"><input class="them-thu-tu" type="text" placeholder="Thứ tự danh mục" name = "ids" id = "iddms" readonly></div>
-                <div class="popup-themsp-left__input"><input class="them-ten" type="text" placeholder="Tên danh mục" name = "tendms" id = "tendms" ></div>
+                <div class="popup-themsp-left__input"></div>
+                <div class="popup-themsp-left__input">{{stt}}</div>
+                <div class="popup-themsp-left__input"><input class="them-ten" type="text" placeholder="Tên danh mục" name = "tendms" id = "tendms" formControlName="cateName2"></div>
+                <div class="popup-themsp-left__input"><input  type="hidden" formControlName="cateID"></div>
             </div>
-            <button type ="submit" class="popup-suasp__btn" name = "clicksuadm" onclick="">Sửa</button>
+            <button type ="submit" class="popup-suasp__btn" name = "clicksuadm" (click)="updateCategory()">Sửa</button>
             <span class="back" onclick="close_popup_suasp()">&times;</span>
         </div>
     </div>

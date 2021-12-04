@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { faEdit, faLock, faTrash, faUnlock } from '@fortawesome/free-solid-svg-icons';
 import { Category } from 'src/app/entity/category';
 import { CategoryService } from 'src/app/services/category.service';
 
@@ -11,8 +14,24 @@ export class QlDanhmucComponent implements OnInit {
   isToggle:boolean=true;
   isToggle2:boolean=true;
   categories:Array<Category>
-  constructor(private categoryService:CategoryService) { }
-
+  selectedCate:Category;
+  constructor(private categoryService:CategoryService,
+    private formBuilder:FormBuilder,
+    private route:Router) { }
+  faTrash=faTrash
+  faEdit = faEdit
+  faLock= faLock
+  faUnlock=faUnlock
+  stt:number
+  addCate= this.formBuilder.group({
+    cateName:['',Validators.required],
+  })
+  updateCate= this.formBuilder.group({
+    cateID:['',Validators.required],
+    cateName2:['',Validators.required],
+  })
+  searchText;
+  p:number=1
   ngOnInit(): void {
     this.getCategories()
   }
@@ -36,5 +55,83 @@ getCategories(){
     console.log(error)
   });
   
+}
+get cateName(){
+  return this.addCate.get("cateName")
+}
+get cateName2(){
+  return this.updateCate.get("cateName2")
+}
+get cateID(){
+  return this.updateCate.get("cateID")
+}
+
+ addCategory(){
+   let cate = new Category();
+   cate.tenloai = this.cateName.value;
+   cate.trangthai= 0;
+   this.categoryService.addCategory(cate).subscribe(Response=>{
+     alert("thêm thành công");
+     this.reloadCurrentRoute();
+     console.log(Response);
+   })
+ }
+ displayCate(cate:Category){
+   this.stt= cate.cateID
+  this.cateID.setValue(cate.cateID);
+   this.cateName2.setValue(cate.tenloai);
+   this.selectedCate = cate;
+ }
+ updateCategory(){
+    this.selectedCate.tenloai = this.cateName2.value;
+    this.categoryService.updateCategory(this.selectedCate).subscribe(Response=>{
+      alert("Sửa thành công")
+      this.reloadCurrentRoute();
+      console.log(Response);
+    })
+
+ }
+ HideCategory(cate:Category){
+  if(cate.trangthai == 1){
+    cate.trangthai=0
+    this.categoryService.updateCategory(cate).subscribe(
+      Response1=>{
+        console.log(Response1)
+        this.reloadCurrentRoute();
+      }
+    )
+  }
+  else{
+    if(cate.trangthai == 0){
+      cate.trangthai= 1
+    this.categoryService.updateCategory(cate).subscribe(
+      Response1=>{
+        console.log(Response1)
+        this.reloadCurrentRoute();
+      }
+    )
+    }
+  }
+
+}
+deleteCate(cate:Category){
+  this.categoryService.deleteCategory(cate.cateID).subscribe(Response=>{
+    let result = Response.result;
+    if(result=="success"){
+      alert("Xóa thành công")
+      this.reloadCurrentRoute();
+    }else{
+      console.log(Response)
+      alert("Xóa thất bại")
+      this.reloadCurrentRoute();
+    }
+  })
+}
+reloadCurrentRoute() {
+  let currentUrl = this.route.url;
+  this.route.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.route.navigate([currentUrl]);
+      console.log(currentUrl);
+  });
 }
 }

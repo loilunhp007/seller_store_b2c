@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { Cart } from 'src/app/entity/cart';
 import { CartService } from 'src/app/services/cart.service';
 import { LoginService } from 'src/app/services/login.service';
+import { UserService } from 'src/app/services/user.service';
+import { UserDetail } from 'src/app/entity/user-detail';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -27,18 +29,21 @@ export class MenuComponent implements OnInit {
   uid:string
   img:string
   isLogged = false;
+  userdetail:UserDetail
   constructor(private categoryService:CategoryService,
     private cartService:CartService,
     private router:Router, 
     private formBuilder:FormBuilder,
-    private loginService:LoginService) { 
+    private loginService:LoginService,
+    private userService:UserService) { 
     }
 
   ngOnInit(): void {
+    this.userdetail = new UserDetail();
     if(sessionStorage.getItem("uid")!=null){
       this.uid=JSON.parse(sessionStorage.getItem("uid"));
       this.getCart();
-     
+      this.getUserDetail(this.uid);
     }
     
     this.getCategories();
@@ -51,6 +56,11 @@ export class MenuComponent implements OnInit {
       console.log(error)
     });
     
+  }
+  getUserDetail(id:string){
+    this.userService.getUserByID(id).subscribe(Response=>{
+      this.userdetail=Response;
+    })
   }
   getCart(){
     this.cartService.getCartItems(this.uid).subscribe(Response=>{
@@ -81,6 +91,10 @@ export class MenuComponent implements OnInit {
   }
   logout(){
     this.isLogged = this.loginService.logOut();
-    return this.router.navigate(["/login"]);
+    return this.router.navigate(["/web/login"]);
+  }
+  findProductByCate(category:Category){
+    let cate:number = category.cateID;
+    this.router.navigate(['/web/product'],{queryParams:{cate}})
   }
 }

@@ -25,4 +25,16 @@ public class CategoryService {
     public Category getByID(int id) throws Exception{
         return categoryRepository.findById(id).get();
     }
+    public int deleteByID(Category cate){
+        categoryRepository.delete(cate);
+        System.out.println(categoryRepository.findById(cate.getCateID()).isEmpty());
+        if(categoryRepository.findById(cate.getCateID()).isEmpty()){
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+        
+    }
 }

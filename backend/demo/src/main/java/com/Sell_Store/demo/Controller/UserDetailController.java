@@ -1,5 +1,6 @@
 package com.Sell_Store.demo.Controller;
 
+import com.Sell_Store.demo.Entity.TypeMember;
 import com.Sell_Store.demo.Entity.UserDetail;
 import com.Sell_Store.demo.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,12 @@ public class UserDetailController {
     @GetMapping("/get")
     public ResponseEntity<?> getAllThanhVien(){
         List<UserDetail> lThanhVien=  tvService.getAllThanhVien();
+        return ResponseEntity.status(HttpStatus.OK).body(lThanhVien);
+    }
+    @GetMapping("/get/type/{typeID}")
+    public ResponseEntity<List<UserDetail>> getAllByTypeMember(@PathVariable(name = "typeID")long id){
+        TypeMember typeMember = tvService.getTypeByID(id);
+        List<UserDetail> lThanhVien=  tvService.getAllByTypeMember(typeMember);
         return ResponseEntity.status(HttpStatus.OK).body(lThanhVien);
     }
     @PostMapping({"/add"})
@@ -58,7 +65,11 @@ public class UserDetailController {
         return ResponseEntity.status(HttpStatus.OK).body(tv2);
     }
     
-
+    @GetMapping("/gettype")
+    public ResponseEntity<List<TypeMember>> getAllType(){
+        List<TypeMember> listType=  tvService.getAllType();
+        return ResponseEntity.status(HttpStatus.OK).body(listType);
+    }
 
 
     

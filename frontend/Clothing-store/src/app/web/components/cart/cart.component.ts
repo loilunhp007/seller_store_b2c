@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Cart } from 'src/app/entity/cart';
@@ -13,11 +14,21 @@ export class CartComponent implements OnInit {
   input:number;
   uid:string
   cartTotal=0;
+  date:Date
   constructor(private cartService:CartService,
-    private router:Router) { }
+    private router:Router,
+    public datePipe:DatePipe) { }
   carts:Array<Cart>
   cartLength:number
+  date2:Date
   ngOnInit(): void {
+    this.date=new Date();
+    
+    let date22:any = this.datePipe.transform(this.date,"yyyy-MM-dd")
+    console.log(date22);
+    this.date2 =date22;
+    console.log(this.date2)
+    this.cartLength=0;
     if(sessionStorage.getItem("uid")!=null){
       this.uid = JSON.parse(sessionStorage.getItem("uid"));
       this.getCart();
@@ -29,6 +40,10 @@ export class CartComponent implements OnInit {
       this.cartLength = this.carts.length;
       this.getCartTotal(this.carts);
       console.log(this.carts);
+      this.carts.forEach(e=>{
+        console.log(e.product.special_from_time)
+        console.log(e.product.special_to_time)
+      })
     },(error)=>{
       console.log(error);
     })
@@ -58,8 +73,18 @@ export class CartComponent implements OnInit {
     })
   }
   getCartTotal(carts:Array<Cart>){
-    carts.forEach(element => {
-      this.cartTotal+=(element.product.price*(100-element.product.percent_discount)/100)*element.soluong
+    carts.forEach(data => {
+      let date2 =new Date();
+      let date22:any = this.datePipe.transform(date2,"yyyy-MM-dd")
+      if(data.product.percent_discount>0&& date22<data.product.special_to_time&&date22>data.product.special_from_time){
+        this.cartTotal+= Number(data.product.price*((100-data.product.percent_discount)/100)*data.soluong)
+        console.log(this.cartTotal)
+       
+      }else{
+
+        this.cartTotal+= Number(data.product.price*data.soluong)
+        console.log(this.cartTotal)
+       }
     });
   }
  
@@ -82,5 +107,8 @@ export class CartComponent implements OnInit {
           this.router.navigate([currentUrl]);
           console.log(currentUrl);
       });
+    }
+    goCheckOut(){
+      this.router.navigate(['/web/checkout'])
     }
 }

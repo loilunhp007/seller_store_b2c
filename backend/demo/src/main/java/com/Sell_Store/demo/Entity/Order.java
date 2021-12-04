@@ -2,6 +2,7 @@ package com.Sell_Store.demo.Entity;
 
 import lombok.*;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Set;
 
@@ -47,10 +48,10 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "uid")
     private UserDetail userDetail;
-    @Column(name="starttime", nullable = false, updatable = false, insertable = false)
-    private Timestamp startTime;
-    @Column(name="endtime", nullable = false, updatable = true, insertable = true)
-    private Timestamp endTime;
+    @Column(name="starttime", nullable = false)
+    private String startTime;
+    @Column(name="endtime", nullable = true, updatable = true, insertable = true)
+    private String endTime;
     @Column(name = "total",columnDefinition = "double",nullable = false)
     private Double total;
     @Column(name = "state",columnDefinition = "int",nullable = false)

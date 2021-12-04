@@ -6,7 +6,7 @@
 	<table id="table-dh">
 		<thead>
 			<tr>
-				<th colspan="8">DANH SÁCH ĐƠN HÀNG</th>
+				<th colspan="9">DANH SÁCH ĐƠN HÀNG</th>
 			</tr>
 			<tr>
 				<th colspan="4">Chọn ngày
@@ -30,11 +30,43 @@
 				<th>SĐT</th>
 				<th>Thời Điểm Đặt Hàng</th>
 				<th>Tổng Tiền</th>
+				
 				<th>Tình Trạng</th>
+				<th>Chi tiết</th>
 				<th>Thao Tác</th>
 			</tr>
 		</thead>
 		<tbody id = "tinhtranghd" >
+			<tr *ngFor="let order of orders | paginate:{itemsPerPage:10,currentPage:p}">
+				<td data-sortable="true">{{order.orderID}}</td>
+				<td data-sortable="true">{{order.userDetail.firstname+order.userDetail.lastname}}</td>
+				<td data-sortable="true">{{order.userDetail.gmail}}</td>
+				<td data-sortable="true">{{order.userDetail.phone}}</td>
+				<td data-sortable="true">{{order.startTime|date:"yyyy-MM-dd"}}</td>
+				<td data-sortable="true">{{order.total|currency:'VND':'symbol':'3.0'}}</td>
+				<td data-sortable="true" *ngIf="order.state=='1'">
+						Chờ xác nhận
+				</td>
+				<td data-sortable="true" *ngIf="order.state=='0'">
+						Đã Hủy
+				</td>
+				<td data-sortable="true" *ngIf="order.state=='2'">
+						Chuẩn bị hàng
+				</td>
+				<td data-sortable="true" *ngIf="order.state=='3'">
+						Giao hàng
+				</td>
+				<td data-sortable="true" *ngIf="order.state=='4'">
+						Đã giao hàng
+				</td>
+				<td data-sortable="true">
+				 <a class="link" (click)="goDetail(order)">
+				<span class="glyphicon glyphicon-list-alt"></span>Xem Chi Tiết</a></td>
+				<td data-sortable="true">
+				<button  class="btn-table" *ngIf="(order.trangthai!=4 && order.trangthai!=0)"  (click)="updateOrder(order)" [order]="order" >Xác nhận</button>
+				<button  class="btn-table" [disabled]="!order.trangthai==1 ||order.trangthai==4"   (click)="updateOrderCancel(order)"><i class="fa fa-trash"></i> Hủy Đơn</button>
+				</td>
+			</tr>
         </tbody>
     </table>
 </div>
@@ -54,8 +86,35 @@
 					<th>Thành tiền</th>	
 				</tr>
 			</thead>
-			<tbody id = "dulieuchitiet">
-				
+			<tbody >
+				<tr *ngFor="let order of orders | paginate:{itemsPerPage:10,currentPage:p}">
+					<td data-sortable="true">{{order.orderID}}</td>
+					<td data-sortable="true">{{order.userDetail.firstname+order.userDetail.lastname}}</td>
+					<td data-sortable="true">{{order.startTime}}</td>
+					<td data-sortable="true">{{order.total|currency:'VND':'symbol':'3.0'}}</td>
+					<td data-sortable="true" *ngIf="order.trangthai=='1'">
+							Chờ xác nhận
+					</td>
+					<td data-sortable="true" *ngIf="order.trangthai=='0'">
+							Đã Hủy
+					</td>
+					<td data-sortable="true" *ngIf="order.trangthai=='2'">
+							Chuẩn bị hàng
+					</td>
+					<td data-sortable="true" *ngIf="order.trangthai=='3'">
+							Giao hàng
+					</td>
+					<td data-sortable="true" *ngIf="order.trangthai=='4'">
+							Đã giao hàng
+					</td>
+					<td data-sortable="true">
+					 <a class="link" (click)="goDetail(order)">
+					<span class="glyphicon glyphicon-list-alt"></span>Xem Chi Tiết</a></td>
+					<td data-sortable="true">
+					<button  class="btn-table" *ngIf="(order.trangthai!=4 && order.trangthai!=0)"  (click)="updateOrder(order)" [order]="order" >Xác nhận</button>
+					<button  class="btn-table" [disabled]="!order.trangthai==1 ||order.trangthai==4"   (click)="updateOrderCancel(order)"><i class="fa fa-trash"></i> Hủy Đơn</button>
+					</td>
+				</tr>
 			</tbody>
 			
 		</table>

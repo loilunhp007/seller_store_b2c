@@ -5,7 +5,7 @@ import java.util.List;
 import com.Sell_Store.demo.Entity.Account;
 import com.Sell_Store.demo.Services.AccountService;
 
-
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,13 +35,6 @@ public class AccountController {
     }
     @PostMapping("/add")
     public ResponseEntity<Account> addaccount(@RequestBody Account user ) throws Exception{ 
-        String existUsername = user.getEmail();
-        if (existUsername != null && !"".equals(existUsername)){
-            Account existAccount = accountService.findAccountByEmail(existUsername);
-            if(existAccount != null){
-                 throw new Exception("Username"+existUsername+"is exist");
-            }
-        }
         Account _account = accountService.addAccount(user);
         return ResponseEntity.status(HttpStatus.OK).body(_account);
         
@@ -67,6 +60,18 @@ public class AccountController {
         _account.setState(account.getState());
         Account account2 = accountService.addAccount(_account);
         return ResponseEntity.status(HttpStatus.OK).body(account2);
+    }
+    @PostMapping("/checkExistUser")
+    public ResponseEntity<String> checkExistUser(@RequestBody Account account) throws Exception{
+        Account  _account =accountService.findAccountByEmail(account.getEmail());
+        JSONObject obj =new JSONObject();
+        if(_account!=null){
+            obj.put("user", "exist");
+            return ResponseEntity.status(HttpStatus.OK).body(obj.toString());
+        }else{
+            obj.put("user", "empty");
+            return ResponseEntity.status(HttpStatus.OK).body(obj.toString());
+        }
     }
     
 

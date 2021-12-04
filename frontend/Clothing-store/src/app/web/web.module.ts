@@ -5,7 +5,7 @@ import { SliderComponent } from './components/slider/slider.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { ProductComponent } from './components/product/product.component';
 import { SearchComponent } from './components/search/search.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
@@ -69,7 +69,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     OrderComponent,
     CheckoutComponent,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [WebComponent]
 })
 export class WebModule { }

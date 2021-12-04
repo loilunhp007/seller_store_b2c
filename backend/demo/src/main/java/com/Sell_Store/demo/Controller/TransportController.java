@@ -39,4 +39,5 @@ public class TransportController {
         Transport transport2= transportService.addTransport(transport);
         return ResponseEntity.status(HttpStatus.OK).body(transport2);
     }
+    
 }

@@ -26,7 +26,7 @@ public class AccountService {
     public Account findAccountByEmail(String email){
         return accountRepository.findAccountByEmail(email);
     }
-    public Account findAccountByEmailAndMatkhau(String email,String password){
+    public Account findAccountByEmailAndMatkhau(String email,String password) throws Exception{
         return accountRepository.findAccountByEmailAndPassword(email,password);
     }
     public long count(){

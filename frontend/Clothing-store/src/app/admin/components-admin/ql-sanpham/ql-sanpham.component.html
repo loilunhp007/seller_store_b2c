@@ -6,7 +6,8 @@
 <div class="section">
     <div id="search">
         <form action="" method="get">
-            <input type="text" name="key" value="" placeholder="Nhập sản phẩm cần tìm" />
+
+            <input type="text" name="key" value=""[(ngModel)]="searchText" placeholder="Nhập sản phẩm cần tìm" />
             <button type="submit" name="xem" value="search" >Tìm kiếm</button>
         </form>
     </div>
@@ -24,7 +25,7 @@
             </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of products">
+          <tr *ngFor="let product of products | filter : searchText| paginate:{itemsPerPage:8,currentPage:p}">
                 <td>{{product.productID}}</td>
                 <td><img src="../../../../../assets/images/banner-small-01.png" width="110px"></td>
                 <td>{{product.productName}}</td>
@@ -38,10 +39,10 @@
                   </td>
                 
                <td >
-                  <button type="button"   class="btn btn-success"[product]="selectedProduct"
-                 (click)="popup_updateProduct();displayProduct(product)">Sửa</button>									
-		        <button type="button"   class="btn btn-success" [product]="selectedProduct"(click)="deleteProduct(product)">Xóa</button>
-         <button [product]="selectedProduct"
+                  <button type="button" class="btn-table" [product]="selectedProduct"
+                 (click)="popup_updateProduct();displayProduct(product)"><fa-icon [icon]="faEdit"></fa-icon></button>									
+		        <button type="button"  class="btn-table" [product]="selectedProduct"(click)="deleteProduct(product)"><fa-icon [icon]="faTrash"></fa-icon></button>
+         <button [product]="selectedProduct" class="btn-table"
          (click)="statusProduct(product)"><span *ngIf="product.state=='0'">Bật</span><span *ngIf="product.state=='1'">Tắt</span></button>
                 </td>
             </tr>

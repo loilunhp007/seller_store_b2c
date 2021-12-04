@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { faCoffee, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Category } from 'src/app/entity/category';
 import { Product } from 'src/app/entity/product';
 import { CategoryService } from 'src/app/services/category.service';
@@ -13,6 +14,8 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./../../../../assets/admin/css/styles.css']
 })
 export class QlSanphamComponent implements OnInit {
+  searchText;
+  p:number=1
   selectedProduct : Product
   isToggle:boolean = true;
   isToggle2:boolean = true;
@@ -26,6 +29,9 @@ export class QlSanphamComponent implements OnInit {
   categories:Array<Category>
   addForm:FormGroup
   cateLoad:Category
+  faCoffee = faCoffee;
+  faTrash=faTrash;
+  faEdit = faEdit;
   constructor(private productService:ProductService,
     private formBuilder:FormBuilder,
     private categoryService:CategoryService,

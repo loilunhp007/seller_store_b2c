@@ -38,4 +38,10 @@ export class ProductService {
   deleteInventory(id:String):Observable<any>{
     return this.httpClient.delete<Inventory>("http://localhost:8090/inventory/delete/"+id);
   }
+  updateInventory(productID:string,quantity:number):Observable<any>{
+    return this.httpClient.put<Inventory>("http://localhost:8090/inventory/put/"+productID+"/"+quantity,null);
+  }
+  getProductByCate(id:number):Observable<any>{
+    return this.httpClient.get<Product[]>("http://localhost:8090/products/get/category/"+id)
+  }
 }

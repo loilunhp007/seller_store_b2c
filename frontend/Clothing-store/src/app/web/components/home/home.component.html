@@ -8,7 +8,7 @@
                      <li>
                         <div class="row">
                            <div class="col-md-3 col-sm-6" *ngFor="let product of hotproducts;let i=index">
-                              <div class="products" >
+                              <div class="products"*ngIf="i<4&&product.state=='1'" >
                                 <input type="hidden" id="productID" value={{product.productID}}>
                                  <div class="offer">- {{product.percent_discount}}%</div>
                                  <div class="thumbnail"><a  (click)="goDetail(product)" *ngFor="let img of product.images.slice(0,1)| keyvalue"><img src="../../../../assets/images/products/{{img.value}}" alt="Product Name"></a></div>
@@ -17,51 +17,18 @@
                                  <div class="button_group"><button class="button add-cart" type="button" (click)="addTocart(product)">Add To Cart</button><button class="button compare" type="button"><i class="fa fa-exchange"></i></button><button class="button wishlist" type="button"><i class="fa fa-heart-o"></i></button></div>
                               </div>
                            </div>
-                            <div class="col-md-3 col-sm-6">
-                              <div class="products" >
-                                 <div class="offer">- %20</div>
-                                 <div class="thumbnail"><a href="details.html"><img src="assets/images/products/small/products-01.png" alt="Product Name"></a></div>
-                                 <div class="productname">2</div>
-                                 <h4 class="price">$451.00</h4>
-                                 <div class="button_group"><button class="button add-cart" type="button">Add To Cart</button><button class="button compare" type="button"><i class="fa fa-exchange"></i></button><button class="button wishlist" type="button"><i class="fa fa-heart-o"></i></button></div>
-                              </div>
-                           </div>
                         </div>
                      </li>
                      <li>
                         <div class="row">
-                           <div class="col-md-3 col-sm-6">
-                              <div class="products">
-                                 <div class="offer">- %20</div>
-                                 <div class="thumbnail"><a href="details.html"><img src="assets/images/products/small/products-01.png" alt="Product Name"></a></div>
-                                 <div class="productname">Iphone 5s Gold 32 Gb 2013</div>
-                                 <h4 class="price">$451.00</h4>
-                                 <div class="button_group"><button class="button add-cart" type="button">Add To Cart</button><button class="button compare" type="button"><i class="fa fa-exchange"></i></button><button class="button wishlist" type="button"><i class="fa fa-heart-o"></i></button></div>
-                              </div>
-                           </div>
-                           <div class="col-md-3 col-sm-6">
-                              <div class="products">
-                                 <div class="thumbnail"><a href="details.html"><img src="assets/images/products/small/products-02.png" alt="Product Name"></a></div>
-                                 <div class="productname">Iphone 5s Gold 32 Gb 2013</div>
-                                 <h4 class="price">$451.00</h4>
-                                 <div class="button_group"><button class="button add-cart" type="button">Add To Cart</button><button class="button compare" type="button"><i class="fa fa-exchange"></i></button><button class="button wishlist" type="button"><i class="fa fa-heart-o"></i></button></div>
-                              </div>
-                           </div>
-                           <div class="col-md-3 col-sm-6">
-                              <div class="products">
-                                 <div class="offer">New</div>
-                                 <div class="thumbnail"><a href="details.html"><img src="assets/images/products/small/products-03.png" alt="Product Name"></a></div>
-                                 <div class="productname">Iphone 5s Gold 32 Gb 2013</div>
-                                 <h4 class="price">$451.00</h4>
-                                 <div class="button_group"><button class="button add-cart" type="button">Add To Cart</button><button class="button compare" type="button"><i class="fa fa-exchange"></i></button><button class="button wishlist" type="button"><i class="fa fa-heart-o"></i></button></div>
-                              </div>
-                           </div>
-                           <div class="col-md-3 col-sm-6">
-                              <div class="products">
-                                 <div class="thumbnail"><a href="details.html"><img src="assets/images/products/small/products-04.png" alt="Product Name"></a></div>
-                                 <div class="productname">Iphone 5s Gold 32 Gb 2013</div>
-                                 <h4 class="price">$451.00</h4>
-                                 <div class="button_group"><button class="button add-cart" type="button">Add To Cart</button><button class="button compare" type="button"><i class="fa fa-exchange"></i></button><button class="button wishlist" type="button"><i class="fa fa-heart-o"></i></button></div>
+                           <div class="col-md-3 col-sm-6" *ngFor="let product of hotproducts;let i=index">
+                              <div class="products"*ngIf="i>=4&&i<8 &&product.state=='1'">
+                                <input type="hidden" id="productID" value={{product.productID}}>
+                                 <div class="offer">- {{product.percent_discount}}%</div>
+                                 <div class="thumbnail"><a  (click)="goDetail(product)" *ngFor="let img of product.images.slice(0,1)| keyvalue"><img src="../../../../assets/images/products/{{img.value}}" alt="Product Name"></a></div>
+                                 <div class="productname">{{product.productName}}</div>
+                                 <h4 class="price"><span class="old-price">${{product.price}}</span>${{product.price*(100-product.percent_discount)/100}}</h4>
+                                 <div class="button_group"><button class="button add-cart" type="button" (click)="addTocart(product)">Add To Cart</button><button class="button compare" type="button"><i class="fa fa-exchange"></i></button><button class="button wishlist" type="button"><i class="fa fa-heart-o"></i></button></div>
                               </div>
                            </div>
                         </div>

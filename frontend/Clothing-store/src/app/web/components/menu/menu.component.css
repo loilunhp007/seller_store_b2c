@@ -1,0 +1,13 @@
+.usermenu2{
+    display: inline-block;
+    text-decoration: none;
+}
+.usermenu2 li{
+    float: left;
+    margin-left: 6px!important;
+    text-decoration: none;
+}
+.usermenu2 li a{
+    text-decoration: none;
+    color: white;
+}

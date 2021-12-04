@@ -33,6 +33,8 @@ import { DpDatePickerModule } from 'ng2-date-picker';
 import {moment} from 'angular-moment'
 import { NgxPaginationModule } from 'ngx-pagination';
 import { WebModule } from './web/web.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { WebModule } from './web/web.module';
     WebModule,
     AdminModule,
     DpDatePickerModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    FontAwesomeModule,
+    Ng2SearchPipeModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
