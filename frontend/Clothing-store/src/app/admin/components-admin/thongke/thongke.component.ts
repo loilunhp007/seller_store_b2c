@@ -1,6 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ArcElement, BarController, BarElement, BubbleController, CategoryScale, Chart, DoughnutController, Filler, Legend, LinearScale, LineController, LineElement, LogarithmicScale, PieController, PointElement, PolarAreaController, RadarController, RadialLinearScale, ScatterController, TimeScale, TimeSeriesScale, Title, Tooltip } from 'chart.js';
 import { Product } from 'src/app/entity/product';
+import { Thongke } from 'src/app/entity/thongke';
 import { OrderDetailService } from 'src/app/services/order-detail.service';
 import { OrderService } from 'src/app/services/order.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -14,7 +16,8 @@ export class ThongkeComponent implements OnInit {
 
   constructor(private productService:ProductService,
     private orderDetailService:OrderDetailService,
-    private orderService:OrderService) { }
+    private orderService:OrderService,
+    public datepipe:DatePipe) { }
   canvas1: any;
   ctx1: any;
   canvas2: any;
@@ -22,10 +25,15 @@ export class ThongkeComponent implements OnInit {
   canvas3: any;
   ctx3: any;
   products:Array<Product>
-  luotXem:any = []
-  nameproduct:any = []
-  spbanra:any=[]
-  doanhthu:any=[]
+  soluongdonhang:Array<Thongke> =[]
+  spbanra:Array<Thongke> =[]
+  productname1:Array<string> =[]
+  soluong:Array<number> = []
+  donhang:Array<number> = []
+  doanhthusp:Array<number> = []
+  productname2:Array<string> = []
+  productname3:Array<string> = []
+  doanhthu:Array<Thongke> =[]
   userId:String
   select = 1
   select2=1
@@ -62,7 +70,7 @@ export class ThongkeComponent implements OnInit {
     );
     this.getValueWithAsync();
   }
-  private thongkespTheoluotxem(luotxem:any[],nameproduct:any[]){
+  private thongkedonhangngay(soluong:any[],nameproduct:any[]){
     this.canvas1 = document.getElementById('myChart1');
     this.ctx1 = this.canvas1.getContext('2d');
     this.ctx1 = 'myChart1'
@@ -73,7 +81,7 @@ export class ThongkeComponent implements OnInit {
         datasets: [
           {
             label: 'Luot xem',
-            data: luotxem,
+            data: soluong,
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
               'rgba(54, 162, 235, 0.2)',
@@ -187,30 +195,40 @@ export class ThongkeComponent implements OnInit {
     });
   }
   private loadChart(){
-    this.productService.getProducts().toPromise().then(
-      Response=>{
-        this.products=Response
+        
         this.orderDetailService.ThongKeSP(this.select,4).toPromise().then(
           Response2=>{
-            this.spbanra = Response2;
+            this.spbanra = Response2
+            this.spbanra.forEach(element => {
+              this.soluong.push(element[0])
+              this.productname1.push(element[1])
+            });
           }
         )
         this.orderDetailService.thongKeDoanhthu(this.select).toPromise().then(
           Response3=>{
             this.doanhthu=Response3;
+            this.doanhthu.forEach(element => {
+              this.doanhthusp.push(element[0])
+              this.productname2.push(element[1])
+            });
+            console.log(this.doanhthu)
           }
         )
-        this.products.forEach(data=>{
-          this.nameproduct.push(data.productName);
-          this.luotXem.push(data.price);
-         
-        
-            }
-          
+        let date = new Date();
+        let date2:string = this.datepipe.transform(date,"yyyy-MM-dd");
+        this.orderDetailService.thongkengay(date2,1).subscribe(Response=>{
+          this.soluongdonhang=Response;
+          this.soluongdonhang.forEach(element => {
+            this.donhang.push(element[0])
+            this.productname3.push(element[1])
+          });
+          console.log(this.soluongdonhang)
+        })
+
             
-        )
-      }
-    );
+ 
+    
   }
   exit() {
     location.reload();
@@ -218,9 +236,9 @@ export class ThongkeComponent implements OnInit {
   resolveAfter3Seconds(x) {
     return new Promise(resolve => {
       setTimeout(() => {
-        this.thongkespTheoluotxem(this.luotXem,this.nameproduct);
-        this.ThongKesoluongbanra(this.nameproduct,this.spbanra)
-        this.thongkeDoanhthu(this.nameproduct,this.doanhthu);
+        this.thongkedonhangngay(this.donhang,this.productname3);
+        this.ThongKesoluongbanra(this.productname1,this.soluong)
+        this.thongkeDoanhthu(this.productname3,this.productname2);
       }, 1000);
     });
 }
@@ -231,15 +249,22 @@ selected(select:number){
   
   this.myChart3.destroy();
   this.doanhthu =[];
+  this.doanhthusp=[];
+  this.productname2=[];
   this.orderDetailService.thongKeDoanhthu(this.select).toPromise().then(
     Response3=>{
       this.doanhthu=Response3;
+      this.doanhthu.forEach(element => {
+        this.doanhthusp.push(element[0])
+        this.productname2.push(element[1])
+      });
+      console.log(this.doanhthu)
     }
   )
     
   
   setTimeout(()=>{
-    this.thongkeDoanhthu(this.nameproduct,this.doanhthu);
+    this.thongkeDoanhthu(this.productname2,this.doanhthusp);
     
   },1000)
   
@@ -248,13 +273,20 @@ selected(select:number){
   selected2(select:number){
     this.myChart2.destroy();
     this.spbanra=[];
+    this.soluong=[];
+    this.productname1=[];
     this.orderDetailService.ThongKeSP(this.select2,4).toPromise().then(
       Response2=>{
         this.spbanra = Response2;
+        this.spbanra.forEach(element => {
+          this.soluong.push(element[0])
+          this.productname1.push(element[1])
+        });
+        console.log(this.spbanra)
       }
     )
     setTimeout(()=>{
-      this.ThongKesoluongbanra(this.nameproduct,this.spbanra);
+      this.ThongKesoluongbanra(this.productname1,this.soluong);
     },1000)
   }
 

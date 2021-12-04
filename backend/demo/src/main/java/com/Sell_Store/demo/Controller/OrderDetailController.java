@@ -1,5 +1,6 @@
 package com.Sell_Store.demo.Controller;
 
+import java.sql.Array;
 import java.util.List;
 
 import com.Sell_Store.demo.Entity.OrderDetail;
@@ -50,13 +51,18 @@ public class OrderDetailController {
 
     }
     @GetMapping("/get/thongkedoanhthu/{thang}")
-        public ResponseEntity<List<Long>> getDoanhThu(@PathVariable(name = "thang")int thang){
-            List<Long> num = orderDetailService.getThanhtien(thang);
+        public ResponseEntity<List<Object>> getDoanhThu(@PathVariable(name = "thang")int thang){
+            List<Object> num = orderDetailService.getThanhtien(thang);
             return ResponseEntity.status(HttpStatus.OK).body(num);    
         }
         @GetMapping("/get/thongkesoluong/{thang}/{state}")
-        public ResponseEntity<List<Long>> getSoluongBan(@PathVariable(name = "thang")int thang,@PathVariable(name ="state")int state){
-            List<Long> num = orderDetailService.getThongKeSoluong(thang,state);
+        public ResponseEntity<List<Object>> getSoluongBan(@PathVariable(name = "thang")int thang,@PathVariable(name ="state")int state){
+            List<Object> num = orderDetailService.getThongKeSoluong(thang,state);
+            return ResponseEntity.status(HttpStatus.OK).body(num);    
+        }
+        @GetMapping("/get/thongkengay/{ngay}/{state}")
+        public ResponseEntity<List<Object>> getThongKeNgay(@PathVariable(name = "ngay")String ngay,@PathVariable(name ="state")int state){
+            List<Object> num = orderDetailService.thongkeDonHangNgay(ngay,state);
             return ResponseEntity.status(HttpStatus.OK).body(num);    
         }
         

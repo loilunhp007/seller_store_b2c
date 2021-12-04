@@ -26,10 +26,14 @@ public class OrderDetailService {
         return orderDetailRepository.save(orderDetail);
 
     }
-    public List<Long> getThanhtien(int thang){
+    public List<Object> getThanhtien(int thang){
         return orderDetailRepository.findTotalItemGroupbyProductID(thang);
     }
-    public List<Long> getThongKeSoluong(int thang,int state){
+    public List<Object> getThongKeSoluong(int thang,int state){
         return orderDetailRepository.thongkesoluong(thang,state);
     }
+    public List<Object> thongkeDonHangNgay(String date,int state){
+        return orderDetailRepository.thongkeNgay(date, state);
+    }
+
 }

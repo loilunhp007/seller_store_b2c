@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
         console.log(Response);
         
       },(error) => {
+        alert("Đăng nhập không thành công")
         console.log("Đăng nhập không thành công");
       });
 
