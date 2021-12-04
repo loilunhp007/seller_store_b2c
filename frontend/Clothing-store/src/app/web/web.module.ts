@@ -20,6 +20,7 @@ import { OrderComponent } from './components/order/order.component';
 import { WebComponent } from './web.component';
 import { WebRoutingModule } from './web-routing.module';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { InfoComponent } from './components/info/info.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     CartComponent,
     OrderComponent,
     CheckoutComponent,
+    InfoComponent,
   ],
   imports: [
     BrowserModule,
