@@ -21,8 +21,13 @@ export class QlDonhangComponent implements OnInit {
     private productService:ProductService,
     private orderDetailService:OrderDetailService,
     public datepipe:DatePipe) { }
+    orderdetails:Array<OrderDetail>
     orders:Array<Order>
     p:number=1
+    isToggle:boolean=true
+    time1:Date = new Date("2020-01-01")
+    time2:Date = new Date("2021-01-01")
+    selected:number=1
   ngOnInit(): void {
     this.getAllOrder()
   }
@@ -99,5 +104,42 @@ export class QlDonhangComponent implements OnInit {
         this.route.navigate([currentUrl]);
         console.log(currentUrl);
     });
+  }
+  getOrderDetail(order:Order){
+    this.orderDetailService.getOrderDetail(order.orderID).subscribe(Response=>{
+      this.orderdetails = Response;
+      console.log(this.orderdetails)
+    })
+  }
+  Search(date1:Date,date2:Date,state:number){
+    this.orderService.getAllOrder().subscribe(
+      Response=>{
+        let tmps :Array<Order>  = Response;
+        this.orders = []
+        tmps.forEach(e=>{
+          let d1:any = this.datepipe.transform(e.startTime,"yyyy-MM-dd")
+         
+          if(d1 >= date1 && d1<= date2 && e.state==state){
+              this.orders.push(e);
+          }
+        })
+        console.log(this.orders);}
+    )
+  }
+  public popup_themsp(){
+    
+    this.isToggle = !this.isToggle
+  
+  console.log(this.isToggle);
+}
+  findOrder(){
+    if(this.selected==5){
+      this.getAllOrder();
+    }else{
+      this.Search(this.time1,this.time2,this.selected)
+    }
+  }
+  tinhtrang(event){
+    this.selected = event.target.value
   }
 }

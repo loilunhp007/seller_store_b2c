@@ -19,7 +19,8 @@ export class QlSanphamComponent implements OnInit {
   selectedProduct : Product
   isToggle:boolean = true;
   isToggle2:boolean = true;
-  files:Array<File>
+  files:Array<File>=[]
+  files2:Array<File>=[]
   imageName:Array<string>=[]
   selectedFile:File;
   selectedFile2:File;
@@ -145,13 +146,9 @@ export class QlSanphamComponent implements OnInit {
     //Select File
     if (event.target.files && event.target.files[0]) {
       let filesAmount = event.target.files.length;
-      for (let i = 0; i < filesAmount; i++) {
-              var reader2 = new FileReader();
-              reader2.onload = (event:any) => {
-                console.log(event.target.result);
-                 this.files.push(event.target.result); 
-                 
-              }
+      for (let i = 0; i < filesAmount; i++) {   
+                  let k:File=event.target.files[i];
+                 this.files.push(k); 
       }
       console.log(this.files)
   }
@@ -210,9 +207,19 @@ export class QlSanphamComponent implements OnInit {
     const hour = date.getHours();
     const minutes = date.getMinutes();
     const second = date.getSeconds();
-    let imgName=year+"_"+month+"_"+day+"_"+hour+"_"+minutes+"_"+second;
-      uploadData.append('imageFile', this.selectedFile, imgName+".png");
-        this.imageName.push(imgName)
+    let i=1;
+    if(this.files.length!=0){
+      this.files.forEach(e=>{
+        console.log(e.type)
+        let imgName=year+"_"+month+"_"+day+"_"+hour+"_"+minutes+"_"+second+"_"+i;
+        uploadData.append('imageFile',e, imgName+".png");
+        this.imageName.push(imgName+".png")
+        i++;
+      })
+     
+    }
+    
+       
         console.log(this.AProductName.value)
         this.product.productID="P_"
         this.product.productName = this.AProductName.value;
@@ -222,7 +229,18 @@ export class QlSanphamComponent implements OnInit {
         this.product.special_from_time=this.AProductFromDate.value
         this.product.special_to_time = this.AProductToDate.value;
         this.product.info = this.AProductInfo.value+'';
-        this.product.images= "["+"'"+imgName+"'"+"]"
+        this.product.images = "["
+        for(let j=0;j<this.imageName.length;j++){
+          if(j==(this.imageName.length-1)){
+            this.product.images+="'"+this.imageName[j]+"'"
+          }
+          else{
+            this.product.images+="'"+this.imageName[j]+"'"+","
+          }
+         
+        }
+
+        this.product.images+="]"
         this.product.category = cate;
           if(this.product.special_from_time>this.product.special_to_time&&(this.product.special_from_time <= date)&&this.product.special_to_time<=date){
             alert("ngày bắt đầu phải lớn hơn ngày kết thúc");
@@ -323,12 +341,9 @@ export class QlSanphamComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       let filesAmount = event.target.files.length;
       for (let i = 0; i < filesAmount; i++) {
-              var reader2 = new FileReader();
-              reader2.onload = (event:any) => {
-                console.log(event.target.result);
-                 this.files.push(event.target.result); 
+                 this.files2.push(event.target.result); 
                  
-              }
+              
       }
       console.log(this.files)
   }
@@ -355,6 +370,7 @@ export class QlSanphamComponent implements OnInit {
         let product2= new Product() 
         this.productService.getProductByID(this.SProductID.value).subscribe(Response=>{
             product2=Response
+            product2.imagesArray = Response.images;
             product2.productName=this.SProductName.value;
             product2.info=this.SProductInfo.value
             product2.price= this.SProductPrice.value
@@ -369,15 +385,32 @@ export class QlSanphamComponent implements OnInit {
             const minutes = date.getMinutes();
             const second = date.getSeconds();
             let imgName=year+"_"+month+"_"+day+"_"+hour+"_"+minutes+"_"+second;
-            const uploadData = new FormData();
+            const uploadData2 = new FormData();
             let images = Response.images
             let img = images[0]
             product2.images = "["+"'"+imgName+"'"+"]"
             if(this.selectedFile2!=null){
-              
-              uploadData.append('imageFile', this.selectedFile2,imgName);
+              if(this.files2.length>2){
+                let date= new Date();
+                const day=date.getDate();
+                const month = date.getMonth()+1;
+                const year = date.getFullYear();
+                const hour = date.getHours();
+                const minutes = date.getMinutes();
+                const second = date.getSeconds();
+                let i=1;
+                  this.files2.forEach(e=>{
+                    let imgName=year+"_"+month+"_"+day+"_"+hour+"_"+minutes+"_"+second+"_"+i;
+                    uploadData2.append('imageFile', e, imgName+".png");
+                    this.imageName2.push(imgName)
+                    i++;
+                  })
+                 
+              }else{
+                uploadData2.append('imageFile', this.selectedFile2,imgName);
+              }
               console.log(product2)
-              this.httpClient.post('http://localhost:8090/products/upload',uploadData,{ observe : "response"}).subscribe(
+              this.httpClient.post('http://localhost:8090/products/upload',uploadData2,{ observe : "response"}).subscribe(
                 (Response)=>{
                   if(Response.status === 200){
                     this.productService.updateProduct(product2).subscribe(

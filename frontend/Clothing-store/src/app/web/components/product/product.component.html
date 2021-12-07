@@ -329,8 +329,8 @@
               </div>
               <div class="sort-by">
                 Sort by : 
-               <input type="text" id="name" width="100" placeholder="Nhập tên...">
-               <input type="number" id="price"width="50" placeholder="Nhập giá...">
+               <input type="text" id="name" width="100" placeholder="Nhập tên..." [(ngModel)]="nameFilter" >
+               <input type="text" id="price"width="50"  onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="Nhập giá..."[(ngModel)]="priceFilter" >
               </div>
              
             </div>
@@ -339,16 +339,16 @@
           <div class="clearfix">
           </div>
           <div class="row">
-            <div class="col-md-4 col-sm-6"*ngFor='let product of products'>
-              <div class="products" >
-                <div class="thumbnail" *ngFor="let img of product.images.slice(0,1)" (click)="goDetail(product)">
+            <div class="col-md-4 col-sm-6"*ngFor="let product of products|filter:nameFilter |filter:priceFilter|paginate:{itemsPerPage:6,currentPage:p}">
+              <div class="products" *ngIf="product.state=='1'" >
+                <div class="thumbnail" *ngFor="let img of product.images.slice(0,1) " (click)="goDetail(product)">
                     <img src="../../../../assets/images/products/{{img}}" alt="Product Name">
                 </div>
                 <div class="productname" (click)="goDetail(product)" >
                   {{product.productName}}
                 </div>
                 <h4 class="price">
-                  {{product.price}}
+                  {{product.price|currency:'VND':'symbol':'3.0'}}
                 </h4>
                 <div class="button_group">
                   <button class="button add-cart" type="button">
@@ -366,6 +366,7 @@
               </div>
             </div>
           </div>
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
           <div class="clearfix">
           </div>
         </div>

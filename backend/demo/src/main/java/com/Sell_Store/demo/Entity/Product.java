@@ -50,7 +50,7 @@ public class Product{
     @OneToOne
     @JoinColumn(name = "cateID", referencedColumnName = "cateID")
     private Category category;
-    @Column(name = "productName",columnDefinition = "nvarchar(20)", length = 50, nullable = false )
+    @Column(name = "productName",columnDefinition = "nvarchar(255)", length = 50, nullable = false )
     private String productName;
     @Column(name = "images",columnDefinition = "json")
     @Lob
@@ -58,7 +58,7 @@ public class Product{
     @JsonProperty("images")
     @JsonRawValue
     private JSONArray images;
-    @Column(name = "info",columnDefinition = "nvarchar(20)", length = 200, nullable = false )
+    @Column(name = "info",columnDefinition = "nvarchar(255)", length = 200, nullable = false )
     private String info;
     @Column(name = "price",columnDefinition = "double")
     private double price;

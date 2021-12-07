@@ -1,5 +1,6 @@
+
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/entity/product';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -14,6 +15,7 @@ export class SearchComponent implements OnInit {
   constructor(
     private actRoute: ActivatedRoute,
     private productService: ProductService,
+    private route :Router
   ) { }
 
   ngOnInit(): void {
@@ -29,5 +31,11 @@ export class SearchComponent implements OnInit {
       Response =>{ this.products = Response}
     )
   }
+  goDetail(product:Product){
+    this.actRoute.queryParams.subscribe( params  =>{
+      const id = product.productID;
+      this.route.navigate(['/web/product-detail'],{queryParams:{id}})
+    })
 
+  }
 }

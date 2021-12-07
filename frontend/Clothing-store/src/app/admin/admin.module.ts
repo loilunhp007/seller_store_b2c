@@ -20,6 +20,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { QlNhanvienComponent } from './components-admin/ql-nhanvien/ql-nhanvien.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { QlkhoComponent } from './components-admin/qlkho/qlkho.component';
 
 
 
@@ -36,7 +37,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     QlDanhmucComponent,
     QlDonhangComponent,
     QlKhachhangComponent,
-    QlNhanvienComponent
+    QlNhanvienComponent,
+    QlkhoComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     QlAccountComponent,
     QlDanhmucComponent,
     QlDonhangComponent,
-    QlKhachhangComponent
+    QlKhachhangComponent,
+    QlkhoComponent
   ]
 })
 export class AdminModule { }

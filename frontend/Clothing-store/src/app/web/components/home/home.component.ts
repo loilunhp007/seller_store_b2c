@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, SystemJsNgModuleLoaderConfig } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cart } from 'src/app/entity/cart';
@@ -19,17 +20,27 @@ export class HomeComponent implements OnInit {
   uid:string
   carts:Array<Cart>
   cartSize:number=0
+  date2:Date;
   constructor(private productService:ProductService,
     private cartService:CartService,
-    private Actroute:ActivatedRoute,private route:Router) { }
+    private Actroute:ActivatedRoute,private route:Router,
+    public datepipe:DatePipe) { }
     flag:boolean=false;
+    c:boolean=true
+    c2:boolean=true
   ngOnInit(): void {
+    let date = new Date();
+    let date22:any = this.datepipe.transform(date,"yyyy-MM-dd")
+    this.date2 = date22
     this.getProduct();
     if(sessionStorage.getItem("uid")!=null){
       this.uid = JSON.parse(sessionStorage.getItem("uid"))
       this.getCart();
     }
-    this.sampleMethodCall()
+    setTimeout(() => {
+      this.sampleMethodCall()
+      this.sampleMethodCall1() 
+   }, 2000);
    
     
    
@@ -73,14 +84,12 @@ export class HomeComponent implements OnInit {
   }
   public sampleMethodCall() {
     
-    setInterval(function() {
-      document.getElementById("next_featured").click(); },4000); 
+    if(this.c2==true){
+      document.getElementById("next_featured").click();
+      console.log("click 1")
     }
-    goDetail(product:Product){
-      this.Actroute.queryParams.subscribe( params  =>{
-        const id = product.productID;
-        this.route.navigate(['/web/product-detail'],{queryParams:{id}})
-      })
+    this.c2=false;
+     console.log(this.c2)
     }
     getCart(){
       this.cartService.getCartItems(this.uid).subscribe(Response=>{
@@ -92,4 +101,23 @@ export class HomeComponent implements OnInit {
         console.log(error);
       })
     }
+    
+    public sampleMethodCall1() {
+    
+        if(this.c==true){
+          document.getElementById("next_hot").click(); 
+          console.log("click 2")
+        }
+        this.c=false;
+        console.log(this.c)
+      }
+
+      goDetail(event,product:Product){
+        event.preventDefault();
+        this.Actroute.queryParams.subscribe( params  =>{
+          const id = product.productID;
+          this.route.navigate(['/web/product-detail'],{queryParams:{id}})
+        })
+        return false;
+      }
 }

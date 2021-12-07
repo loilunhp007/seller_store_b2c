@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/entity/product';
 import { ProductService } from 'src/app/services/product.service';
@@ -11,6 +12,9 @@ export class ProductComponent implements OnInit {
   products:Array<Product>
   productID:string;
   product:Product;
+  p:number=1
+  nameFilter 
+  priceFilter
   constructor(
     private productService:ProductService,
     private Actroute: ActivatedRoute,

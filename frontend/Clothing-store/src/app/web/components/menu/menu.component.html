@@ -46,7 +46,7 @@
                            </div>
                            <div class="col-md-3"*ngIf="isLoggedIn()">
                                 <ul class="usermenu2" >
-                                 <li><a  class="log">{{userdetail.firstname+userdetail.lastname}} </a></li>
+                                 <li><a [routerLink]="['/web/user']"  class="log">{{userdetail.firstname+userdetail.lastname}} </a></li>
                                  <li><a (click)="logout()"class="reg">Đăng xuất</a></li>
                               </ul>
                            </div>
@@ -102,18 +102,16 @@
                                  <div class="dropdown-menu mega-menu">
                                     <div class="row">
                                        <div class="col-md-6 col-sm-6">
-                                          <ul class="mega-menu-links" *ngFor="let category of categories">
-                                             <li><a (click)="findProductByCate(category)">{{category.tenloai}}</a></li>
+                                          <ul class="mega-menu-links" >
+                                             <li *ngFor="let category of categories">
+                                                <a (click)="findProductByCate(category)">{{category.tenloai}}</a>
+                                             </li>
                                           </ul>
                                        </div>
                                        <div class="col-md-6 col-sm-6">
                                           <ul class="mega-menu-links">
-                                             <li><a href="productgird.html">New Collection</a></li>
-                                             <li><a href="productgird.html">Shirts & tops</a></li>
-                                             <li><a href="productgird.html">Laptop & Brie</a></li>
-                                             <li><a href="productgird.html">Dresses</a></li>
-                                             <li><a href="productgird.html">Blazers & Jackets</a></li>
-                                             <li><a href="productgird.html">Shoulder Bags</a></li>
+                                            <!-- <li><a href="productgird.html">New Collection</a></li>-->
+                                            
                                           </ul>
                                        </div>
                                     </div>

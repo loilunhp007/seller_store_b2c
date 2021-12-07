@@ -9,6 +9,7 @@ import { QlDonhangComponent } from './components-admin/ql-donhang/ql-donhang.com
 import { QlKhachhangComponent } from './components-admin/ql-khachhang/ql-khachhang.component';
 import { QlNhanvienComponent } from './components-admin/ql-nhanvien/ql-nhanvien.component';
 import { QlSanphamComponent } from './components-admin/ql-sanpham/ql-sanpham.component';
+import { QlkhoComponent } from './components-admin/qlkho/qlkho.component';
 import { ThongkeComponent } from './components-admin/thongke/thongke.component';
 
 
@@ -23,9 +24,9 @@ const routes: Routes = [
     {path:'khachhang',component:QlKhachhangComponent,pathMatch:'full'},
     {path:'sanpham',component:QlSanphamComponent,pathMatch:'full'},
     {path:'nhanvien',component:QlNhanvienComponent,pathMatch:'full'},
-    {path:'login',component:LoginAdminComponent,pathMatch:'full'}
+    {path:'kho',component:QlkhoComponent,pathMatch:'full'},
   ]},
-  {path:'loginadmin',component:LoginAdminComponent,pathMatch:'full'}
+  {path:'adminlogin',component:LoginAdminComponent,pathMatch:'full'}
 ];
 
 export const AdminRouting = RouterModule.forRoot(routes);

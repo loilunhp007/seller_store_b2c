@@ -10,16 +10,19 @@
 			</tr>
 			<tr>
 				<th colspan="4">Chọn ngày
-					<input type="date" id="ngaytu" value="2019-05-01" ><span> -> </span><input type="date" id="ngayden" value="2019-05-14" >
+					<input [(ngModel)]="time1" type="date" id="ngaytu" value="2020-01-01" ><span> -> </span><input type="date" id="ngayden"[(ngModel)]="time2" value="2020-9-30" >
 				</th>
 				<th colspan="1">
-					<button type="button" onclick="timkiemngay()">Tìm kiếm</button>
+					<button type="button" (click)="findOrder()">Tìm kiếm</button>
                 </th>
 				<th colspan="3">Trạng thái
-					<select id="trang_thai" onchange = "tinhtrang(this)">
-						<option value="1">Đã xử lý</option>
-						<option value="0">Chưa xử lý</option>
-						<option value="2" selected>Tất cả</option>
+					<select id="trang_thai" (change) = "tinhtrang($event)">
+						<option value="1" >Chờ xác nhận</option>
+						<option value="0">Hủy</option>
+						<option value="2">Chuẩn bị hàng</option>
+						<option value="3">Giao hàng</option>
+						<option value="4">Đã giao hàng</option>
+						<option value ="5"selected>Tất cả</option>
 					</select>
 				</th>
 			</tr>
@@ -60,22 +63,20 @@
 						Đã giao hàng
 				</td>
 				<td data-sortable="true">
-				 <a class="link" (click)="goDetail(order)">
+				 <a class="link" (click)="popup_themsp();getOrderDetail(order)">
 				<span class="glyphicon glyphicon-list-alt"></span>Xem Chi Tiết</a></td>
 				<td data-sortable="true">
-				<button  class="btn-table" *ngIf="(order.trangthai!=4 && order.trangthai!=0)"  (click)="updateOrder(order)" [order]="order" >Xác nhận</button>
-				<button  class="btn-table" [disabled]="!order.trangthai==1 ||order.trangthai==4"   (click)="updateOrderCancel(order)"><i class="fa fa-trash"></i> Hủy Đơn</button>
+				<button  class="btn-table" *ngIf="(order.state!=4 && order.state!=0)"  (click)="updateOrder(order)" [order]="order" >Xác nhận</button>
+				<button  class="btn-table" [disabled]="!order.state==1 ||order.state==4"   (click)="updateOrderCancel(order)"><i class="fa fa-trash"></i> Hủy Đơn</button>
 				</td>
 			</tr>
         </tbody>
     </table>
+	<pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
-</div>
-<!-- popup khi ấn vào thì ra được chi tiết đơn hàng, ở trên bảng chỉ hiện đơn hàng mà thôi -->
-<div class="popup-cthd" style="display: none">
+<div class="popup-cthd" *ngIf="!isToggle">
 	<div class="popup-themsp__content" >
 		<div class="popup-themsp__title">Chi Tiết Đơn Hàng</div>
-		
 		<table id="table-dh">
 			<thead>
 				<tr>
@@ -87,33 +88,12 @@
 				</tr>
 			</thead>
 			<tbody >
-				<tr *ngFor="let order of orders | paginate:{itemsPerPage:10,currentPage:p}">
-					<td data-sortable="true">{{order.orderID}}</td>
-					<td data-sortable="true">{{order.userDetail.firstname+order.userDetail.lastname}}</td>
-					<td data-sortable="true">{{order.startTime}}</td>
-					<td data-sortable="true">{{order.total|currency:'VND':'symbol':'3.0'}}</td>
-					<td data-sortable="true" *ngIf="order.trangthai=='1'">
-							Chờ xác nhận
-					</td>
-					<td data-sortable="true" *ngIf="order.trangthai=='0'">
-							Đã Hủy
-					</td>
-					<td data-sortable="true" *ngIf="order.trangthai=='2'">
-							Chuẩn bị hàng
-					</td>
-					<td data-sortable="true" *ngIf="order.trangthai=='3'">
-							Giao hàng
-					</td>
-					<td data-sortable="true" *ngIf="order.trangthai=='4'">
-							Đã giao hàng
-					</td>
-					<td data-sortable="true">
-					 <a class="link" (click)="goDetail(order)">
-					<span class="glyphicon glyphicon-list-alt"></span>Xem Chi Tiết</a></td>
-					<td data-sortable="true">
-					<button  class="btn-table" *ngIf="(order.trangthai!=4 && order.trangthai!=0)"  (click)="updateOrder(order)" [order]="order" >Xác nhận</button>
-					<button  class="btn-table" [disabled]="!order.trangthai==1 ||order.trangthai==4"   (click)="updateOrderCancel(order)"><i class="fa fa-trash"></i> Hủy Đơn</button>
-					</td>
+				<tr *ngFor="let detail of orderdetails ">
+					<td data-sortable="true">{{detail.orderID}}</td>
+					<td data-sortable="true">{{detail.product.productName}}</td>
+					<td data-sortable="true">{{detail.price|currency:'VND':'symbol':'3.0'}}</td>
+					<td data-sortable="true">{{detail.quantity}}</td>
+					<td data-sortable="true">{{detail.price*detail.quantity|currency:'VND':'symbol':'3.0'}}</td>
 				</tr>
 			</tbody>
 			
@@ -133,3 +113,5 @@
 			</div>
 		</div>
 		
+</div>
+<!-- popup khi ấn vào thì ra được chi tiết đơn hàng, ở trên bảng chỉ hiện đơn hàng mà thôi -->

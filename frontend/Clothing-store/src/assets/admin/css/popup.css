@@ -20,7 +20,7 @@
 	z-index: 5;
 }
 .popup-cthd{
-	display: none;
+	display: block;
 	background: rgba(0,0,0,0.5);
 	position: fixed;
 	top: 0;

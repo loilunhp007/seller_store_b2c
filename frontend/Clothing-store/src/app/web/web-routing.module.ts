@@ -10,6 +10,9 @@ import { SearchComponent } from './components/search/search.component';
 import { WebComponent } from './web.component';
 import {CheckoutComponent} from './components/checkout/checkout.component';
 import { RegisterComponent } from './components/register/register.component';
+import { UserprofileComponent } from './components/userprofile/userprofile.component';
+import { UserinfoComponent } from './components/userinfo/userinfo.component';
+import {OrderComponent} from './components/order/order.component'
 
 const routes: Routes = [
   {
@@ -22,7 +25,7 @@ const routes: Routes = [
         pathMatch:'full',    
       },
       {
-        path : "index",component:HomeComponent, pathMatch:'full'
+        path : "index",component:HomeComponent, 
       } ,
       {
         path : "login", component:LoginComponent ,pathMatch:'full',
@@ -32,10 +35,17 @@ const routes: Routes = [
       },
       {path:"search",component:SearchComponent,pathMatch:'full'},
       {path:"product",component:ProductComponent,pathMatch:'full'},
-      {path:"product-detail",component:ProductDetailComponent,pathMatch:'full'},
+      {path:"product-detail",component:ProductDetailComponent},
       {path:"contact",component:ContactsComponent},
       {path:"checkout",component:CheckoutComponent,pathMatch:'full'},
-      {path:"register",component:RegisterComponent,pathMatch:'full'}
+      {path:"register",component:RegisterComponent,pathMatch:'full'},
+      {path:"user",component:UserprofileComponent,
+        children:[{
+          path:'',redirectTo:'userinfo',pathMatch:'full'},
+          {path:'userinfo',component:UserinfoComponent},
+          {path:"order",component:OrderComponent}
+        ]
+    },
     ]
   }
   

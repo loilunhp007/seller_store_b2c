@@ -27,7 +27,7 @@
         <tbody>
           <tr *ngFor="let product of products | filter : searchText| paginate:{itemsPerPage:8,currentPage:p}">
                 <td>{{product.productID}}</td>
-                <td><img src="../../../../../assets/images/banner-small-01.png" width="110px"></td>
+                <td *ngFor="let img of product.images.slice(0,1)"><img src="../../../../../assets/images/products/{{img}}" width="110px"></td>
                 <td>{{product.productName}}</td>
                 <td>{{product.price|currency:'VND':'symbol':'3.0'}}</td>
                 <td>{{product.category.tenloai}}</td>
@@ -48,13 +48,7 @@
             </tr>
         </tbody>
     </table>
-    <div class="text-center">
-                    <nav aria-label="Page navigation example">
-                      <ul class="pagination justify-content-center">
-                    </ul>
-                </nav>
-            </div>
-    </div>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
 <!-- popup thêm sp -->
 <form [formGroup]="addForm" *ngIf="!isToggle">
     <div class="popup-themsp">
@@ -74,7 +68,7 @@
                 <div class="popup-themsp-left__input" ><input type="text" placeholder="Tên sản phẩm" name ="ten" id="AProductName" class="form-control" formControlName="AProductName" ></div>
                 <div class="popup-themsp-left__input"><input type="text" placeholder="Giá sản phẩm" name = "gia" id="AProductPrice" class="form-control" formControlName="AProductPrice" ></div>
                 <div class="popup-themsp-left__input"><input type="text" placeholder="Phần trăm giảm" name = "discount" id="AProductDiscount" class="form-control" formControlName="AProductDiscount" ></div>
-                <div class="popup-themsp-left__input" ><input type="file" name="hinhanh"  type="file" id="AProductImage" accept="image/png,image/jpg"  (change)="onFileChanged($event)" class="form-control" formControlName="AProductImage"></div>
+                <div class="popup-themsp-left__input" ><input type="file" name="hinhanh"  type="file" id="AProductImage" multiple accept="image/png,image/jpg"  (change)="onFileChanged($event)" class="form-control" formControlName="AProductImage"></div>
                 <div class="popup-themsp-left__input" ><select name="dropdown" (change)="selectedLoaiSp($event)">
                 <option *ngFor="let category of categories" [value]="category.cateID">{{category.tenloai}}</option>
                 </select>
