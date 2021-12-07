@@ -14,7 +14,7 @@ import { ThongkeComponent } from './components-admin/thongke/thongke.component';
 
 
 const routes: Routes = [
-  {path:'admin',component:AdminComponent,canActivate:[AdminguardGuard],
+  {path:'admin',component:AdminComponent,//canActivate:[AdminguardGuard],
   children:[
     {path:'',redirectTo:'/admin/thongke',pathMatch:'full'},
     {path:'thongke',component:ThongkeComponent,pathMatch:'full'},

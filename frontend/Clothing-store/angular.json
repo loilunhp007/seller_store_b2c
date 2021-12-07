@@ -120,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "Clothing-store"
+    }
+  },
+  "defaultProject": "Clothing-store",
+  "cli": {
+    "analytics": false
+  }
 }

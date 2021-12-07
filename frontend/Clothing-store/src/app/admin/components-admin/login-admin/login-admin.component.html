@@ -12,7 +12,7 @@
                 </span>
 
                 <div class="wrap-input100 validate-input">
-                    
+
                     <input  class="input100" type="text" ngModel name="email" id="email" required minlegth = "6" #email="ngModel" placeholder="example@gmail.com"  data-validate = "Username is required" aria-describedby="emailHId">
                     <small id="emailHId" *ngIf="!email?.valid && (email?.dirty || email?.touched)"
                   class="text-muted">Email is invalid or empty</small>
@@ -33,10 +33,10 @@
                     </span>
                 </div>
                 <div class="container-login100-form-btn">
-                    
+
                     <button class="login100-form-btn" name = "click">
                         Login
-                    </button>  
+                    </button>
                 </div>
             </form>
         </div>
