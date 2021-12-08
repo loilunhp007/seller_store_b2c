@@ -8,7 +8,7 @@ import { CategoryService } from 'src/app/services/category.service';
 @Component({
   selector: 'app-ql-danhmuc',
   templateUrl: './ql-danhmuc.component.html',
-  styleUrls: ['./../../../../assets/admin/css/styles.css']
+  styleUrls: ['./../../../../assets/admin/css/styles.css','./ql-danhmuc.component.css']
 })
 export class QlDanhmucComponent implements OnInit {
   isToggle:boolean=true;
@@ -36,13 +36,13 @@ export class QlDanhmucComponent implements OnInit {
     this.getCategories()
   }
   public popup_themsp(){
-    
+
     this.isToggle = !this.isToggle
-  
+
   console.log(this.isToggle);
 }
 public popup_themsp2(){
-    
+
   this.isToggle2 = !this.isToggle2
 
 console.log(this.isToggle2);
@@ -54,7 +54,7 @@ getCategories(){
   },(error)=>{
     console.log(error)
   });
-  
+
 }
 get cateName(){
   return this.addCate.get("cateName")

@@ -8,14 +8,14 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-ql-khachhang',
   templateUrl: './ql-khachhang.component.html',
-  styleUrls: ['./../../../../assets/admin/css/styles.css']
+  styleUrls: ['./../../../../assets/admin/css/styles.css','./ql-khachhang.component.css']
 })
 export class QlKhachhangComponent implements OnInit {
 
   constructor(private userService:UserService,
     public datepipe: DatePipe,
     private route:Router) { }
-  users:Array<Userdetail> = [] 
+  users:Array<Userdetail> = []
   date:Date = new Date();
   days:string;
   faTrash=faTrash;
@@ -39,8 +39,8 @@ export class QlKhachhangComponent implements OnInit {
     },(error)=>{
       alert("something wrong happens")
     })
-     
-   
+
+
   }
 
   reloadCurrentRoute() {
@@ -74,6 +74,6 @@ export class QlKhachhangComponent implements OnInit {
           )
           }
         }
-    
+
 }
 }
