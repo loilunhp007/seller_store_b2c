@@ -37,10 +37,10 @@
                   <td data-sortable="true" *ngIf="product.state=='0'">
                           Tạm ẩn
                   </td>
-                
+
                <td >
                   <button type="button" class="btn-table" [product]="selectedProduct"
-                 (click)="popup_updateProduct();displayProduct(product)"><fa-icon [icon]="faEdit"></fa-icon></button>									
+                 (click)="popup_updateProduct();displayProduct(product)"><fa-icon [icon]="faEdit"></fa-icon></button>
 		        <button type="button"  class="btn-table" [product]="selectedProduct"(click)="deleteProduct(product)"><fa-icon [icon]="faTrash"></fa-icon></button>
          <button [product]="selectedProduct" class="btn-table"
          (click)="statusProduct(product)"><span *ngIf="product.state=='0'">Bật</span><span *ngIf="product.state=='1'">Tắt</span></button>
@@ -54,36 +54,47 @@
     <div class="popup-themsp">
         <div class="popup-themsp__content" >
             <div class="popup-themsp__title">Thêm Sản Phẩm</div>
-            <div class="popup-themsp-left">
+              <div class="popup-themsp-left">
                 <div class="popup-themsp-left__label">Nhập Tên</div>
+                <div class="popup-themsp-right__input" ><input type="text" placeholder="Tên sản phẩm" name ="ten" id="AProductName" class="form-control" formControlName="AProductName" ></div>
+              </div>
+              <div class="popup-themsp-left">
                 <div class="popup-themsp-left__label">Nhập Giá</div>
+                <div class="popup-themsp-right__input"><input type="text" placeholder="Giá sản phẩm" name = "gia" id="AProductPrice" class="form-control" formControlName="AProductPrice" ></div>
+              </div>
+              <div class="popup-themsp-left">
                 <div class="popup-themsp-left__label">Nhập giảm giá</div>
+                <div class="popup-themsp-right__input"><input type="text" placeholder="Phần trăm giảm" name = "discount" id="AProductDiscount" class="form-control" formControlName="AProductDiscount" ></div>
+              </div>
+              <div class="popup-themsp-left">
                 <div class="popup-themsp-left__label">Chọn Hình</div>
+                <div class="popup-themsp-right__input" ><input type="file" name="hinhanh"  type="file" id="AProductImage" multiple accept="image/png,image/jpg"  (change)="onFileChanged($event)" class="form-control" formControlName="AProductImage"></div>
+              </div>
+              <div class="popup-themsp-left">
                 <div class="popup-themsp-left__label">Chọn Loại</div>
-                <div class="popup-themsp-left__label">Ngày Bắt đầu</div>
-                <div class="popup-themsp-left__label">Ngày Kết thúc</div>
-                <div class="popup-themsp-left__label">Mô tả</div>
-            </div>
-            <div class="popup-themsp-right">
-                <div class="popup-themsp-left__input" ><input type="text" placeholder="Tên sản phẩm" name ="ten" id="AProductName" class="form-control" formControlName="AProductName" ></div>
-                <div class="popup-themsp-left__input"><input type="text" placeholder="Giá sản phẩm" name = "gia" id="AProductPrice" class="form-control" formControlName="AProductPrice" ></div>
-                <div class="popup-themsp-left__input"><input type="text" placeholder="Phần trăm giảm" name = "discount" id="AProductDiscount" class="form-control" formControlName="AProductDiscount" ></div>
-                <div class="popup-themsp-left__input" ><input type="file" name="hinhanh"  type="file" id="AProductImage" multiple accept="image/png,image/jpg"  (change)="onFileChanged($event)" class="form-control" formControlName="AProductImage"></div>
-                <div class="popup-themsp-left__input" ><select name="dropdown" (change)="selectedLoaiSp($event)">
-                <option *ngFor="let category of categories" [value]="category.cateID">{{category.tenloai}}</option>
+                <select class="popup-themsp-right__input" name="dropdown" (change)="selectedLoaiSp($event)">
+                  <option *ngFor="let category of categories" [value]="category.cateID">{{category.tenloai}}</option>
                 </select>
+              </div>
+              <div class="popup-themsp-left">
+                <div class="popup-themsp-left__label">Ngày Bắt đầu</div>
+                  <dp-date-picker  [config]="datePickerConfig" placeholder="Enter date" id="AProductFromDate" class="form-control popup-themsp-right__input" formControlName="AProductFromDate" (change)="validatorsChanged($event)">
+                  </dp-date-picker>
+              </div>
+              <div class="popup-themsp-left">
+                <div class="popup-themsp-left__label">Ngày Kết thúc</div>
+                  <dp-date-picker  [config]="datePickerConfig" placeholder="Enter date"id="AProductToDate" class="form-control popup-themsp-right__input" formControlName="AProductToDate" (change)="validatorsChanged2($event)">
+                  </dp-date-picker>
+              </div>
+              <div class="popup-themsp-left">
+                <div class="popup-themsp-left__label">Mô tả</div>
+                <div class="popup-themsp-right__input"><textarea name="mota" rows="4" placeholder="Mô tả tại đây..."  id="AProductInfo" class="form-control" formControlName="AProductInfo"></textarea></div>
+              </div>
+              <div id = "imagePreviewt"><img [src]="imgURL" class="sua-hinh" width="110" *ngIf="imgURL" /></div>
+              <span class="back" (click)="popup_themsp()">&times;</span>
             </div>
-            <div class="popup-themsp-left__input" ><dp-date-picker  [config]="datePickerConfig" placeholder="Enter date" id="AProductFromDate" class="form-control" formControlName="AProductFromDate" (change)="validatorsChanged($event)">  
-                                </dp-date-picker></div>
-            <div class="popup-themsp-left__input" ><dp-date-picker  [config]="datePickerConfig" placeholder="Enter date"id="AProductToDate" class="form-control" formControlName="AProductToDate" (change)="validatorsChanged2($event)">  
-                                </dp-date-picker></div>
-            <div class="popup-themsp-left__input"><textarea name="mota" rows="5" cols="20" placeholder="Mô tả tại đây..."  id="AProductInfo" class="form-control" formControlName="AProductInfo"></textarea></div>
-        </div>
+            <button type ="button" class="popup-themsp__btn" name ="clickthem"(click)="addProduct()">Thêm</button>
 
-        <button type ="button" class="popup-themsp__btn" name ="clickthem"(click)="addProduct()">Thêm</button>
-        <div id = "imagePreviewt"><img [src]="imgURL" class="sua-hinh" width="110" *ngIf="imgURL" /></div>
-        <span class="back" (click)="popup_themsp()">&times;</span>
-    </div>
     </div>
     </form>
     <!-- popup sửa sp -->
@@ -112,9 +123,9 @@
                 <option *ngFor="let category of categories" [value]="category.cateID">{{category.tenloai}}</option>
                 </select>
             </div>
-            <div class="popup-themsp-left__input" ><dp-date-picker  [config]="datePickerConfig" placeholder="Enter date" id="SProductFromDate" class="form-control" formControlName="SProductFromDate">  
+            <div class="popup-themsp-left__input" ><dp-date-picker  [config]="datePickerConfig" placeholder="Enter date" id="SProductFromDate" class="form-control" formControlName="SProductFromDate">
                                 </dp-date-picker></div>
-            <div class="popup-themsp-left__input" ><dp-date-picker  [config]="datePickerConfig" placeholder="Enter date"id="SProductToDate" class="form-control" formControlName="SProductToDate" >  
+            <div class="popup-themsp-left__input" ><dp-date-picker  [config]="datePickerConfig" placeholder="Enter date"id="SProductToDate" class="form-control" formControlName="SProductToDate" >
                                 </dp-date-picker></div>
             <div class="popup-themsp-left__input"><textarea name="mota2" rows="5" cols="20" placeholder="Mô tả tại đây..."  id="SProductInfo" class="form-control" formControlName="SProductInfo"></textarea></div>
         </div>

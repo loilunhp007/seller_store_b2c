@@ -11,7 +11,7 @@ import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'app-ql-sanpham',
   templateUrl: './ql-sanpham.component.html',
-  styleUrls: ['./../../../../assets/admin/css/styles.css']
+  styleUrls: ['./ql-sanpham.component.css'],
 })
 export class QlSanphamComponent implements OnInit {
   searchText;
@@ -61,7 +61,7 @@ export class QlSanphamComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    
+
     this.getCategories();
     this.getProduct();
     this.cateLoad = new Category();
@@ -75,20 +75,20 @@ export class QlSanphamComponent implements OnInit {
       AProductCate:['',Validators.required],
       AProductFromDate:[''],
       AProductToDate:[''],
-  
+
     });
-    
+
   }
   public popup_themsp(){
-    
+
       this.isToggle = !this.isToggle
-    
+
     console.log(this.isToggle);
   }
   public popup_updateProduct(){
-    
+
     this.isToggle2 = !this.isToggle2
-  
+
   console.log(this.isToggle2);
 }
   getCategories(){
@@ -98,15 +98,15 @@ export class QlSanphamComponent implements OnInit {
     },(error)=>{
       console.log(error)
     });
-    
+
   }
   getProduct(){
     this.productService.getProducts().subscribe(Response =>{
         this.products = Response;
         for(let i=0;i<this.products.length;i++){
           this.products[i].imagesArray = Response[i].images;
-        } 
-       
+        }
+
         console.log(this.products);
     },(error)=>{
       alert("empty products")
@@ -124,13 +124,13 @@ export class QlSanphamComponent implements OnInit {
                 this.reloadCurrentRoute()
               }
             )
-            
+
           }
           else{
-            alert("Error");  
+            alert("Error");
           }
         })
-        
+
       }
     }
     else{
@@ -140,19 +140,19 @@ export class QlSanphamComponent implements OnInit {
         }
       )
     }
-    
+
   }
   public onFileChanged(event) {
     //Select File
     if (event.target.files && event.target.files[0]) {
       let filesAmount = event.target.files.length;
-      for (let i = 0; i < filesAmount; i++) {   
+      for (let i = 0; i < filesAmount; i++) {
                   let k:File=event.target.files[i];
-                 this.files.push(k); 
+                 this.files.push(k);
       }
       console.log(this.files)
   }
-    
+
     this.selectedFile = event.target.files[0];
     let reader = new FileReader();
     reader.readAsDataURL(this.selectedFile)
@@ -187,16 +187,16 @@ export class QlSanphamComponent implements OnInit {
     return this.addForm.get('AProductToDate');
   }
 
-  
+
   addProduct(){
     this.product = new Product();
     const uploadData = new FormData();
     let cate = new Category()
     cate = this.categories.find(x=>x.cateID==this.selectedCate)
     console.log(cate.tenloai);
-    /*this.files.forEach(ele=>{   
+    /*this.files.forEach(ele=>{
       const random = Math.floor(Math.random() * (9999 - 1000));
-      
+
       this.imageName.push(ele.name+random+'')
       i++
     })*/
@@ -216,10 +216,10 @@ export class QlSanphamComponent implements OnInit {
         this.imageName.push(imgName+".png")
         i++;
       })
-     
+
     }
-    
-       
+
+
         console.log(this.AProductName.value)
         this.product.productID="P_"
         this.product.productName = this.AProductName.value;
@@ -237,7 +237,7 @@ export class QlSanphamComponent implements OnInit {
           else{
             this.product.images+="'"+this.imageName[j]+"'"+","
           }
-         
+
         }
 
         this.product.images+="]"
@@ -254,12 +254,12 @@ export class QlSanphamComponent implements OnInit {
                       //this.route.navigate(['admin','product']);
                       this.reloadCurrentRoute()
                     },
-                    (error)=>{ 
+                    (error)=>{
                       console.log(this.product)
                       alert(this.product)
                       alert(this.product);
                     }
-              
+
                   ),
                   (error)=>{
                     console.log(this.product)
@@ -267,19 +267,19 @@ export class QlSanphamComponent implements OnInit {
                   }
                 console.log('Image upload Sucess');
                 }
-            },    
+            },
                 ),
                 (error)=>{
                     console.log(error);
                     console.log(this.product);
                     alert(this.product)
                     alert(this.product);
-                }    
-            
-          }
-        
+                }
 
-    
+          }
+
+
+
 
   }
    validatorsChanged() {
@@ -296,7 +296,7 @@ export class QlSanphamComponent implements OnInit {
   //add product end
   //update product start
   get SProductInfo() {
-    
+
     return this.updateForm.get('SProductInfo');
   }
   get SProductName() {
@@ -324,7 +324,7 @@ export class QlSanphamComponent implements OnInit {
   get SProductID(){
     return this.updateForm.get('SProductID');
   }
-  
+
   displayProduct(product:Product){
      this.SProductID.setValue ( product.productID)
     this.SProductName.setValue( product.productName)
@@ -341,9 +341,9 @@ export class QlSanphamComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       let filesAmount = event.target.files.length;
       for (let i = 0; i < filesAmount; i++) {
-                 this.files2.push(event.target.result); 
-                 
-              
+                 this.files2.push(event.target.result);
+
+
       }
       console.log(this.files)
   }
@@ -355,7 +355,7 @@ export class QlSanphamComponent implements OnInit {
         this.imgURL2 = reader.result
       }
     }
-   
+
   }
   selectedLoaiSp2(event){
     console.log("gg")
@@ -363,11 +363,11 @@ export class QlSanphamComponent implements OnInit {
       this.cateLoad = this.categories.find(x=>x.cateID==event.target.value)
       console.log(this.cateLoad.tenloai)
     }
-  
+
   }
   updateProduct()
   {
-        let product2= new Product() 
+        let product2= new Product()
         this.productService.getProductByID(this.SProductID.value).subscribe(Response=>{
             product2=Response
             product2.imagesArray = Response.images;
@@ -405,7 +405,7 @@ export class QlSanphamComponent implements OnInit {
                     this.imageName2.push(imgName)
                     i++;
                   })
-                 
+
               }else{
                 uploadData2.append('imageFile', this.selectedFile2,imgName);
               }
@@ -415,31 +415,31 @@ export class QlSanphamComponent implements OnInit {
                   if(Response.status === 200){
                     this.productService.updateProduct(product2).subscribe(
                       (response)=>{
-                        
+
                         this.reloadCurrentRoute()
                       },
-                      (error)=>{ 
+                      (error)=>{
                         console.log(error)
-                       
+
                       }
-                
+
                     )
-    
+
                   }
               })
             }else{
               this.productService.updateProduct(product2).subscribe(
                 Response=>{
                   this.reloadCurrentRoute()
-                  
+
                 },
                 error=>{console.log(error)
                   }
               )
             }
         })
-     
-  
+
+
 
   }
   reloadCurrentRoute() {
@@ -451,12 +451,12 @@ export class QlSanphamComponent implements OnInit {
   }
   //update product end
   statusProduct(product:Product){
-    
+
     product.images = "["+"'"+product.imagesArray[0]+"'"+"]";
         if(product.state == 1){
           product.state=0
-          
-         
+
+
            // product.images = "["+"'"+imgName+"'"+"]"
           this.productService.updateProduct(product).subscribe(
             Response1=>{
@@ -474,6 +474,6 @@ export class QlSanphamComponent implements OnInit {
           )
           }
         }
-    
+
 }
 }

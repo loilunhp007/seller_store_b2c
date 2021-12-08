@@ -5,10 +5,38 @@
     min-height: 100vh;
     padding-bottom: 30px;
 }
-.popup-themsp{
-    display: block;
+.popup-themsp-left {
+  display: block;
+  width: 100%;
+  margin-left: 10px;
 }
- button.btn-table{
+.popup-themsp-left__label{
+  float:left;
+  width: max-content;
+  font-size: larger;
+}
+
+.popup-themsp-right__input{
+  float: right ;
+  width: 300px;
+}
+.dp-input-container input {
+  width: 100%;
+}
+#search form button {
+  padding: 5px;
+}
+#search form input {
+  border-radius: 8px;
+}
+.popup-themsp__content {
+  text-align: left;
+  padding: 10px 100px;
+}
+.popup-themsp__title {
+  margin-bottom: 20px;
+}
+.buton.btn-table{
     min-width: 40px;
     min-height: 40px;
     margin-right: 15px;
