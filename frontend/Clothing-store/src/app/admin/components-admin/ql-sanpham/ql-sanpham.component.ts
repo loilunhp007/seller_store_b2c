@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faCoffee, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Category } from 'src/app/entity/category';
+import { Inventory } from 'src/app/entity/inventory';
 import { Product } from 'src/app/entity/product';
 import { CategoryService } from 'src/app/services/category.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -19,7 +20,8 @@ export class QlSanphamComponent implements OnInit {
   selectedProduct : Product
   isToggle:boolean = true;
   isToggle2:boolean = true;
-  files:Array<File>
+  files:Array<File>=[]
+  files2:Array<File>=[]
   imageName:Array<string>=[]
   selectedFile:File;
   selectedFile2:File;
@@ -39,7 +41,7 @@ export class QlSanphamComponent implements OnInit {
     private route:Router) { }
   @Input()
   product:Product
-  products:Array<Product>
+  products:Array<Product>=[];
   selectedCate=1;
   datePickerConfig = {
     format: 'YYYY-MM-DD',
@@ -58,7 +60,8 @@ export class QlSanphamComponent implements OnInit {
     SProductToDate:[''],
     SProductID:[''],
   });
-
+  type:number
+  delRole:boolean=false;
   ngOnInit(): void {
     
     this.getCategories();
@@ -76,8 +79,33 @@ export class QlSanphamComponent implements OnInit {
       AProductToDate:[''],
   
     });
+    this.type = this.getFirstNumberFromString(JSON.parse(sessionStorage.getItem('type'))) 
     
   }
+  getFirstNumberFromString(s:string){
+    let a:number = Number(s.replace( /[^\d].*/, '' ))
+    return a ; // creates array from matches
+  }
+  editRoleCheck():any{
+    if(this.type==1||this.type==2){
+      this.popup_updateProduct();
+      
+      return true;
+    }else{
+      alert("You dont have permission to do this");
+      return false;
+    }
+  }
+  deleteRoleCheck(){
+      if(this.type==1||this.type==2){
+        this.delRole=true;
+      }else{
+        alert("You dont have permission to do this");
+        return false;
+      }
+  }
+  
+
   public popup_themsp(){
     
       this.isToggle = !this.isToggle
@@ -112,7 +140,8 @@ export class QlSanphamComponent implements OnInit {
     })
   }
   deleteProduct(product:Product){
-    if(product.inventory!=null){
+   if(this.delRole==true){
+    if(product.inventory!=null ){
       if(confirm("Are you sure to delete "+product.productName)) {
         this.productService.deleteInventory(product.productID).subscribe(Response=>{
           if(Response.result =="success"){
@@ -140,18 +169,15 @@ export class QlSanphamComponent implements OnInit {
       )
     }
     
+   }
   }
   public onFileChanged(event) {
     //Select File
     if (event.target.files && event.target.files[0]) {
       let filesAmount = event.target.files.length;
-      for (let i = 0; i < filesAmount; i++) {
-              var reader2 = new FileReader();
-              reader2.onload = (event:any) => {
-                console.log(event.target.result);
-                 this.files.push(event.target.result); 
-                 
-              }
+      for (let i = 0; i < filesAmount; i++) {   
+                  let k:File=event.target.files[i];
+                 this.files.push(k); 
       }
       console.log(this.files)
   }
@@ -210,9 +236,19 @@ export class QlSanphamComponent implements OnInit {
     const hour = date.getHours();
     const minutes = date.getMinutes();
     const second = date.getSeconds();
-    let imgName=year+"_"+month+"_"+day+"_"+hour+"_"+minutes+"_"+second;
-      uploadData.append('imageFile', this.selectedFile, imgName+".png");
-        this.imageName.push(imgName)
+    let i=1;
+    if(this.files.length!=0){
+      this.files.forEach(e=>{
+        console.log(e.type)
+        let imgName=year+"_"+month+"_"+day+"_"+hour+"_"+minutes+"_"+second+"_"+i;
+        uploadData.append('imageFile',e, imgName+".png");
+        this.imageName.push(imgName+".png")
+        i++;
+      })
+     
+    }
+    
+       
         console.log(this.AProductName.value)
         this.product.productID="P_"
         this.product.productName = this.AProductName.value;
@@ -222,7 +258,18 @@ export class QlSanphamComponent implements OnInit {
         this.product.special_from_time=this.AProductFromDate.value
         this.product.special_to_time = this.AProductToDate.value;
         this.product.info = this.AProductInfo.value+'';
-        this.product.images= "["+"'"+imgName+"'"+"]"
+        this.product.images = "["
+        for(let j=0;j<this.imageName.length;j++){
+          if(j==(this.imageName.length-1)){
+            this.product.images+="'"+this.imageName[j]+"'"
+          }
+          else{
+            this.product.images+="'"+this.imageName[j]+"'"+","
+          }
+         
+        }
+
+        this.product.images+="]"
         this.product.category = cate;
           if(this.product.special_from_time>this.product.special_to_time&&(this.product.special_from_time <= date)&&this.product.special_to_time<=date){
             alert("ngày bắt đầu phải lớn hơn ngày kết thúc");
@@ -234,18 +281,25 @@ export class QlSanphamComponent implements OnInit {
                   this.productService.addProduct(this.product).subscribe(
                     (response)=>{
                       //this.route.navigate(['admin','product']);
-                      this.reloadCurrentRoute()
+                      let inventory = new Inventory;
+                      let product3:Product = response
+                      inventory.product = product3;
+                      inventory.product.images = this.product.images
+                      inventory.quantity=0;
+                      console.log(inventory)
+                      this.productService.addInventory(inventory).subscribe(Response4=>{
+                        alert("Add product success");
+                        this.reloadCurrentRoute();
+                      })
+                     
                     },
                     (error)=>{ 
                       console.log(this.product)
-                      alert(this.product)
-                      alert(this.product);
                     }
               
                   ),
                   (error)=>{
                     console.log(this.product)
-                      alert(this.product)
                   }
                 console.log('Image upload Sucess');
                 }
@@ -323,14 +377,8 @@ export class QlSanphamComponent implements OnInit {
     if (event.target.files && event.target.files[0]) {
       let filesAmount = event.target.files.length;
       for (let i = 0; i < filesAmount; i++) {
-              var reader2 = new FileReader();
-              reader2.onload = (event:any) => {
-                console.log(event.target.result);
-                 this.files.push(event.target.result); 
-                 
-              }
+             this.files2.push(event.target.files[i]);                      
       }
-      console.log(this.files)
   }
     if(event.target.files[0]!=null){
       this.selectedFile2 = event.target.files[0];
@@ -355,9 +403,11 @@ export class QlSanphamComponent implements OnInit {
         let product2= new Product() 
         this.productService.getProductByID(this.SProductID.value).subscribe(Response=>{
             product2=Response
+            product2.imagesArray = Response.images;
             product2.productName=this.SProductName.value;
             product2.info=this.SProductInfo.value
             product2.price= this.SProductPrice.value
+            product2.percent_discount = this.SProductDiscount.value
             product2.special_from_time = this.SProductFromDate.value
             product2.special_to_time = this.SProductToDate.value
             product2.category = this.cateLoad;
@@ -369,15 +419,43 @@ export class QlSanphamComponent implements OnInit {
             const minutes = date.getMinutes();
             const second = date.getSeconds();
             let imgName=year+"_"+month+"_"+day+"_"+hour+"_"+minutes+"_"+second;
-            const uploadData = new FormData();
-            let images = Response.images
-            let img = images[0]
-            product2.images = "["+"'"+imgName+"'"+"]"
+            const uploadData2 = new FormData();
             if(this.selectedFile2!=null){
               
-              uploadData.append('imageFile', this.selectedFile2,imgName);
-              console.log(product2)
-              this.httpClient.post('http://localhost:8090/products/upload',uploadData,{ observe : "response"}).subscribe(
+                let date= new Date();
+                const day=date.getDate();
+                const month = date.getMonth()+1;
+                const year = date.getFullYear();
+                const hour = date.getHours();
+                const minutes = date.getMinutes();
+                const second = date.getSeconds();
+                let i=1;
+                  this.files2.forEach(e=>{
+                    let imgName=year+"_"+month+"_"+day+"_"+hour+"_"+minutes+"_"+second+"_"+i;
+                    uploadData2.append('imageFile', e, imgName+".png");
+                    this.imageName2.push(imgName+".png")
+                    i++;
+                  })
+                  if(this.files2.length>1){
+                  product2.images = "["
+                  for(let j=0;j<this.imageName2.length;j++){
+                    if(j==(this.imageName2.length-1)){
+                      product2.images+="'"+this.imageName2[j]+"'"
+                    }
+                    else{
+                      product2.images+="'"+this.imageName2[j]+"'"+","
+                    }
+                  
+                  }
+
+                  product2.images+="]"  
+              }
+              else{
+                if(this.imageName2.length==1){
+                  product2.images = "["+"'"+this.imageName2[0]+"'"+"]"
+                }
+              }
+              this.httpClient.post('http://localhost:8090/products/upload',uploadData2,{ observe : "response"}).subscribe(
                 (Response)=>{
                   if(Response.status === 200){
                     this.productService.updateProduct(product2).subscribe(
@@ -395,10 +473,26 @@ export class QlSanphamComponent implements OnInit {
                   }
               })
             }else{
+              let k:any = [];
+              k=product2.imagesArray;
+              let imag:Array<string> = k;
+             product2.images = "["
+             for(let j=0;j<imag.length;j++){
+               if(j==(imag.length-1)){
+                 product2.images+="'"+imag[j]+"'"
+               }
+               else{
+                 product2.images+="'"+imag[j]+"'"+","
+               }
+             
+             }
+         
+             product2.images+="]"  
+             console.log(product2.percent_discount)
               this.productService.updateProduct(product2).subscribe(
                 Response=>{
+                  console.log(Response)
                   this.reloadCurrentRoute()
-                  
                 },
                 error=>{console.log(error)
                   }
@@ -418,8 +512,21 @@ export class QlSanphamComponent implements OnInit {
   }
   //update product end
   statusProduct(product:Product){
+    let k:any = [];
+     k=product.imagesArray;
+     let imag:Array<string> = k;
+    product.images = "["
+    for(let j=0;j<imag.length;j++){
+      if(j==(imag.length-1)){
+        product.images+="'"+imag[j]+"'"
+      }
+      else{
+        product.images+="'"+imag[j]+"'"+","
+      }
     
-    product.images = "["+"'"+product.imagesArray[0]+"'"+"]";
+    }
+
+    product.images+="]"  
         if(product.state == 1){
           product.state=0
           

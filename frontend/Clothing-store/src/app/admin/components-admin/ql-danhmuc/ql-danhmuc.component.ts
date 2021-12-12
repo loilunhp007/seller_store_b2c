@@ -32,8 +32,10 @@ export class QlDanhmucComponent implements OnInit {
   })
   searchText;
   p:number=1
+  type:number
   ngOnInit(): void {
     this.getCategories()
+    this.type = this.getFirstNumberFromString(JSON.parse(sessionStorage.getItem('type')))
   }
   public popup_themsp(){
     
@@ -55,6 +57,17 @@ getCategories(){
     console.log(error)
   });
   
+}
+getFirstNumberFromString(s:string){
+  let a:number = Number(s.replace( /[^\d].*/, '' ))
+  return a ; // creates array from matches
+}
+deleteCateCheck(cate:Category){
+  if(this.type==4||this.type==1){
+    this.deleteCate(cate);
+  }else{
+    alert("you are not allowed")
+  }
 }
 get cateName(){
   return this.addCate.get("cateName")

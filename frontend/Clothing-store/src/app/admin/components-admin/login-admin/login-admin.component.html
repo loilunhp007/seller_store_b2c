@@ -13,7 +13,7 @@
 
                 <div class="wrap-input100 validate-input">
                     
-                    <input  class="input100" type="text" ngModel name="taikhoan" id="email" required minlegth = "6" #email="ngModel" placeholder="example@gmail.com"  data-validate = "Username is required" aria-describedby="emailHId">
+                    <input  class="input100" type="text" ngModel name="email" id="email" required minlegth = "6" #email="ngModel" placeholder="example@gmail.com"  data-validate = "Username is required" aria-describedby="emailHId">
                     <small id="emailHId" *ngIf="!email?.valid && (email?.dirty || email?.touched)"
                   class="text-muted">Email is invalid or empty</small>
                     <span class="focus-input100"></span>
@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate = "Password is required">
-                    <input type="password" ngModel name="pass" id="password" #password="ngModel" required minlegth = "6"
+                    <input type="password" ngModel name="password" id="password" #password="ngModel" required minlegth = "6"
                     class="input100" placeholder="*********" aria-describedby="passwordHId">
                      <small  *ngIf="!password?.valid && (password?.dirty||password?.touched) " id="passwordHId"
                     class="text-muted">Password is invalid or empty</small>
@@ -32,11 +32,6 @@
                         <i class="fa fa-lock" aria-hidden="true"></i>
                     </span>
                 </div>
-                <select class="input100" name ="dropdown">
-                        <option value = "1">Chọn phân quyền</option>
-                        <option value ="Admin">Admin</option>
-                        <option value ="Manager">Manager</option>
-                </select>
                 <div class="container-login100-form-btn">
                     
                     <button class="login100-form-btn" name = "click">

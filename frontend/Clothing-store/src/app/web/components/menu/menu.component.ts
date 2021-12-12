@@ -51,6 +51,7 @@ export class MenuComponent implements OnInit {
   getCategories(){
     this.categoryService.getCategories().subscribe(Response=>{
       this.categories = Response;
+      this.categories = this.categories.filter(e=>e.trangthai==1)
       console.log(Response)
     },(error)=>{
       console.log(error)

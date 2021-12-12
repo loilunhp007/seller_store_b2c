@@ -17,22 +17,25 @@ export class QlKhachhangComponent implements OnInit {
     private route:Router) { }
   users:Array<Userdetail> = [] 
   date:Date = new Date();
-  days:string;
+  day:string;
+  days:Array<string>=[]
   faTrash=faTrash;
   faEdit = faEdit;
   faLock = faLock;
   faUnLock = faUnlock;
   searchText;
   p:number=1
+  type:number
   ngOnInit(): void {
     this.getUser();
+    this.type = this.getFirstNumberFromString(JSON.parse(sessionStorage.getItem('type')))
   }
   getUser(){
     this.userService.getUsersByType(2).subscribe(Response=>{
       this.users = Response;
       for(let i=0;i<this.users.length;i++){
         let date2 = new Date(this.users[i].timestamp);
-        this.days=Math.floor((this.date.getTime() -  date2.getTime())/(1000*3600*24))+'';
+        this.days.push(Math.floor((this.date.getTime() -  date2.getTime())/(1000*3600*24))+'')
         this.datepipe.transform(this.users[i].timestamp, 'yyyy-mm-dd')
       }
       console.log(this.users)
@@ -42,6 +45,25 @@ export class QlKhachhangComponent implements OnInit {
      
    
   }
+  getFirstNumberFromString(s:string){
+    let a:number = Number(s.replace( /[^\d].*/, '' ))
+    return a ; // creates array from matches
+  }
+  blockUserCheck(user:Userdetail){
+    if(this.type==4||this.type==1){
+      this.blockUser(user);
+    }else{
+      alert("you are not allowed")
+    }
+  }
+  deleteUserCheck(user:Userdetail){
+    if(this.type==4||this.type==1){
+      this.deleteUserDetail(user);
+    }else{
+      alert("you are not allowed")
+    }
+  }
+
 
   reloadCurrentRoute() {
     let currentUrl = this.route.url;

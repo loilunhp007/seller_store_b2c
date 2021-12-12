@@ -60,6 +60,7 @@ export class CheckoutComponent implements OnInit {
   Cartlength=0
   previosPrice=0;
   date22:any
+  buy:boolean=true
   ngOnInit(): void {
     this.getPaymentmethod();
     this.getTransport();
@@ -120,6 +121,11 @@ export class CheckoutComponent implements OnInit {
   getCart(){
     this.cartService.getCartItems(this.uid).subscribe(Response=>{
       this.carts=Response;
+      this.carts.forEach(e=>{
+        if(e.product.state==0){
+          this.buy=false;
+        }
+      })
       this.Cartlength=this.carts.length;
       this.getCartTotal(this.carts);
       console.log(this.carts);
@@ -149,8 +155,14 @@ export class CheckoutComponent implements OnInit {
 
          this.cartService.getCartItems(this.uid).subscribe(
            Response2=>{
+             let checkQuan:boolean=true;
              this.carts=Response2;
-             if(true){
+             this.carts.forEach(e=>{
+               if(e.product.inventory.quantity < e.soluong){
+                 checkQuan=false;
+               }
+             })
+             if(checkQuan){
                let order = new Order()
                let date = new Date();
              let day=date.getDate();
@@ -182,7 +194,7 @@ export class CheckoutComponent implements OnInit {
                     }else{
                       orderDetail.totalItem = Number(data.product.price*data.soluong)
                     }
-                    
+                    let quan =  data.product.inventory.quantity-data.soluong
                    
                     //orderDetail.transport= this.shippingFee.value
                   //  orderDetail. = Number(product2.gia*data.soluong)+Number(this.Shipping)
@@ -190,7 +202,8 @@ export class CheckoutComponent implements OnInit {
                     orderDetail.destination = this.address.value
                      this.orderDetailService.addOrderDetail(orderDetail).subscribe(
                                     Response5=>{
-                                      this.productService.updateInventory(data.product.productID,data.soluong).subscribe(
+                                      
+                                      this.productService.updateInventory(data.product.productID,quan).subscribe(
                                         Response6=>{
                                           this.cartService.deleteCart(this.uid).subscribe(
                                             Response7=>{
@@ -210,14 +223,7 @@ export class CheckoutComponent implements OnInit {
                                 ),(error)=>{
                                             
                                 }
-                            
-    
-                            
-                        
-                        
-                        
-    
-                     
+                                       
                   })
                },(error)=>{
                 alert("đặt hàng thành công"),
@@ -227,7 +233,7 @@ export class CheckoutComponent implements OnInit {
                    alert("đặt hàng thành công")
                  
              }else{
-               
+               alert("Có lỗi xảy ra vui lòng thử lại sau")
            }      
           },(error)=>{
             alert("Có sự cố xảy ra vui lòng thử lại sau")

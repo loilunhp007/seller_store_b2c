@@ -20,6 +20,11 @@ import { OrderComponent } from './components/order/order.component';
 import { WebComponent } from './web.component';
 import { WebRoutingModule } from './web-routing.module';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { UserinfoComponent } from './components/userinfo/userinfo.component';
+import { UserRoutingModule } from './components/userprofile/user-routing.module';
+
 
 @NgModule({
   declarations: [
@@ -41,6 +46,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     CartComponent,
     OrderComponent,
     CheckoutComponent,
+    UserinfoComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,7 +54,10 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    WebRoutingModule
+    WebRoutingModule,
+    NgxPaginationModule,
+    Ng2SearchPipeModule,
+    UserRoutingModule
   ],
   exports:[
     MenuComponent,
@@ -68,6 +77,7 @@ import { CheckoutComponent } from './components/checkout/checkout.component';
     CartComponent,
     OrderComponent,
     CheckoutComponent,
+    UserinfoComponent,
   ],
   providers: [DatePipe],
   bootstrap: [WebComponent]

@@ -1,5 +1,8 @@
 package com.Sell_Store.demo.Controller;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import com.Sell_Store.demo.Entity.Order;
@@ -64,8 +67,12 @@ public class OrderController {
         Order order= new Order(); 
          order = orderService.getOrderById(orderID);
         order.setState(state);
+        if(state==4){
+            Date date = new Date();
+            Format formatter=new SimpleDateFormat("yyyy-MM-dd");
+            order.setEndTime(formatter.format(date));
+        }
         Order order2 = orderService.saveDathang(order);
         return ResponseEntity.status(HttpStatus.OK).body(order2);
     }
-
 }

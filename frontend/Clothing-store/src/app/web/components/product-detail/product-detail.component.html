@@ -4,37 +4,18 @@
       <div class="row">
         <div class="col-md-9">
           <div class="products-details" >
-            <div class="preview_image">
-              <div class="preview-small">
-                <img id="zoom_03" src="../../../../assets/images/products/medium/products-01.jpg" data-zoom-image="../../../../assets/images/products/Large/products-01.jpg" alt="">
+            <div class="preview_image" *ngIf="imageslength > 1">
+              <div class="preview-small"  *ngFor="let img of product.images.slice(0,1)">
+                <img id="zoom_03" src="../../../../assets/images/products/{{img}}"  alt="">
               </div>
-              <div class="thum-image">
+              <div class="thum-image" >
                 <ul id="gallery_01" class="prev-thum">
-                  <li>
-                    <a href="#" data-image="../../../../assets/images/products/medium/products-01.jpg" data-zoom-image="../../../../assets/images/products/Large/products-01.jpg">
-                      <img src="../../../../assets/images/products/thum/products-01.png" alt="">
+                  <li *ngFor="let img of product.images">
+                    <a  data-image="../../../../assets/images/products/{{img}}" >
+                      <img src="../../../../assets/images/products/{{img}}" alt="">
                     </a>
                   </li>
-                  <li>
-                    <a href="#" data-image="../../../../assets/images/products/medium/products-02.jpg" data-zoom-image="../../../../assets/images/products/Large/products-02.jpg">
-                      <img src="../../../../assets/images/products/thum/products-02.png" alt="">
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" data-image="../../../../assets/images/products/medium/products-03.jpg" data-zoom-image="../../../../assets/images/products/Large/products-03.jpg">
-                      <img src="../../../../assets/images/products/thum/products-03.png" alt="">
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" data-image="../../../../assets/images/products/medium/products-04.jpg" data-zoom-image="../../../../assets/images/products/Large/products-04.jpg">
-                      <img src="../../../../assets/images/products/thum/products-04.png" alt="">
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#" data-image="../../../../assets/images/products/medium/products-05.jpg" data-zoom-image="../../../../assets/images/products/Large/products-05.jpg">
-                      <img src="../../../../assets/images/products/thum/products-05.png" alt="">
-                    </a>
-                  </li>
+                  
                 </ul>
                 <a class="control-left" id="thum-prev" href="javascript:void(0);">
                   <i class="fa fa-chevron-left">
@@ -44,6 +25,18 @@
                   <i class="fa fa-chevron-right">
                   </i>
                 </a>
+              </div>
+               <div class="thum-image" *ngIf="imageslength > 1">
+                
+               
+              </div>
+            </div>
+            <div class="preview_image" *ngIf="imageslength == 1">
+              <div class="preview-small"  >
+                <img id="zoom_03" src="../../../../assets/images/products/{{images}}"  alt="">
+              </div>
+              <div class="thum-image" >
+               
               </div>
             </div>
             <div class="products-description">
@@ -58,7 +51,7 @@
               </p>
               <p>
                 Availability: 
-                <span class=" light-red">
+                <span class=" light-red"*ngIf="product.inventory.quantity > 0">
                   In Stock
                 </span>
                 <span class=" light-red" *ngIf="product.inventory.quantity==0">
@@ -71,17 +64,13 @@
               <hr class="border">
               <div class="price">
                 Price : 
-                <span class="new_price">
-                  {{product.price*(100-product.percent_discount)/100}}
-                  <sup>
-                    $
-                  </sup>
+                <span class="new_price" *ngIf="product.percent_discount>0 && date<=product.special_to_time && date >= product.special_from_time">
+                  {{product.price*(100-product.percent_discount)/100|currency:'VND':'symbol':'3.0'}}
+
                 </span>
-                <span class="old_price">
-                  {{product.price}}
-                  <sup>
-                    $
-                  </sup>
+                <span class="new_price" *ngIf="product.percent_discount==0||date> product.special_to_time ||date<product.special_from_time">
+                  {{product.price|currency:'VND':'symbol':'3.0'}}
+
                 </span>
               </div>
               <hr class="border">
@@ -95,7 +84,7 @@
                   </select>
                 </div>
                 <div class="button_group">
-                  <button class="button" >
+                  <button class="button" (click)="addTocart(product)">
                     Add To Cart
                   </button>
                   <button class="button compare">
@@ -142,10 +131,8 @@
             </div>
             <div class="tab-content-wrap">
               <div class="tab-content" id="Descraption">
-                {{product.info}}
-                <p>
-                  Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae Aenean eleifend laoreet congue. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibu um ante ipsum primis in faucibus orci luctus et ultri ces posuere cubilia curae Aenean eleifend laoreet congue. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc...
-                </p>
+                <p>{{product.info}}</p>
+               
               </div>
               <div class="tab-content" id="Reviews">
                 <form>
@@ -287,130 +274,47 @@
               Products
             </h3>
             <div class="control">
-              <a id="prev_hot" class="prev" href="#">
+              <a id="prev_hot" class="prev" >
                 &lt;
               </a>
-              <a id="next_hot" class="next" href="#">
+              <a id="next_hot" class="next" >
                 &gt;
               </a>
             </div>
             <ul id="hot">
               <li>
                 <div class="row">
-                  <div class="col-md-4 col-sm-4">
-                    <div class="products">
-                      <div class="offer">
-                        - %20
-                      </div>
-                      <div class="thumbnail">
-                        <img src="../../../../assets/images/products/small/products-01.png" alt="Product Name">
-                      </div>
-                      <div class="productname">
-                        {{product.productName}}
-                      </div>
-                      <h4 class="price">
-                        {{product.price}}
-                      </h4>
-                      <div class="button_group">
-                        <button class="button add-cart" type="button">
-                          Add To Cart
-                        </button>
-                        <button class="button compare" type="button">
-                          <i class="fa fa-exchange">
-                          </i>
-                        </button>
-                        <button class="button wishlist" type="button">
-                          <i class="fa fa-heart-o">
-                          </i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 col-sm-4">
-                    <div class="products">
-                      <div class="offer">
-                        New
-                      </div>
-                      <div class="thumbnail">
-                        <img src="../../../../assets/images/products/small/products-03.png" alt="Product Name">
-                      </div>
-                      <div class="productname">
-                        Iphone 5s Gold 32 Gb 2013
-                      </div>
-                      <h4 class="price">
-                        $451.00
-                      </h4>
-                      <div class="button_group">
-                        <button class="button add-cart" type="button">
-                          Add To Cart
-                        </button>
-                        <button class="button compare" type="button">
-                          <i class="fa fa-exchange">
-                          </i>
-                        </button>
-                        <button class="button wishlist" type="button">
-                          <i class="fa fa-heart-o">
-                          </i>
-                        </button>
-                      </div>
+                  <div class="col-md-4 col-sm-4" *ngFor="let product1 of hotproducts;let i = index">
+                    <div class="products" *ngIf="i<3 && product1.state==1">
+                      <div class="offer"*ngIf="date >= product1.special_from_time && date <= product1.special_to_time">- {{product1.percent_discount}}%</div>
+                          <div class="offer"*ngIf="(product1.percent_discount==0||date < product1.special_from_time ||date > product1.special_to_time)">- 0%</div>
+                          <div class="thumbnail"><a   *ngFor="let img of product1.images.slice(0,1)| keyvalue"><img src="../../../../assets/images/products/{{img.value}}" (click)="goDetail($event,product)" alt="Product Name" width="220" height="230"></a></div>
+                          <div class="productname">{{product.productName}}</div>
+                          <h4 class="price" *ngIf="date >= product1.special_from_time && date <= product1.special_to_time"><span class="old-price">{{product1.price|currency:'VND':'symbol':'3.0'}}</span>{{product1.price*(100-product1.percent_discount)/100|currency:'VND':'symbol':'3.0'}}</h4>
+                           <h4 class="price" *ngIf="(product1.percent_discount==0||date < product1.special_from_time ||date > product1.special_to_time)"> {{product1.price|currency:'VND':'symbol':'3.0'}}</h4>
+                            <div class="button_group"><button class="button add-cart" type="button" (click)="addTocart(product)">Add To Cart</button>
+                            <button class="button compare" type="button"><i class="fa fa-exchange"></i></button>
+                            <button class="button wishlist" type="button"><i class="fa fa-heart-o"></i></button>
+                            </div>
                     </div>
                   </div>
                 </div>
-              
+               
+              </li>
+              <li>
                 <div class="row">
-                  <div class="col-md-4 col-sm-4">
-                    <div class="products">
-                      <div class="offer">
-                        - %20
-                      </div>
-                      <div class="thumbnail">
-                        <img src="../../../../assets/images/products/small/products-01.png" alt="Product Name">
-                      </div>
-                      <div class="productname">
-                        Iphone 5s Gold 32 Gb 2013
-                      </div>
-                      <h4 class="price">
-                        $451.00
-                      </h4>
-                      <div class="button_group">
-                        <button class="button add-cart" type="button">
-                          Add To Cart
-                        </button>
-                        <button class="button compare" type="button">
-                          <i class="fa fa-exchange">
-                          </i>
-                        </button>
-                        <button class="button wishlist" type="button">
-                          <i class="fa fa-heart-o">
-                          </i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 col-sm-4">
-                    <div class="products">
-                      <div class="thumbnail">
-                        <img src="../../../../assets/images/products/small/products-02.png" alt="Product Name">
-                      </div>
-                      <div class="productname">
-                        Iphone 5s Gold 32 Gb 2013
-                      </div>
-                      <h4 class="price">
-                        $451.00
-                      </h4>
-                      <div class="button_group">
-                        <button class="button add-cart" type="button">
-                          Add To Cart
-                        </button>
-                        <button class="button compare" type="button">
-                          <i class="fa fa-exchange">
-                          </i>
-                        </button>
-                        <button class="button wishlist" type="button">
-                          <i class="fa fa-heart-o">
-                          </i>
-                        </button>
-                      </div>
+                  <div class="col-md-4 col-sm-4" *ngFor="let product1 of hotproducts;let i = index">
+                    <div class="products" *ngIf="i>=3&&i<6 && product1.state==1">
+                      <div class="offer"*ngIf="date >= product1.special_from_time && date <= product1.special_to_time">- {{product1.percent_discount}}%</div>
+                          <div class="offer"*ngIf="(product1.percent_discount==0||date < product1.special_from_time ||date > product1.special_to_time)">- 0%</div>
+                          <div class="thumbnail"><a   *ngFor="let img of product1.images.slice(0,1)| keyvalue"><img src="../../../../assets/images/products/{{img.value}}" (click)="goDetail($event,product)" alt="Product Name" width="220" height="230"></a></div>
+                          <div class="productname">{{product.productName}}</div>
+                          <h4 class="price" *ngIf="date >= product1.special_from_time && date <= product1.special_to_time"><span class="old-price">{{product1.price|currency:'VND':'symbol':'3.0'}}</span>{{product1.price*(100-product1.percent_discount)/100|currency:'VND':'symbol':'3.0'}}</h4>
+                           <h4 class="price" *ngIf="(product1.percent_discount==0||date < product1.special_from_time ||date > product1.special_to_time)"> {{product1.price|currency:'VND':'symbol':'3.0'}}</h4>
+                            <div class="button_group"><button class="button add-cart" type="button" (click)="addTocart(product)">Add To Cart</button>
+                            <button class="button compare" type="button"><i class="fa fa-exchange"></i></button>
+                            <button class="button wishlist" type="button"><i class="fa fa-heart-o"></i></button>
+                            </div>
                     </div>
                   </div>
                  
@@ -431,16 +335,16 @@
             </h4>
             <div class="special-item">
               <div class="product-image">
-                <a href="#">
-                  <img src="../../../../assets/images/products/thum/products-01.png" alt="">
+                <a routerLink="['/']" *ngFor="let img of product.images.slice(0,1)">
+                  <img src="../../../../assets/images/products/{{img}}" alt="">
                 </a>
               </div>
               <div class="product-info">
                 <p>
-                  Licoln Corner Unit
+                  {{product.productName}}
                 </p>
                 <h5 class="price">
-                  $300.00
+                  {{product.price|currency:'VND':'symbol':'3.0'}}
                 </h5>
               </div>
             </div>

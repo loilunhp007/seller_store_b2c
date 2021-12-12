@@ -800,9 +800,9 @@
             </div>
             <div class="row">
               <div class="col-md-4 col-sm-6" *ngFor="let product of products">
-                <div class="products" >
+                <div class="products" *ngIf="product.state=='1'">
                   <div class="thumbnail">
-                    <a href="details.html" *ngFor="let img of product.images.slice(0,1)">
+                    <a (click)="goDetail(product)" *ngFor="let img of product.images.slice(0,1)">
                       <img src="../../../../assets/images/products/{{img}}" alt="Product Name">
                     </a>
                   </div>
@@ -813,7 +813,7 @@
                     {{product.price}}
                   </h4>
                   <div class="button_group">
-                    <button class="button add-cart" type="button">
+                    <button class="button add-cart" (click)="addTocart(product)" type="button">
                       Add To Cart
                     </button>
                     <button class="button compare" type="button">

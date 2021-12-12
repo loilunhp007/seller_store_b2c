@@ -11,10 +11,7 @@ export class LoginService {
   constructor(private httpClient:HttpClient) { }
 
   login(account: Account): Observable<any>{
-    // let httpHeaders = new HttpHeaders({
-    //   'Content-Type' : 'application/json',
-    //   'Cache-Control': 'no-cache'
-    // });
+
     return this.httpClient.post<Account>("http://localhost:8090/user/login", account);
   }
   isLogged(){

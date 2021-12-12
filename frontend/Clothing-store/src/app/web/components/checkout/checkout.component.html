@@ -320,6 +320,7 @@
                     <th>
                       Price
                     </th>
+                    <th>Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -338,23 +339,7 @@
                             02 Review(s)
                           </a>
                         </p>
-                        <div class="color-choser">
-                          <span class="text">
-                            Product Color : 
-                          </span>
-                          <ul>
-                            <li>
-                              <a class="black-bg " href="#">
-                                black
-                              </a>
-                            </li>
-                            <li>
-                              <a class="red-bg" href="#">
-                                light red
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
+                        
                         <p>
                           Product Code : 
                           <strong class="pcode">
@@ -386,6 +371,7 @@
                         </strong>
                       </h5>
                     </td>
+                    <td>Sản phẩm hiện không có sẵn</td>
                   </tr>
                 </tbody>
                 
@@ -416,7 +402,7 @@
                         {{cartTotal|currency:'VND':'symbol':'3.0'}}
                     </span>
                   </div>
-                  <button (click)="createOrder()"  >
+                  <button (click)="createOrder()" [disabled]="!buy"  >
                     Process To Checkout
                   </button>
                 </div>

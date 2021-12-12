@@ -12,7 +12,7 @@
             <button type="submit" name="xem" value="search" >Tìm kiếm</button>
         </form>
     </div>
-    <div class="them-sp" onclick="popup_themsp()"><button>Thêm Danh Mục</button></div>
+    <div class="them-sp" (click)="popup_themsp()"><button>Thêm Danh Mục</button></div>
     <table id="table-dm">
         <thead>
             <tr>
@@ -27,11 +27,14 @@
                 <td>{{i+1}}</td>
                 <td>{{category.tenloai}}</td>
                 <td ><span *ngIf="category.trangthai=='1'">Đang hoạt động</span><span *ngIf="category.trangthai=='0'">Ẩn</span></td>
-                <td>
+                <td *ngIf="this.type==1||this.type==4">
                     <button type="button"  class="btn-table"><fa-icon [icon]="faEdit" (click)="popup_themsp2();displayCate(category)"></fa-icon></button>
                     <button type="button"  class="btn-table"><fa-icon [icon]="faTrash"(click)="deleteCate(category)"></fa-icon></button>
-                    <button type="button"  class="btn-table" *ngIf="category.trangthai=='1'"><fa-icon [icon]="faLock" (click)="HideCategory(category)"></fa-icon></button>
-                    <button type="button"  class="btn-table"*ngIf=" category.trangthai=='0'"><fa-icon [icon]="faUnlock" (click)="HideCategory(category)"></fa-icon></button>
+                    <button type="button" class="btn-table" *ngIf="category.trangthai=='1'"><fa-icon [icon]="faLock" (click)="HideCategory(category)"></fa-icon></button>
+                    <button type="button"class="btn-table"*ngIf=" category.trangthai=='0'"><fa-icon [icon]="faUnlock" (click)="HideCategory(category)"></fa-icon></button>
+                </td>
+                <td *ngIf="this.type!=1||this.type!=4">
+
                 </td>
             </tr>    
         </tbody>
@@ -62,13 +65,11 @@
         <div class="popup-suadm__content">
             <div class="popup-themsp__title">Sửa Danh Mục</div>
             <div class="popup-themsp-left">
-                <div class="popup-themsp-left__label" ></div>
                 <div class="popup-themsp-left__label" >Thứ tự</div>
                 <div class="popup-themsp-left__label" >Tên</div>
                 <div class="popup-themsp-left__label" ></div>
             </div>
             <div class="popup-themsp-right" id ="">
-                <div class="popup-themsp-left__input"></div>
                 <div class="popup-themsp-left__input">{{stt}}</div>
                 <div class="popup-themsp-left__input"><input class="them-ten" type="text" placeholder="Tên danh mục" name = "tendms" id = "tendms" formControlName="cateName2"></div>
                 <div class="popup-themsp-left__input"><input  type="hidden" formControlName="cateID"></div>
