@@ -80,7 +80,7 @@ export class ThongkeComponent implements OnInit {
         labels: nameproduct,
         datasets: [
           {
-            label: 'Luot xem',
+            label: 'Đơn hàng',
             data: soluong,
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
@@ -122,7 +122,7 @@ export class ThongkeComponent implements OnInit {
         labels: name,
         datasets: [
           {
-            label: 'Tổng đơn hàng ',
+            label: 'Số lượng ',
             data: spbanra,
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',

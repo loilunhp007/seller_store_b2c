@@ -347,11 +347,10 @@
                 <div class="productname" (click)="goDetail(product)" >
                   {{product.productName}}
                 </div>
-                <h4 class="price">
-                  {{product.price|currency:'VND':'symbol':'3.0'}}
-                </h4>
+                <h4 class="price" *ngIf="date2 >= product.special_from_time && date2 <= product.special_to_time"><span class="old-price">{{product.price|currency:'VND':'symbol':'3.0'}}</span>{{product.price*(100-product.percent_discount)/100|currency:'VND':'symbol':'3.0'}}</h4>
+                <h4 class="price" *ngIf="(product.percent_discount==0||date2 < product.special_from_time ||date2 > product.special_to_time)"> {{product.price|currency:'VND':'symbol':'3.0'}}</h4>
                 <div class="button_group">
-                  <button class="button add-cart" type="button">
+                  <button class="button add-cart" type="button" (click)="addTocart(product)">
                     Add To Cart
                   </button>
                   <button class="button compare" type="button">

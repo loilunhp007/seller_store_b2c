@@ -32,9 +32,13 @@ export class LoginComponent implements OnInit {
     account.password = this.loginForm.value.password
       this.loginService.login(account)
       .subscribe(Response =>{
-        sessionStorage.setItem("uid",JSON.stringify(Response.userDetail.id))
+        if(Response.state==0){
+          alert("Tài khoản của bạn đã bị vô hiệu hóa")
+        }else{
+          sessionStorage.setItem("uid",JSON.stringify(Response.userDetail.id))
         this.router.navigate(["/"])
         console.log(Response);
+        }
         
       },(error) => {
         alert("Đăng nhập không thành công")

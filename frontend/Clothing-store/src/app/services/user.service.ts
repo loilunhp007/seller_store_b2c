@@ -22,7 +22,7 @@ getUsers():Observable<any>{
   updateUser(userDetail: Userdetail):Observable<any> {
     return this.httpClient.put<Userdetail>('http://localhost:8090/userdetail/put/'+userDetail.id, userDetail);   
    }
-   deleteUser(uid:string){
+   deleteUser(uid:number){
     return this.httpClient.delete<string>('http://localhost:8090/user/delete/'+uid)
   }
   getUserByID(id:string):Observable<any>{
@@ -35,9 +35,17 @@ getUsers():Observable<any>{
     return this.httpClient.post<Account>('http://localhost:8090/user/add', newUser);   
    }
    getType():Observable<any>{
-     return this.httpClient.get<TypeMember>("http://localhost:8090/userdetail/gettype");
+     return this.httpClient.get<TypeMember[]>("http://localhost:8090/userdetail/gettype");
    }
    checkExistUser(account:Account):Observable<any>{
      return this.httpClient.post<string>("http://localhost:8090/user/checkExistUser",account)
    }
+   updateAccount(newUser: Account):Observable<any> {
+    return this.httpClient.put<Account>('http://localhost:8090/user/put/'+newUser.uid, newUser);   
+   }
+   getAccounts()
+   {
+     return this.httpClient.get<Account[]>("http://localhost:8090/user/get");
+   }
+
 }

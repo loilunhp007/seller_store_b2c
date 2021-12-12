@@ -21,6 +21,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { QlNhanvienComponent } from './components-admin/ql-nhanvien/ql-nhanvien.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { QlkhoComponent } from './components-admin/qlkho/qlkho.component';
+import { TruncatePipe } from './components-admin/ql-nhanvien/truncate.pipe';
 
 
 
@@ -38,7 +39,8 @@ import { QlkhoComponent } from './components-admin/qlkho/qlkho.component';
     QlDonhangComponent,
     QlKhachhangComponent,
     QlNhanvienComponent,
-    QlkhoComponent
+    QlkhoComponent,
+    TruncatePipe
   ],
   imports: [
     CommonModule,
@@ -63,7 +65,8 @@ import { QlkhoComponent } from './components-admin/qlkho/qlkho.component';
     QlDanhmucComponent,
     QlDonhangComponent,
     QlKhachhangComponent,
-    QlkhoComponent
+    QlkhoComponent,
+    TruncatePipe
   ]
 })
 export class AdminModule { }

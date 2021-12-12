@@ -16,7 +16,7 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetail,OrderDe
     public List<Object> findTotalItemGroupbyProductID(int thang);
     @Query(value = "SELECT sum(detail.quantity),p.product_name from order_detail detail join orders ord on detail.order_id = ord.orderid join product p on detail.product_id = p.pid where Month(ord.endTime)=?1 and ord.state=?2  group by detail.product_id",nativeQuery = true)
     public List<Object> thongkesoluong(int thang,int state);
-    @Query(value="SELECT count(ord.orderid),Date(ord.startTime) from orders ord join order_detail detail on ord.orderid = detail.order_id where Date(ord.startTime)=?1 and ord.state=?2  group by detail.product_id",nativeQuery = true)
+    @Query(value="SELECT count(ord.orderid),Date(ord.startTime) from orders ord join order_detail detail on ord.orderid = detail.order_id where Date(ord.startTime)=?1",nativeQuery = true)
     public List<Object> thongkeNgay(String date,int state);
     public List<OrderDetail> findAllByProductID(String productID);
     

@@ -31,6 +31,7 @@
                     <th>
                       Delete
                     </th>
+                    <th> Status</th>
                   </tr>
                 </thead>
                 <tbody *ngIf="cartLength>0">
@@ -104,6 +105,7 @@
                         <img src="../../../../assets/images/remove.png" alt="" (click)="deleteCartItem(cart.product)">
                       </a>
                     </td>
+                    <td *ngIf="cart.product.state==0">Sản phẩm hiện không có sẵn</td>
                   </tr>
                 </tbody>
                 <tbody *ngIf="cartLength==0"><tr><td>Cart rỗng</td></tr></tbody>
@@ -137,7 +139,7 @@
                           {{cartTotal|currency:'VND':'symbol':'3.0'}}
                       </span>
                     </div>
-                    <button (click)="goCheckOut()" [disabled]="cartLength<=0">
+                    <button (click)="goCheckOut()" [disabled]="cartLength<=0||!buy">
                       Process To Checkout
                     </button>
                   </div>

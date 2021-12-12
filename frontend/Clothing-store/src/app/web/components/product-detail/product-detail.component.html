@@ -4,14 +4,14 @@
       <div class="row">
         <div class="col-md-9">
           <div class="products-details" >
-            <div class="preview_image">
-              <div class="preview-small" *ngFor="let img of product.images.slice(0,1)">
+            <div class="preview_image" *ngIf="imageslength > 1">
+              <div class="preview-small"  *ngFor="let img of product.images.slice(0,1)">
                 <img id="zoom_03" src="../../../../assets/images/products/{{img}}"  alt="">
               </div>
-              <div class="thum-image">
+              <div class="thum-image" >
                 <ul id="gallery_01" class="prev-thum">
                   <li *ngFor="let img of product.images">
-                    <a routerLink="['/']" data-image="../../../../assets/images/products/{{img}}" >
+                    <a  data-image="../../../../assets/images/products/{{img}}" >
                       <img src="../../../../assets/images/products/{{img}}" alt="">
                     </a>
                   </li>
@@ -26,6 +26,18 @@
                   </i>
                 </a>
               </div>
+               <div class="thum-image" *ngIf="imageslength > 1">
+                
+               
+              </div>
+            </div>
+            <div class="preview_image" *ngIf="imageslength == 1">
+              <div class="preview-small"  >
+                <img id="zoom_03" src="../../../../assets/images/products/{{images}}"  alt="">
+              </div>
+              <div class="thum-image" >
+               
+              </div>
             </div>
             <div class="products-description">
               <h5 class="name">
@@ -39,7 +51,7 @@
               </p>
               <p>
                 Availability: 
-                <span class=" light-red">
+                <span class=" light-red"*ngIf="product.inventory.quantity > 0">
                   In Stock
                 </span>
                 <span class=" light-red" *ngIf="product.inventory.quantity==0">

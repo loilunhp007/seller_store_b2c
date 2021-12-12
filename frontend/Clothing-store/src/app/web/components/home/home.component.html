@@ -8,7 +8,7 @@
                      <li>
                         <div class="row">
                            <div class="col-md-3 col-sm-6" *ngFor="let product of hotproducts;let i=index">
-                              <div class="products" *ngIf="i<4&&product.state=='1'">
+                              <div class="products" *ngIf="i<4">
                                  <div class="offer" *ngIf="(date2 >= product.special_from_time && date2 <= product.special_to_time)">- {{product.percent_discount}}%</div>
                                  <div class="offer" *ngIf="(product.percent_discount==0||date2 < product.special_from_time ||date2 > product.special_to_time)">- 0%</div>
                                  <div class="thumbnail" ><a (click)="goDetail($event,product)" *ngFor="let img of product.images.slice(0,1)"><img src="../../../../assets/images/products/{{img}}" alt="Product Name" width="220" height="220"></a></div>
@@ -23,7 +23,7 @@
                      <li>
                         <div class="row">
                            <div class="col-md-3 col-sm-6" *ngFor="let product of hotproducts;let i=index">
-                              <div class="products"*ngIf="i>=4&&i<8 &&product.state=='1'">
+                              <div class="products"*ngIf="i>=4&&i<8">
                                 <input type="hidden" id="productID" value={{product.productID}}>
                                 <div class="offer"*ngIf="date2 >= product.special_from_time && date2 <= product.special_to_time">- {{product.percent_discount}}%</div>
                                 <div class="offer"*ngIf="(product.percent_discount==0||date2 < product.special_from_time ||date2 > product.special_to_time)">- 0%</div>
@@ -46,7 +46,7 @@
                      <li>
                         <div class="row">
                           <div class="col-md-3 col-sm-6" *ngFor="let product of products;let i=index">
-                              <div class="products"*ngIf="i<4&&product.state=='1'" >
+                              <div class="products"*ngIf="i<4" >
                                 <input type="hidden" id="productID" value={{product.productID}}>
                                 <div class="offer"*ngIf="date2 >= product.special_from_time && date2 <= product.special_to_time">- {{product.percent_discount}}%</div>
                                 <div class="offer"*ngIf="(product.percent_discount==0||date2 < product.special_from_time ||date2 > product.special_to_time)">- 0%</div>
@@ -65,7 +65,7 @@
                      <li>
                         <div class="row">
                            <div class="col-md-3 col-sm-6" *ngFor="let product of products;let i=index">
-                               <div class="products" *ngIf="i>=4&&i<8&&product.state=='1'">
+                               <div class="products" *ngIf="i>=4&&i<8">
                                  <input type="hidden" id="productID" value={{product.productID}}>
                                  <div class="offer"*ngIf="date2 >= product.special_from_time && date2 <= product.special_to_time">- {{product.percent_discount}}%</div>
                                  <div class="offer"*ngIf="(product.percent_discount==0||date2 < product.special_from_time ||date2 > product.special_to_time)">- 0%</div>

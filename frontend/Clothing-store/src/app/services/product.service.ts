@@ -41,7 +41,14 @@ export class ProductService {
   updateInventory(productID:string,quantity:number):Observable<any>{
     return this.httpClient.put<Inventory>("http://localhost:8090/inventory/put/"+productID+"/"+quantity,null);
   }
+  addInventory(inventory:Inventory):Observable<any>{
+    return this.httpClient.post<Inventory>("http://localhost:8090/inventory/add",inventory);
+  }
   getProductByCate(id:number):Observable<any>{
     return this.httpClient.get<Product[]>("http://localhost:8090/products/get/category/"+id)
   }
+  getInventory():Observable<any>{
+    return this.httpClient.get<Inventory[]>("http://localhost:8090/inventory/get")
+  }
+  
 }

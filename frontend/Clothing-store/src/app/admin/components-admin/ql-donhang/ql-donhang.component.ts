@@ -34,7 +34,7 @@ export class QlDonhangComponent implements OnInit {
   getAllOrder(){
     this.orderService.getAllOrder().subscribe(
       Response=>{
-        this.orders=Response;
+        this.orders=Response.slice().reverse();
         console.log(this.orders);}
     )
   }
@@ -62,6 +62,7 @@ export class QlDonhangComponent implements OnInit {
         Response=>{
           let order2 = new Order(); 
           order2 = Response
+          this.orderDetailService.updateOrderDetail
 
           this.reloadCurrentRoute();
         })

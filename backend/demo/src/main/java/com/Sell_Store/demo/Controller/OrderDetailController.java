@@ -46,6 +46,7 @@ public class OrderDetailController {
 
         OrderDetail orderDetail2= orderDetail;
         orderDetail2.setTotalItem(orderDetail.getTotalItem());
+        orderDetail2.setUserPay(orderDetail.getUserPay());
         OrderDetail orderDetail3= orderDetailService.saveDathang(orderDetail2);
         return   ResponseEntity.status(HttpStatus.OK).body(orderDetail3);
 

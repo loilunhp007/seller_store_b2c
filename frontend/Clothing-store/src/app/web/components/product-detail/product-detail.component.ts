@@ -31,7 +31,8 @@ export class ProductDetailComponent implements OnInit {
     products:Array<Product>
     hotproducts:Array<Product>
     c:boolean=true
-   
+    images:any
+    imageslength:number=0
   ngOnInit(): void {
     let date2:any= this.datepipe.transform(new Date(),"yyyy-MM-dd")
     this.date = date2;
@@ -58,6 +59,8 @@ export class ProductDetailComponent implements OnInit {
   getProductByID(masp:String){
     this.productService.getProductByID(masp).subscribe(
       Response =>{ this.product=Response
+          this.images=this.product.images[0];
+          this.imageslength = this.product.images.length;
           if(this.i<1){
             //window.location.reload();
           }
