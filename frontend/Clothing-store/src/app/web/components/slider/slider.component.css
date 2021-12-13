@@ -1,0 +1,10 @@
+.sequence-canvas li {
+  height: fit-content;
+}
+.flat-caption h1,h2,p,a{
+  line-height: initial;
+}
+
+.flat-button a.more {
+  display: inline-block;
+}
