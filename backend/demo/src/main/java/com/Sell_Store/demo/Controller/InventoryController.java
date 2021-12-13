@@ -4,8 +4,10 @@ import java.util.List;
 
 import com.Sell_Store.demo.Entity.Inventory;
 import com.Sell_Store.demo.Entity.Product;
+import com.Sell_Store.demo.Entity.WareHouse;
 import com.Sell_Store.demo.Services.InventoryService;
 import com.Sell_Store.demo.Services.ProductService;
+import com.Sell_Store.demo.Services.WareHouseService;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +33,18 @@ public class InventoryController {
     private InventoryService inventoryService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private WareHouseService wareHouseService;
     @GetMapping("/get")
     public ResponseEntity<List<Inventory>> getAllInventories(){
         List<Inventory> list= inventoryService.getAllInventories();
         return ResponseEntity.status(HttpStatus.OK).body(list);
     } 
     @GetMapping("/get/{id}")
-    public ResponseEntity<Inventory> getInventoryByID(@PathVariable(name = "id")int id){
-        Inventory inventory = inventoryService.getInventoryByID(id);
+    public ResponseEntity<Inventory> getInventoryByID(@PathVariable(name = "id")String id){
+        Product p = productService.findProductByID(id);
+        WareHouse w = wareHouseService.findByid(1);
+        Inventory inventory = inventoryService.getInventoryByProduct(p,w);
         return ResponseEntity.status(HttpStatus.OK).body(inventory);
     } 
     @PostMapping("/add")
@@ -61,8 +67,9 @@ public class InventoryController {
    }
    @PutMapping("/put/{productID}/{quantity}")
    public ResponseEntity<Inventory> updateInventory(@PathVariable(name="productID")String productID,@PathVariable(name="quantity")int quantity){
-    Product product = productService.findProductByID(productID);   
-    Inventory inventory2 = this.inventoryService.getInventoryByProduct(product);
+    Product product = productService.findProductByID(productID); 
+    WareHouse w = wareHouseService.findByid(1);  
+    Inventory inventory2 = this.inventoryService.getInventoryByProduct(product,w);
     
     inventory2.setQuantity(quantity);
     this.inventoryService.addProductToInventory(inventory2);

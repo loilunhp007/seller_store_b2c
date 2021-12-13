@@ -62,6 +62,14 @@ getFirstNumberFromString(s:string){
   let a:number = Number(s.replace( /[^\d].*/, '' ))
   return a ; // creates array from matches
 }
+addCateCheck(){
+  if(this.type==4||this.type==1){
+    this.popup_themsp()
+  }else{
+    alert("you are not allowed")
+  }
+
+}
 deleteCateCheck(cate:Category){
   if(this.type==4||this.type==1){
     this.deleteCate(cate);

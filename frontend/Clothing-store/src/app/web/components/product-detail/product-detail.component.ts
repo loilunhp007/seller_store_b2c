@@ -33,6 +33,7 @@ export class ProductDetailComponent implements OnInit {
     c:boolean=true
     images:any
     imageslength:number=0
+    quantity:number
   ngOnInit(): void {
     let date2:any= this.datepipe.transform(new Date(),"yyyy-MM-dd")
     this.date = date2;
@@ -61,6 +62,7 @@ export class ProductDetailComponent implements OnInit {
       Response =>{ this.product=Response
           this.images=this.product.images[0];
           this.imageslength = this.product.images.length;
+          this.quantity = this.product.inventory[0].quantity;
           if(this.i<1){
             //window.location.reload();
           }

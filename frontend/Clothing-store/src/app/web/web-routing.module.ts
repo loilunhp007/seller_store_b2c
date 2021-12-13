@@ -13,6 +13,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { UserprofileComponent } from './components/userprofile/userprofile.component';
 import { UserinfoComponent } from './components/userinfo/userinfo.component';
 import {OrderComponent} from './components/order/order.component'
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 
 const routes: Routes = [
   {
@@ -46,8 +47,9 @@ const routes: Routes = [
           {path:"order",component:OrderComponent}
         ]
     },
-    ]
-  }
+    ],
+    
+  },
   
   
 ];

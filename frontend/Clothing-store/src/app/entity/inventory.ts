@@ -1,8 +1,8 @@
 import { Product } from "./product";
 
 export class Inventory {
-    id:number;
-    quantity:number;
+    wareid:number;
     productID:string;
+    quantity:number;
     product:Product;
 }

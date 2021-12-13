@@ -1,10 +1,17 @@
 
 <div class="main fix">
-<div class="breadcrumb">
-    <span><a href="../index.html">Home</a></span><span> / </span><span>Manager</span><span> / </span><span>Quản lý tài khoản</span>
-</div>
-<div class="section">
-<div class="them-sp"><button onclick="popup_themnv()">Thêm Nhân Viên</button></div>
+    <div class="breadcrumb">
+        <span><a href="../index.html">Home</a></span><span> / </span><span>Manager</span><span> / </span><span>Quản lý danh mục</span>
+    </div>
+    <div class="section">
+        <div id="search">
+            <form action="" method="get">
+                <input type="text" name="key" value=""[(ngModel)]="searchText" placeholder="Nhập tài khoản cần tìm" />  
+                <button type="submit" name="xem" value="search" >Tìm kiếm</button>
+            </form>
+        </div>
+
+    <!--<div class="them-sp"><button onclick="popup_themnv()">Thêm Nhân Viên</button></div>-->
     <table id="table-user">
         <thead>
             <tr>
@@ -17,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let user of users" >
+            <tr *ngFor="let user of users|filter:searchText|paginate:{itemsPerPage:10,currentPage:p}" >
                 <td data-sortable="true" >{{user.uid}}</td>
                 <td data-sortable="true" >{{user.userDetail.firstname+" "+user.userDetail.lastname}}</td>
                 <td data-sortable="true" >{{user.email}}</td>
@@ -28,7 +35,9 @@
                 <td data-sortable="true" *ngIf="user.state==0" >
                         Tạm ẩn
                 </td>
-                <td><button type="button"class="btn-table" (click)="deleteUser(user)"><fa-icon [icon]="faTrash"(click)="deleteCate(category)"></fa-icon></button>
+                <td>
+                    <button type="button"class="btn-table" (click)="deleteUser(user)"><fa-icon [icon]="faEdit"(click)="deleteCate(category)"></fa-icon></button>
+                    <button type="button"class="btn-table" (click)="deleteUser(user)"><fa-icon [icon]="faTrash"(click)="deleteCate(category)"></fa-icon></button>
                     
                     <button type="button"  class="btn-table"*ngIf="user.state==1"><fa-icon [icon]="faLock" (click)="updateStatus(user)"></fa-icon></button>
                     <button type="button"  class="btn-table"*ngIf="user.state==0"><fa-icon [icon]="faUnlock" (click)="updateStatus(user)"></fa-icon></button>
@@ -38,6 +47,7 @@
 
         </tbody>
     </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
 </div>
 <form method="POST" id="form_themnv" enctype="multipart/form-data">

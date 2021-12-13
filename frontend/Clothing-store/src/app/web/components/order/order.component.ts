@@ -15,6 +15,8 @@ export class OrderComponent implements OnInit {
     private orderDetailService:OrderDetailService) { }
   orderdetails:Array<OrderDetail>
   orders:Array<Order>
+  order:Order
+  details:OrderDetail
   uid:string
   isToggle:boolean=true
   p:number=1
@@ -32,8 +34,10 @@ export class OrderComponent implements OnInit {
     )
   }
   getOrderDetail(order:Order){
+    this.order=order
     this.orderDetailService.getOrderDetail(order.orderID).subscribe(Response=>{
       this.orderdetails = Response;
+      this.details = this.orderdetails[0];
       console.log(this.orderdetails)
     })
   }

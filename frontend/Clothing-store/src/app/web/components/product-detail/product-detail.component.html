@@ -51,12 +51,13 @@
               </p>
               <p>
                 Availability: 
-                <span class=" light-red"*ngIf="product.inventory.quantity > 0">
-                  In Stock
-                </span>
-                <span class=" light-red" *ngIf="product.inventory.quantity==0">
-                  inavailable
-                </span>
+               
+                  <span class=" light-red"*ngIf="quantity > 0">
+                    In Stock
+                  </span>
+                  <span class=" light-red" *ngIf="quantity==0">
+                    inavailable
+                  </span>
               </p>
               <p>
                {{product.info}}
@@ -84,7 +85,7 @@
                   </select>
                 </div>
                 <div class="button_group">
-                  <button class="button" (click)="addTocart(product)">
+                  <button class="button" [disabled]="quantity<=0" (click)="addTocart(product)">
                     Add To Cart
                   </button>
                   <button class="button compare">

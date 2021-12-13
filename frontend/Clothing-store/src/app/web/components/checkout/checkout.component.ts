@@ -158,7 +158,7 @@ export class CheckoutComponent implements OnInit {
              let checkQuan:boolean=true;
              this.carts=Response2;
              this.carts.forEach(e=>{
-               if(e.product.inventory.quantity < e.soluong){
+               if(e.product.inventory[0].quantity < e.soluong){
                  checkQuan=false;
                }
              })
@@ -194,7 +194,7 @@ export class CheckoutComponent implements OnInit {
                     }else{
                       orderDetail.totalItem = Number(data.product.price*data.soluong)
                     }
-                    let quan =  data.product.inventory.quantity-data.soluong
+                    let quan =  data.product.inventory[0].quantity-data.soluong
                    
                     //orderDetail.transport= this.shippingFee.value
                   //  orderDetail. = Number(product2.gia*data.soluong)+Number(this.Shipping)

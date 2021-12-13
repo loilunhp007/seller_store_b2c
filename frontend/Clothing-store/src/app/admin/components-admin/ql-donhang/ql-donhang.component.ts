@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Order } from 'src/app/entity/order';
 import { OrderDetail } from 'src/app/entity/order-detail';
 import { Product } from 'src/app/entity/product';
@@ -25,6 +26,7 @@ export class QlDonhangComponent implements OnInit {
     orders:Array<Order>
     p:number=1
     isToggle:boolean=true
+    faTrash=faTrash
     time1:Date = new Date("2020-01-01")
     time2:Date = new Date("2021-01-01")
     selected:number=1

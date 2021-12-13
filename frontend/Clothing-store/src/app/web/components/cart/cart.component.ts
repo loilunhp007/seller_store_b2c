@@ -102,7 +102,7 @@ export class CartComponent implements OnInit {
     if(cart.soluong>this.input){
         this.updateQuanCart(cart.product,this.input);
     }
-    if(cart.soluong<this.input&&(cart.product.inventory.quantity-this.input>0)){
+    if(cart.soluong<this.input&&(cart.product.inventory[0].quantity-this.input>0)){
         this.updateQuanCart(cart.product,this.input);
     }
     

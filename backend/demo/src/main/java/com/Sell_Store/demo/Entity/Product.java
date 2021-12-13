@@ -76,8 +76,8 @@ public class Product{
     private int views;
     @Column(name = "state",columnDefinition = "int")
     private int state;
-    @OneToOne(mappedBy = "product",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product",fetch = FetchType.LAZY)
     @JsonIgnoreProperties("product")
-    private  Inventory inventory;
+    private  List<Inventory> inventory;
   
 }

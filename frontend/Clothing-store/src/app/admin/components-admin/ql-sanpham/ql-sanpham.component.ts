@@ -87,7 +87,7 @@ export class QlSanphamComponent implements OnInit {
     return a ; // creates array from matches
   }
   editRoleCheck():any{
-    if(this.type==1||this.type==2){
+    if(this.type==1||this.type==4){
       this.popup_updateProduct();
       
       return true;
@@ -96,8 +96,17 @@ export class QlSanphamComponent implements OnInit {
       return false;
     }
   }
+  addRoleCheck(){
+    if(this.type==1||this.type==4){
+      this.popup_themsp()
+      return true;
+    }else{
+      alert("You dont have permission to do this");
+      return false;
+    }
+  }
   deleteRoleCheck(){
-      if(this.type==1||this.type==2){
+      if(this.type==1||this.type==4){
         this.delRole=true;
       }else{
         alert("You dont have permission to do this");
@@ -283,6 +292,7 @@ export class QlSanphamComponent implements OnInit {
                       //this.route.navigate(['admin','product']);
                       let inventory = new Inventory;
                       let product3:Product = response
+                      inventory.wareid=1;
                       inventory.product = product3;
                       inventory.product.images = this.product.images
                       inventory.quantity=0;

@@ -3,7 +3,9 @@ package com.Sell_Store.demo.Services;
 import java.util.List;
 
 import com.Sell_Store.demo.Entity.Inventory;
+import com.Sell_Store.demo.Entity.InventoryID;
 import com.Sell_Store.demo.Entity.Product;
+import com.Sell_Store.demo.Entity.WareHouse;
 import com.Sell_Store.demo.Repository.InventoryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,7 @@ public class InventoryService {
     public List<Inventory> getAllInventories(){
         return inventoryRepository.findAll();
     }
-    public Inventory getInventoryByID(int id){
+    public Inventory getInventoryByID(InventoryID id){
         if(!inventoryRepository.findById(id).isEmpty())
         {return inventoryRepository.findById(id).get();
         }
@@ -29,13 +31,16 @@ public class InventoryService {
     public Inventory addProductToInventory(Inventory inventory){
         return inventoryRepository.save(inventory);
     }
-    public Inventory getInventoryByProduct(Product product){
-        return inventoryRepository.findByProduct(product);
+    public Inventory getInventoryByProduct(Product product,WareHouse wareHouse){
+        return inventoryRepository.findByProductAndWareHouse(product,wareHouse);
     }
     public int deteleProductByID(Product product){
-        Inventory inventory = inventoryRepository.findByProduct(product);
+        InventoryID id = new InventoryID();
+        id.setProductID(product.getProductID()); 
+        id.setWareid((long)1);
+        Inventory inventory = inventoryRepository.findById(id).get();
         inventoryRepository.delete(inventory);
-        if(inventoryRepository.findById(inventory.getId())==null){
+        if(!inventoryRepository.findById(id).isPresent()){
             return 1;
         }
         else return 0;

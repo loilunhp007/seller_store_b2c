@@ -4,6 +4,7 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 ">
             <h4 class="mb-2 text-primary bor">Đơn hàng của tôi</h4>
         </div>
+        
         <table id="table-dh">
             <thead>
                 <tr>
@@ -53,6 +54,14 @@
 <div class="popup-cthd" *ngIf="!isToggle">
 	<div class="popup-themsp__content" >
 		<div class="popup-themsp__title">Chi Tiết Đơn Hàng</div>
+        <div>
+            <h4>Thoi gian dat hang: {{order.startTime}}</h4>
+            <h4>Tinh trang: {{order.state}}</h4>
+            <h4>Tong tien {{order.total}}</h4>
+            <h4>Dia chi giao hang {{details.deliveryAddress}}</h4>
+            <h4>Dia chi nhan hang {{details.destination}}</h4>
+            <h4>Don vi van chuyen:{{details.transport.name}}-{{details.transport.fee}}</h4>
+        </div>
                 <table id="table-dh">
                     <thead>
                         <tr>

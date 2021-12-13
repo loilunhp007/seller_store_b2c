@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { faLock, faTrash, faUnlock } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faLock, faTrash, faUnlock } from '@fortawesome/free-solid-svg-icons';
 import { Account } from 'src/app/entity/account';
 import { UserService } from 'src/app/services/user.service';
 
@@ -15,7 +15,10 @@ export class QlAccountComponent implements OnInit {
   faLock= faLock
   faUnlock=faUnlock
   faTrash=faTrash
+  faEdit = faEdit
   type:number
+  searchText;
+  p:number=1
   ngOnInit(): void {
     this.getUser();
     this.type = this.getFirstNumberFromString(JSON.parse(sessionStorage.getItem('type')))

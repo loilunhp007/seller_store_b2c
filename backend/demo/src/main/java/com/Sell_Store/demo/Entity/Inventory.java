@@ -9,8 +9,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -31,13 +33,22 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "inventory",schema="seller_store")
+@IdClass(InventoryID.class)
 public class Inventory {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "p_id",referencedColumnName = "pid")
-    private Product product;
+    @Column(name = "ware_id", columnDefinition = "nvarchar(20)")
+    private Long wareid;
+    @Id
+    @Column(name = "product_ID", columnDefinition = "nvarchar(20)")
+    private String productID;
     @Column(name = "quantity",columnDefinition = "int")
     private int quantity;
+    @ManyToOne
+    @MapsId("productID")
+    @JoinColumn(name = "product_id")
+    private Product product;
+    @ManyToOne
+    @MapsId("wareID")
+    @JoinColumn(name = "ware_id")
+    private WareHouse wareHouse;
 }

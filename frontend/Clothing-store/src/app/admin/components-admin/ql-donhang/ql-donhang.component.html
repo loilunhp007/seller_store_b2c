@@ -1,7 +1,5 @@
 <div class="main fix">
-<div class="breadcrumb">
-	<span><a href="../index.html">Home</a></span><span> / </span><span>Manager</span><span> / </span><span>Quản lý Đơn hàng</span>
-</div>
+
 <div class="section">
 	<table id="table-dh">
 		<thead>
@@ -67,10 +65,10 @@
 			</td>
 				<td data-sortable="true">
 				 <a class="link" (click)="popup_themsp();getOrderDetail(order)">
-				<span class="glyphicon glyphicon-list-alt"></span>Xem Chi Tiết</a></td>
+						Xem Chi Tiết</a></td>
 				<td data-sortable="true">
 				<button  class="btn-table" *ngIf="(order.state!=4 && order.state!=0)"  (click)="updateOrder(order)" [order]="order" >Xác nhận</button>
-				<button  class="btn-table" *ngIf="order.state==1 ||order.state==2"   (click)="updateOrderCancel(order)"><i class="fa fa-trash"></i> Hủy Đơn</button>
+				<button  class="btn-table" *ngIf="order.state==1 ||order.state==2"   (click)="updateOrderCancel(order)"><fa-icon [icon]="faTrash"></fa-icon> Hủy Đơn</button>
 				</td>
 			</tr>
         </tbody>

@@ -14,6 +14,6 @@ export class Product {
     percent_discount:number;
     special_from_time:Date;
     special_to_time:Date;
-    inventory:Inventory
+    inventory:Array<Inventory>=[]
     imagesArray:{}
 }
