@@ -413,3 +413,12 @@ label{
 .trangthai {
 	width: 100px;
 }
+#search form button {
+	padding: 5px;
+  }
+  .popup-themsp__title{
+	font-size: 20px;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+  }

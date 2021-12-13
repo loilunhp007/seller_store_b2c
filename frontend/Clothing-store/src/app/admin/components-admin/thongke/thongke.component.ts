@@ -10,7 +10,7 @@ import { ProductService } from 'src/app/services/product.service';
 @Component({
   selector: 'app-thongke',
   templateUrl: './thongke.component.html',
-  styleUrls: ['./../../../../assets/admin/css/styles.css']
+  styleUrls: ['./../../../../assets/admin/css/styles.css','./thongke.component.css']
 })
 export class ThongkeComponent implements OnInit {
 
@@ -43,7 +43,7 @@ export class ThongkeComponent implements OnInit {
   months:any=[{name:'1'},{name:'2'},{name:'3'},{name:'4'},{name:'5'},{name:'6'},{name:'7'},{name:'8'},{name:'9'},{name:'10'},{name:'11'},{name:'12'}]
   ngOnInit(): void {
     this.loadChart();
-    
+
     Chart.register(
       ArcElement,
       LineElement,
@@ -80,7 +80,7 @@ export class ThongkeComponent implements OnInit {
         labels: nameproduct,
         datasets: [
           {
-            label: 'Luot xem',
+            label: 'Đơn hàng',
             data: soluong,
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
@@ -110,7 +110,7 @@ export class ThongkeComponent implements OnInit {
         }
       }
     });
-    
+
   }
   private ThongKesoluongbanra(name:any[],spbanra:any[]){
     this.canvas2 = document.getElementById('myChart2');
@@ -122,7 +122,7 @@ export class ThongkeComponent implements OnInit {
         labels: name,
         datasets: [
           {
-            label: 'Tổng đơn hàng ',
+            label: 'Số lượng ',
             data: spbanra,
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
@@ -195,7 +195,7 @@ export class ThongkeComponent implements OnInit {
     });
   }
   private loadChart(){
-        
+
         this.orderDetailService.ThongKeSP(this.select,4).toPromise().then(
           Response2=>{
             this.spbanra = Response2
@@ -226,9 +226,9 @@ export class ThongkeComponent implements OnInit {
           console.log(this.soluongdonhang)
         })
 
-            
- 
-    
+
+
+
   }
   exit() {
     location.reload();
@@ -246,7 +246,7 @@ async getValueWithAsync() {
   const value = <number>await this.resolveAfter3Seconds(20);
 }
 selected(select:number){
-  
+
   this.myChart3.destroy();
   this.doanhthu =[];
   this.doanhthusp=[];
@@ -261,13 +261,13 @@ selected(select:number){
       console.log(this.doanhthu)
     }
   )
-    
-  
+
+
   setTimeout(()=>{
     this.thongkeDoanhthu(this.productname2,this.doanhthusp);
-    
+
   },1000)
-  
+
   console.log(this.select);
 }
   selected2(select:number){

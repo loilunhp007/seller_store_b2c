@@ -21,6 +21,7 @@ export class CartComponent implements OnInit {
   carts:Array<Cart>
   cartLength:number
   date2:Date
+  buy:boolean=true
   ngOnInit(): void {
     this.date=new Date();
     
@@ -37,6 +38,11 @@ export class CartComponent implements OnInit {
   getCart(){
     this.cartService.getCartItems(this.uid).subscribe(Response=>{
       this.carts=Response;
+      this.carts.forEach(e=>{
+        if(e.product.state==0){
+          this.buy=false
+        }
+      })
       this.cartLength = this.carts.length;
       this.getCartTotal(this.carts);
       console.log(this.carts);

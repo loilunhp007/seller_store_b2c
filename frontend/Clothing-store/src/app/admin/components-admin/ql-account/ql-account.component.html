@@ -8,19 +8,34 @@
     <table id="table-user">
         <thead>
             <tr>
-                <th>STT</th>
-                <th>Mã NV</th>
-                <th>Tên</th>
-                <th>SDT</th>
-                <th>Địa Chỉ</th>
-                <th>Ngày Sinh</th>
-                <th>Giới tính</th>
-                <th>Lương</th>
-                <th>Trạng Thái</th>
-                <th>Thao tác</th>
+                <th scope="col">#Id</th>
+                <th  scope="col">Tên </th>
+                <th scope="col">email</th>
+                <th scope="col">Password</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col">Thao tác</th>
             </tr>
         </thead>
         <tbody>
+            <tr *ngFor="let user of users" >
+                <td data-sortable="true" >{{user.uid}}</td>
+                <td data-sortable="true" >{{user.userDetail.firstname+" "+user.userDetail.lastname}}</td>
+                <td data-sortable="true" >{{user.email}}</td>
+                <td data-sortable="true"class="hidetext" >{{user.password|truncate:[1]}}</td>
+                <td data-sortable="true" *ngIf="user.state==1">
+                     Đang hoạt động
+                 </td>
+                <td data-sortable="true" *ngIf="user.state==0" >
+                        Tạm ẩn
+                </td>
+                <td><button type="button"class="btn-table" (click)="deleteUser(user)"><fa-icon [icon]="faTrash"(click)="deleteCate(category)"></fa-icon></button>
+                    
+                    <button type="button"  class="btn-table"*ngIf="user.state==1"><fa-icon [icon]="faLock" (click)="updateStatus(user)"></fa-icon></button>
+                    <button type="button"  class="btn-table"*ngIf="user.state==0"><fa-icon [icon]="faUnlock" (click)="updateStatus(user)"></fa-icon></button>
+                    
+     </td>
+
+
         </tbody>
     </table>
 </div>

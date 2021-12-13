@@ -64,7 +64,7 @@ public class InventoryController {
     Product product = productService.findProductByID(productID);   
     Inventory inventory2 = this.inventoryService.getInventoryByProduct(product);
     
-    inventory2.setQuantity(inventory2.getQuantity()-quantity);
+    inventory2.setQuantity(quantity);
     this.inventoryService.addProductToInventory(inventory2);
     return ResponseEntity.status(HttpStatus.OK).body(inventory2);
    }

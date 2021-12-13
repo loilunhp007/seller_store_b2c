@@ -33,6 +33,7 @@ export class HomeComponent implements OnInit {
     let date22:any = this.datepipe.transform(date,"yyyy-MM-dd")
     this.date2 = date22
     this.getProduct();
+    
     if(sessionStorage.getItem("uid")!=null){
       this.uid = JSON.parse(sessionStorage.getItem("uid"))
       this.getCart();
@@ -47,7 +48,8 @@ export class HomeComponent implements OnInit {
   }
   getProduct(){
     this.productService.getProducts().subscribe(Response =>{
-        this.products = Response;
+        this.products = Response.slice().reverse();
+        this.products = this.products.filter(e=>e.state==1);
         this.fetchDiscountProduct();
         console.log(this.products);
     },(error)=>{
@@ -56,10 +58,13 @@ export class HomeComponent implements OnInit {
   }
   fetchDiscountProduct(){
     if(this.products!=null){
+      this.products.filter(e=>e.state==1);
       this.products.forEach( (e)=>{
         if(e.percent_discount >= 20){
           this.hotproducts.push(e); 
         }
+        this.hotproducts.filter(e=>e.state==1);
+        
       });
     }
     console.log(this.hotproducts)

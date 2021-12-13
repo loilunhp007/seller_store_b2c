@@ -116,6 +116,7 @@ public class ProductController {
         _Product.setImages(product.getImages());
         _Product.setLikes(product.getLikes());
         _Product.setState(product.getState());
+        _Product.setPercent_discount(product.getPercent_discount());
         _Product.setInventory(product.getInventory());
         Product newProduct= this.productService.addProduct(_Product);
         return ResponseEntity.status(HttpStatus.OK).body(newProduct);

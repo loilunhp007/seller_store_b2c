@@ -11,26 +11,27 @@ export class SidebarComponent implements OnInit {
   constructor(private userService:UserService) { }
   uid:string
   type:number
-  role:number
-  isAdmin:boolean=false
+  role:string
+  isAdmin:boolean;
   isManager:boolean=false
   ngOnInit(): void {
     if(sessionStorage.getItem('uid')!=null && sessionStorage.getItem('type')!=null){
       this.uid=JSON.parse(sessionStorage.getItem('uid'));
-      this.getRole(this.uid);
+      this.role = JSON.parse(sessionStorage.getItem('type'));
+      this.isAdmin = this.roleCheck(this.getFirstNumberFromString(this.role))
     }
   }
-  getRole(uid:string){
-    this.userService.getUserByID(this.uid).subscribe(Response=>{
-      this.role = Response.typeMember.id;
-      if(this.role==1){
-        this.isAdmin=true;
-      }else{
-        this.isManager=true;
-      }
-    })
+  getFirstNumberFromString(s:string){
+    let a:number = Number(s.replace( /[^\d].*/, '' ))
+    return a ; // creates array from matches
   }
-
+  roleCheck(role:number){
+    if(role==1){
+      return true;
+    }
+    return false;
+  
+  }
 
 
 }

@@ -28,22 +28,24 @@ export class LoginAdminComponent implements OnInit {
       alert("Invalid login")
       return;
     };
-    console.log(this.loginForm.value);
     let account = new Account();
     account.email = this.loginForm.value.email
     account.password = this.loginForm.value.password
-    console.log(account)
       this.loginService.login(account)
       .subscribe(Response =>{
         this.account2=Response;
+       if(this.account2.state==0){
+         alert("Tài khoản của bạn đã bị vô hiệu hóa")
+       }else{
         if(this.account2.userDetail.typeMember.typeID ==2){
           alert("you are not allowed")
           this.router.navigate(["/web/index"])
         }else{
           sessionStorage.setItem("uid",JSON.stringify(this.account2.userDetail.id))
+          sessionStorage.setItem("type",JSON.stringify(this.account2.userDetail.typeMember.typeID+this.makeid(8)))
           this.router.navigate(["/admin/thongke"])
-          console.log(Response);
         }
+       }
 
 
       },(error) => {
@@ -51,4 +53,15 @@ export class LoginAdminComponent implements OnInit {
       });
 
   }
+  makeid(length) {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() *
+ charactersLength));
+   }
+   return result;
+}
+
 }

@@ -8,7 +8,7 @@
                      <div class="header_top">
                         <div class="row">
                            <div class="col-md-3">
-                              <ul class="option_nav">
+                              <!-- <ul class="option_nav">
                                  <li class="dorpdown">
                                     <a href="#">Eng</a>
                                     <ul class="subnav">
@@ -26,17 +26,17 @@
                                        <li><a href="#">FER</a></li>
                                     </ul>
                                  </li>
-                              </ul>
+                              </ul> -->
                            </div>
                            <div class="col-md-6">
-                              <ul class="topmenu">
+                              <!-- <ul class="topmenu">
                                  <li><a href="#">About Us</a></li>
                                  <li><a href="#">News</a></li>
                                  <li><a href="#">Service</a></li>
                                  <li><a href="#">Recruiment</a></li>
                                  <li><a href="#">Media</a></li>
                                  <li><a href="#">Support</a></li>
-                              </ul>
+                              </ul> -->
                            </div>
                            <div class="col-md-3"*ngIf="!isLoggedIn()">
                               <ul class="usermenu" >
@@ -55,7 +55,7 @@
                      <div class="clearfix"></div>
                      <div class="header_bottom">
                         <ul class="option">
-                           <li id="search" class="search"  > 
+                           <li id="search" class="search"  >
                               <form [formGroup]="formSearch" (ngSubmit)="goSearch()">
                                  <input class="search-submit" type="submit" value="">
                                  <input class="search-input" placeholder="Enter your search term..." type="search"  formControlName="searchValue" >
@@ -92,7 +92,7 @@
                                  <div class="dropdown-menu">
                                     <ul class="mega-menu-links">
                                      <!--  <li><a href="index.html">home</a></li>-->
-                                     
+
                                     </ul>
                                  </div>
                               </li>
@@ -111,7 +111,7 @@
                                        <div class="col-md-6 col-sm-6">
                                           <ul class="mega-menu-links">
                                             <!-- <li><a href="productgird.html">New Collection</a></li>-->
-                                            
+
                                           </ul>
                                        </div>
                                     </div>

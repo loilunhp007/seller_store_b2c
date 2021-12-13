@@ -2,20 +2,21 @@
 
 
 
-    <div class="breadcrumb">
-        <span><a href="../index.html">Home</a></span><span> / </span><span>Manager</span><span> / </span><span>Quản lý danh mục</span>
-    </div>
+
     <div class="section">
+      <div class="breadcrumb">
+        <!-- <span><a href="../index.html">Home</a></span><span> / </span><span>Manager</span><span> / </span><span>Quản lý danh mục</span> -->
+    </div>
         <div id="search">
-            <form action="" method="get">
-                <input type="text" name="key" value="" placeholder="Nhập danh mục cần tìm" />  
+            <form action="" method="get" style="padding-top:20px">
+                <input type="text" name="key" [(ngModel)]="searchText" value="" placeholder="Nhập Sản phẩm cần tìm" />
                 <button type="submit" name="xem" value="search" >Tìm kiếm</button>
             </form>
         </div>
-        <div class="them-sp" ><button>Thêm Danh Mục</button></div>
         <table id="table-dm">
             <thead>
                 <tr>
+                  <th>Mã sản phẩm</th>
                     <th>
                       Hình ảnh
                     </th>
@@ -25,25 +26,27 @@
                     <th>
                       Quantity
                     </th>
-            
+
                   </tr>
             </thead>
             <tbody>
-                <tr >
-                    <td >
-                      <img src="../../../../../assets/images/banner-small-01.png" alt="">
+                <tr *ngFor="let inventory of inventories| filter : searchText| paginate:{itemsPerPage:10,currentPage:p}">
+                  <td>{{inventory.product.productID}}</td>
+                    <td *ngFor="let img of inventory.product.images.slice(0,1)">
+                      <img src="../../../../../assets/images/products/{{img}}" alt="" width="110px" height="110px">
                     </td>
-                    <td>        
-                          <p>Name</p>
+                    <td>
+                      {{inventory.product.productName}}
                     </td>
                     <td>
                         <div class="cart_quantity_button">
-                        <input  type="number"value="0"  name="quantity" autocomplete="on" size="2" class="cart_quantity_input" >
+                        <input  type="number"value="{{inventory.quantity}}" (change)="onChange($event,inventory)" name="quantity" autocomplete="on" size="2" class="cart_quantity_input" >
                       </div>
                     </td>
                   </tr>
             </tbody>
     </table>
+    <pagination-controls *ngIf="inventories.length > 0" (pageChange)="p = $event"></pagination-controls>
     </div>
-</div>    
+</div>
 
