@@ -28,9 +28,7 @@ const routes: Routes = [
       {
         path : "index",component:HomeComponent, 
       } ,
-      {
-        path : "login", component:LoginComponent ,pathMatch:'full',
-      },
+     
       {
         path:"cart",component:CartComponent
       },
@@ -49,6 +47,9 @@ const routes: Routes = [
     },
     ],
     
+    
+  }, {
+    path : "web/login", component:LoginComponent ,pathMatch:'full',
   },
   
   

@@ -47,5 +47,32 @@ export class OrderComponent implements OnInit {
   
   console.log(this.isToggle);
 }
+updateOrderCancel(order:Order){
+  if(order.state==1||order.state==2){
+    this.orderService.updateOrderStatus(order.orderID,5).subscribe(
+      Response=>{
+        let order2 = new Order(); 
+        order2 = Response
+        this.orderDetailService.getOrderDetail(order.orderID).subscribe(
+          Response2=>{
+            let orderDetail =new OrderDetail();
+            orderDetail=Response2[0]
+            console.log(orderDetail)
+            let sss = orderDetail.productID+''
+            console.log(sss)
+    
+  
+            
+          
+          }
+        )
+  
+      }
+    );
+  }else{
+    alert("Vui lòng liên hệ nhân viên để hủy đơn")
+  }
+ 
+  }
 
 }

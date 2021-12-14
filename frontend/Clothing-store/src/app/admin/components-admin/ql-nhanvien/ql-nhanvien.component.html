@@ -59,7 +59,7 @@
                         <div class="popup-themsp-left__input"><input type="text" name = "email" formControlName="staffEmail"></div>
                         <div class="popup-themsp-left__input">
 
-                            <select name="dropdown" (change)="selectedUserType($event)">
+                            <select name="dropdown" (change)="selectedUserType($event)" [selected]="option ==3" value="option">
                                 <option *ngFor="let type of roles" [value]="type.typeID">{{type.typeName}}</option>
                                 </select>
                         </div>
@@ -73,7 +73,7 @@
                 </div>
             </div>
         </form>
-        <form *ngIf="!isToggle2" [formGroup]="StaffForm2">
+        <form *ngIf="!isToggle2;StaffForm2" [formGroup]="staffForm2">
             <div class="popup-themsp" id = "dodulieunhanvien">
                 <div class="popup-themsp__content">
                     <div class="popup-themsp__title">Sửa Thông Tin Cá Nhân</div>
@@ -87,20 +87,20 @@
                         <div class="popup-themsp-left__label">Địa chỉ</div>
                     </div>
                     <div class="popup-themsp-right">
-                        <div class="popup-themsp-left__input" ><input type="text" placeholder="Mã nhân viên" name ="idnvs" id="idnvtieptheo" readonly ></div>
+                        <div class="popup-themsp-left__input" ><input type="text" placeholder="Mã nhân viên" name ="idnvs" id="idnvtieptheo" readonly  formControlName="staffID2"></div>
                         <div class="popup-themsp-left__input" ><input type="text" placeholder="Họ nhân viên" name ="tennv" formControlName="staffLastName2"></div>
                         <div class="popup-themsp-left__input" ><input type="text" placeholder="Tên nhân viên" name ="tennv2" formControlName="staffFirstName2"></div>
                         <div class="popup-themsp-left__input"><input type="text" placeholder="Số điện thoại" name = "sdt"formControlName="staffPhone2" ></div>
                         <div class="popup-themsp-left__input">
 
-                            <select name="dropdown2" formControlName="type2" (change)="selectedUserType2($event)">
+                            <select name="dropdown2" (change)="selectedUserType2($event)" formControlName="type2">
                                 <option *ngFor="let type of roles" [value]="type.typeID">{{type.typeName}}</option>
                                 </select>
                         </div>
-                        <div class="popup-themsp-left__input"><input type="date" name = "ngaysinh" formControlName="staffBirthDay2"></div>
+                        <div class="popup-themsp-left__input"><input type="date" name = "ngaysinh2" formControlName="staffBirthDay2"></div>
         
                        
-                        <div class="popup-themsp-left__input"><textarea name="diachis" rows="5" cols="20" placeholder="Địa chỉ ..." id="diachis" formControlName="staffAddress2"></textarea></div>
+                        <div class="popup-themsp-left__input"><textarea name="diachis2" rows="5" cols="20" placeholder="Địa chỉ ..." id="diachis" formControlName="staffAddress2"></textarea></div>
                     </div>
                     <button type ="submit" class="popup-suasp__btn" name = "clickthemnhanvien" (click)="updateUser()">Sửa</button>
                     <span class="back" onclick="close_popup_themsp()">&times;</span>

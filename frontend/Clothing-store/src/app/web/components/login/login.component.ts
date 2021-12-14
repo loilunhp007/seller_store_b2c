@@ -36,7 +36,8 @@ export class LoginComponent implements OnInit {
           alert("Tài khoản của bạn đã bị vô hiệu hóa")
         }else{
           sessionStorage.setItem("uid",JSON.stringify(Response.userDetail.id))
-        this.router.navigate(["/"])
+        this.router.navigate(["/web/index"]);
+
         console.log(Response);
         }
         

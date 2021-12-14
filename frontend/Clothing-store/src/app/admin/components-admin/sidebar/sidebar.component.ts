@@ -19,6 +19,7 @@ export class SidebarComponent implements OnInit {
       this.uid=JSON.parse(sessionStorage.getItem('uid'));
       this.role = JSON.parse(sessionStorage.getItem('type'));
       this.isAdmin = this.roleCheck(this.getFirstNumberFromString(this.role))
+      this.isManager = this.managerCheck(this.getFirstNumberFromString(this.role))
     }
   }
   getFirstNumberFromString(s:string){
@@ -31,6 +32,13 @@ export class SidebarComponent implements OnInit {
     }
     return false;
   
+  }
+  managerCheck(role:number){
+    if(role==4){
+      return true;
+    }
+    else
+    {return false;}
   }
 
 

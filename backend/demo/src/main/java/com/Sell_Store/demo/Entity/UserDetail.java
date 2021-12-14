@@ -73,7 +73,7 @@ public class UserDetail {
     @Column(name = "state",columnDefinition = 
     "int")
     private int state;
-    @OneToOne(cascade = CascadeType.ALL) 
+    @OneToOne
     @JoinColumn(name = "typemember_id",referencedColumnName = "typeID")
     private TypeMember typeMember;
 }

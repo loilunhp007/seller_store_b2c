@@ -10,6 +10,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { LoginService } from 'src/app/services/login.service';
 import { UserService } from 'src/app/services/user.service';
 import { UserDetail } from 'src/app/entity/user-detail';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -30,15 +31,20 @@ export class MenuComponent implements OnInit {
   img:string
   isLogged = false;
   userdetail:UserDetail
+  date2:Date
   constructor(private categoryService:CategoryService,
     private cartService:CartService,
     private router:Router, 
     private formBuilder:FormBuilder,
     private loginService:LoginService,
-    private userService:UserService) { 
+    private userService:UserService,
+    public datepipe:DatePipe) { 
     }
 
   ngOnInit(): void {
+    let date = new Date();
+    let date22:any = this.datepipe.transform(date,"yyyy-MM-dd")
+    this.date2 = date22
     this.userdetail = new UserDetail();
     if(sessionStorage.getItem("uid")!=null){
       this.uid=JSON.parse(sessionStorage.getItem("uid"));
@@ -82,8 +88,18 @@ export class MenuComponent implements OnInit {
     return this.formSearch.controls;
   }
   getCartTotal(carts:Array<Cart>){
-    carts.forEach(element => {
-      this.cartTotal+=(element.product.price*(100-element.product.percent_discount)/100)*element.soluong
+    carts.forEach(data => {
+      let date2 =new Date();
+      let date22:any = this.datepipe.transform(date2,"yyyy-MM-dd")
+      if(data.product.percent_discount>0&& date22<data.product.special_to_time&&date22>data.product.special_from_time){
+        this.cartTotal+= Number(data.product.price*((100-data.product.percent_discount)/100)*data.soluong)
+        console.log(this.cartTotal)
+       
+      }else{
+
+        this.cartTotal+= Number(data.product.price*data.soluong)
+        console.log(this.cartTotal)
+       }
     });
   }
   isLoggedIn(){

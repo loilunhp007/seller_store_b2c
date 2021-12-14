@@ -47,5 +47,8 @@ getUsers():Observable<any>{
    {
      return this.httpClient.get<Account[]>("http://localhost:8090/user/get");
    }
+   deleteUserDetail(id:string):Observable<any>{
+      return this.httpClient.delete<string>('http://localhost:8090/userdetail/delete/'+id)
+   }
 
 }

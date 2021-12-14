@@ -45,4 +45,12 @@ public class UserService {
     public TypeMember getTypeByID(long id){
         return typeMemberRepository.findById(id).get();
     }
+    public String deleteUser(UserDetail u){
+         tvRepository.delete(u);
+         if(tvRepository.findById(u.getId()).isPresent()){
+                return 0+"";
+         }else{
+             return 1+"";
+         }
+    }
 }

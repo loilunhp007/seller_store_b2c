@@ -39,11 +39,14 @@
                     <td data-sortable="true" *ngIf="order.state=='4'">
                             Đã giao hàng
                     </td>
+                    <td data-sortable="true" *ngIf="order.state=='5'">
+                        Yêu cầu hủy
+                </td>
                     <td data-sortable="true">
                      <a class="link" (click)="popup_themsp();getOrderDetail(order)">
                     <span class="glyphicon glyphicon-list-alt"></span>Xem Chi Tiết</a></td>
                     <td data-sortable="true">
-                    <button  class="btn-table" [disabled]="!order.state==1 ||order.state==4"   (click)="updateOrderCancel(order)"><i class="fa fa-trash"></i> Hủy Đơn</button>
+                    <button  class="btn-table" [disabled]="!order.state==1||!order.state==2 ||order.state==4||order.state==5"   (click)="updateOrderCancel(order)"><i class="fa fa-trash"></i> Hủy Đơn</button>
                     </td>
                 </tr>
             </tbody>
@@ -55,12 +58,11 @@
 	<div class="popup-themsp__content" >
 		<div class="popup-themsp__title">Chi Tiết Đơn Hàng</div>
         <div>
-            <h4>Thoi gian dat hang: {{order.startTime}}</h4>
-            <h4>Tinh trang: {{order.state}}</h4>
-            <h4>Tong tien {{order.total}}</h4>
-            <h4>Dia chi giao hang {{details.deliveryAddress}}</h4>
-            <h4>Dia chi nhan hang {{details.destination}}</h4>
-            <h4>Don vi van chuyen:{{details.transport.name}}-{{details.transport.fee}}</h4>
+            <h5>Thời gian đặt hàng: {{order.startTime}}</h5>
+            <h5>Tổng tiền {{order.total|currency:'VND':'symbol':'3.0'}}</h5>
+            <h5>Địa chỉ giao hàng: {{details.deliveryAddress}}</h5>
+            <h5>Địa chỉ nhận hàng {{details.destination}}</h5>
+            <h5>Đơn vị vận chuyển:{{details.transport.name}}-{{details.transport.fee|currency:'VND':'symbol':'3.0'}}</h5>
         </div>
                 <table id="table-dh">
                     <thead>

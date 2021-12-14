@@ -3,6 +3,8 @@ package com.Sell_Store.demo.Controller;
 import com.Sell_Store.demo.Entity.TypeMember;
 import com.Sell_Store.demo.Entity.UserDetail;
 import com.Sell_Store.demo.Services.UserService;
+
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,6 +63,7 @@ public class UserDetailController {
         thanhvien.setGmail(userDetail.getGmail());
         thanhvien.setBirthday(userDetail.getBirthday());
         thanhvien.setState(userDetail.getState());
+        thanhvien.setTypeMember(userDetail.getTypeMember());
         UserDetail tv2 = tvService.save(thanhvien);
         return ResponseEntity.status(HttpStatus.OK).body(tv2);
     }
@@ -70,7 +73,19 @@ public class UserDetailController {
         List<TypeMember> listType=  tvService.getAllType();
         return ResponseEntity.status(HttpStatus.OK).body(listType);
     }
-
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable(name = "id")String id){
+        UserDetail u= this.tvService.getUserDetailById(id);
+        
+        String result =this.tvService.deleteUser(u);
+        JSONObject obj = new JSONObject();
+        if(result.equals(0)){
+            obj.put("result", 0);
+        }else{
+            obj.put("result", 1);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(obj.toString());
+    }   
 
     
 }
